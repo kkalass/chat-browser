@@ -3,6 +3,8 @@
 
 A web-based tool for exploring AI-analyzed chat data through an intuitive three-column interface. Browse clusters, groups, and individual messages with advanced filtering and context expansion.
 
+**🌐 [Try it live on GitHub Pages](https://kkalass.github.io/chat-browser/)**
+
 ## Overview
 
 Chat Browser provides a visual interface for exploring pre-analyzed chat room data. The tool uses AI-generated clusters and groups to organize conversations into meaningful topics, making it easy to navigate large chat histories and understand discussion themes.
