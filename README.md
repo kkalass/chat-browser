@@ -1,11 +1,11 @@
 
-# Chat Analyzer UI
+# Chat Browser
 
 A web-based tool for exploring AI-analyzed chat data through an intuitive three-column interface. Browse clusters, groups, and individual messages with advanced filtering and context expansion.
 
 ## Overview
 
-Chat Analyzer UI provides a visual interface for exploring pre-analyzed chat room data. The tool uses AI-generated clusters and groups to organize conversations into meaningful topics, making it easy to navigate large chat histories and understand discussion themes.
+Chat Browser provides a visual interface for exploring pre-analyzed chat room data. The tool uses AI-generated clusters and groups to organize conversations into meaningful topics, making it easy to navigate large chat histories and understand discussion themes.
 
 **Note:** This is a rapid prototype developed through collaborative coding with AI assistance. While functional, you may encounter some UI sluggishness when working with large datasets. We appreciate your patience and understanding!
 

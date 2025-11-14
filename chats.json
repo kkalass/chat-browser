@@ -4,5 +4,11 @@
     "name": "Solid Specification",
     "exportDate": "2025-11-14",
     "description": "AI-analyzed snapshot of the Solid Specification chat room"
+  },
+  {
+    "id": "solid-practicioners",
+    "name": "Solid Practitioners",
+    "exportDate": "2025-11-14",
+    "description": "AI-analyzed snapshot of the Solid Practitioners chat room"
   }
 ]
