@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Analysis - Select Chat</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            width: 100%;
+            padding: 40px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 12px;
+            font-size: 32px;
+        }
+
+        .subtitle {
+            color: #6c757d;
+            margin-bottom: 32px;
+            font-size: 16px;
+        }
+
+        .chat-list {
+            display: grid;
+            gap: 16px;
+        }
+
+        .chat-card {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .chat-card:hover {
+            background: #e9ecef;
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+        }
+
+        .chat-name {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .chat-meta {
+            font-size: 14px;
+            color: #6c757d;
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
+        }
+
+        .chat-meta span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .chat-description {
+            font-size: 13px;
+            color: #868e96;
+            font-style: italic;
+        }
+
+        .export-date {
+            font-size: 13px;
+            color: #495057;
+            margin-top: 4px;
+        }
+
+        .loading {
+            text-align: center;
+            color: #6c757d;
+            padding: 40px;
+        }
+
+        .error {
+            background: #f8d7da;
+            border: 1px solid #f5c2c7;
+            border-radius: 6px;
+            padding: 16px;
+            color: #842029;
+        }
+
+        .empty {
+            text-align: center;
+            color: #6c757d;
+            padding: 40px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Chat Analyzer</h1>
+        <div class="subtitle">Select a chat to explore clusters, groups, and messages</div>
+        <div class="subtitle" style="font-size: 12px; color: #868e96; margin-top: -24px; margin-bottom: 24px;">
+            <em>Note: This is a rapid prototype. Performance may vary with large datasets.</em>
+        </div>
+        
+        <div id="content">
+            <div class="loading">Loading available chats...</div>
+        </div>
+    </div>
+
+    <script>
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            return date.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+        }
+
+        async function loadChats() {
+            const contentEl = document.getElementById('content');
+            
+            try {
+                // Fetch the list of available chats
+                const response = await fetch('chats.json');
+                
+                if (!response.ok) {
+                    throw new Error('Could not load chat list');
+                }
+                
+                const chats = await response.json();
+                
+                if (!chats || chats.length === 0) {
+                    contentEl.innerHTML = '<div class="empty">No chats available yet. Add chat data to the chats/ directory.</div>';
+                    return;
+                }
+                
+                // Render chat cards
+                const chatListHTML = chats.map(chat => `
+                    <a href="chat_browser.html?chat=${encodeURIComponent(chat.id)}" class="chat-card">
+                        <div class="chat-name">${chat.name}</div>
+                        ${chat.description ? `<div class="chat-description">${chat.description}</div>` : ''}
+                        ${chat.exportDate ? `<div class="export-date">📅 Snapshot from ${formatDate(chat.exportDate)}</div>` : ''}
+                    </a>
+                `).join('');
+                
+                contentEl.innerHTML = `<div class="chat-list">${chatListHTML}</div>`;
+                
+            } catch (error) {
+                console.error('Error loading chats:', error);
+                contentEl.innerHTML = `<div class="error">Error loading chats: ${error.message}</div>`;
+            }
+        }
+        
+        // Load chats when page loads
+        loadChats();
+    </script>
+</body>
+</html>

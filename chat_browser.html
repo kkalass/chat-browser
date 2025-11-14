@@ -1,0 +1,2011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Analyzer - Browser</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            overflow: hidden;
+        }
+
+        #app {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .columns-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #ddd;
+            overflow: hidden;
+        }
+
+        .column:nth-child(1),
+        .column:nth-child(2) {
+            background: #fafbfc;
+        }
+
+        .column:nth-child(3) {
+            background: #ffffff;
+        }
+
+        .column:last-child {
+            border-right: none;
+        }
+
+        .column-header {
+            padding: 16px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            color: #495057;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .column-header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .filter-input-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .filter-input {
+            width: 100%;
+            padding: 6px 30px 6px 10px;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: normal;
+            text-transform: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .filter-input:focus {
+            outline: none;
+            border-color: #0066cc;
+        }
+
+        .filter-input::placeholder {
+            color: #adb5bd;
+        }
+
+        .filter-clear-btn {
+            position: absolute;
+            right: 6px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 12px;
+            line-height: 1;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .filter-input-wrapper:hover .filter-clear-btn,
+        .filter-clear-btn.visible {
+            opacity: 1;
+        }
+
+        .filter-clear-btn:hover {
+            background: #c82333;
+        }
+
+        .clear-filter-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 4px 12px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            text-transform: none;
+            transition: all 0.2s ease;
+        }
+
+        .clear-filter-btn:hover {
+            background: #c82333;
+        }
+
+        .column-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 8px;
+        }
+
+        .cluster-item,
+        .group-item,
+        .message-item {
+            padding: 12px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid #e9ecef;
+            position: relative;
+        }
+
+        .cluster-item:hover,
+        .group-item:hover {
+            background: #f8f9fa;
+            border-color: #dee2e6;
+        }
+
+        .cluster-item.selected,
+        .group-item.selected {
+            background: #e7f3ff;
+            border-color: #0066cc;
+        }
+
+        .select-icon {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid #dee2e6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.2s ease;
+            font-size: 12px;
+            z-index: 10;
+        }
+
+        .cluster-item:hover .select-icon,
+        .group-item:hover .select-icon {
+            opacity: 1;
+        }
+
+        .select-icon:hover {
+            border-color: #0066cc;
+            border-width: 2px;
+        }
+
+        .cluster-item.selected .select-icon,
+        .group-item.selected .select-icon {
+            opacity: 1;
+            background: #0066cc;
+            border-color: #0066cc;
+        }
+
+        .select-icon::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: transparent;
+            transition: background 0.2s ease;
+        }
+
+        .cluster-item.selected .select-icon::after,
+        .group-item.selected .select-icon::after {
+            background: white;
+        }
+
+        .cluster-item.highlighted,
+        .group-item.highlighted {
+            background: #fff3cd;
+            border-color: #ffc107;
+            box-shadow: 0 0 0 2px #fff3cd;
+        }
+
+        .cluster-item.outlined {
+            border: 2px solid #ffc107;
+            background: transparent;
+            box-shadow: none;
+        }
+
+        .group-item.outlined {
+            border: 2px solid #ffc107;
+            background: transparent;
+            box-shadow: none;
+        }
+
+        .message-item.highlighted {
+            background: #fff3cd;
+            border-color: #ffc107;
+        }
+
+        .message-item.outlined {
+            border: 2px solid #ffc107;
+            background: transparent;
+        }
+
+        .cluster-item.collapsed,
+        .group-item.collapsed {
+            opacity: 0.4;
+            background: #f8f9fa;
+            padding: 4px 12px;
+            margin-bottom: 2px;
+        }
+
+        .cluster-item.collapsed:hover,
+        .group-item.collapsed:hover {
+            opacity: 0.6;
+        }
+
+        .message-item {
+            cursor: default;
+        }
+
+        .message-item.collapsed {
+            opacity: 0.3;
+            background: #f8f9fa;
+            padding: 4px 12px;
+            margin-bottom: 2px;
+            cursor: pointer;
+        }
+
+        .message-item.collapsed:hover {
+            opacity: 0.5;
+        }
+
+        .outcome-badge {
+            display: inline;
+            padding: 0;
+            font-size: 12px;
+            font-weight: normal;
+            text-transform: lowercase;
+            margin-left: 0;
+            color: #6c757d;
+        }
+
+        .outcome-badge.question-answered,
+        .outcome-badge.informational,
+        .outcome-badge.brainstorming {
+            /* neutral - no special styling */
+        }
+
+        .outcome-badge.problem-solved {
+            color: #28a745;
+            font-weight: 600;
+        }
+
+        .outcome-badge.unresolved {
+            color: #dc3545;
+            font-weight: 600;
+        }
+
+        .item-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+            font-size: 14px;
+            color: #212529;
+        }
+
+        .item-meta {
+            font-size: 12px;
+            color: #6c757d;
+            margin-bottom: 4px;
+        }
+
+        .item-summary {
+            font-size: 13px;
+            color: #495057;
+            line-height: 1.4;
+            margin-top: 8px;
+        }
+
+        .item-keywords {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-top: 8px;
+        }
+
+        .keyword-tag {
+            background: #e9ecef;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            color: #495057;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .keyword-tag:hover {
+            background: #0066cc;
+            color: white;
+        }
+
+        .keyword-tag.active {
+            background: #0066cc;
+            color: white;
+            font-weight: 600;
+        }
+
+        .collapsed .item-summary,
+        .collapsed .item-keywords {
+            display: none;
+        }
+
+        .context-expander {
+            padding: 4px 12px;
+            background: transparent;
+            border: none;
+            border-radius: 3px;
+            text-align: center;
+            font-size: 10px;
+            color: transparent;
+            flex: 1;
+            width: 100%;
+            cursor: default;
+            transition: all 0.2s ease;
+        }
+
+        .context-expander-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 8px 0;
+            position: relative;
+            background: #fafbfc;
+            border: 1px dashed #dee2e6;
+            border-radius: 4px;
+            padding: 2px 4px;
+        }
+
+        .context-expander-container:hover .context-expander {
+            background: #f8f9fa;
+            color: #6c757d;
+            border-color: #adb5bd;
+        }
+
+        .expand-button-group {
+            display: flex;
+            gap: 4px;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            position: absolute;
+        }
+
+        .expand-button-group:first-child {
+            left: 0;
+        }
+
+        .expand-button-group:last-child {
+            right: 0;
+        }
+
+        .context-expander-container:hover .expand-button-group {
+            opacity: 1;
+        }
+
+        .expand-context-btn {
+            padding: 6px 12px;
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #495057;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .expand-context-btn:hover {
+            background: #0066cc;
+            color: white;
+            border-color: #0066cc;
+        }
+
+        .expand-context-btn.collapse-btn {
+            background: #f8f9fa;
+        }
+
+        .expand-context-btn.collapse-btn:hover {
+            background: #dc3545;
+            color: white;
+            border-color: #dc3545;
+        }
+
+        .context-message {
+            background: #f8f9fa;
+            opacity: 0.85;
+        }
+
+        .context-message .message-sender {
+            /* No color override */
+        }
+
+        .context-group {
+            background: #f8f9fa;
+            opacity: 0.85;
+        }
+
+        .context-group .item-title {
+            /* No color override */
+        }
+
+        .message-sender {
+            font-weight: 600;
+            color: #0066cc;
+            font-size: 13px;
+        }
+
+        .message-timestamp {
+            font-size: 11px;
+            color: #868e96;
+            margin-left: 8px;
+        }
+
+        .message-body {
+            margin-top: 6px;
+            font-size: 13px;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .message-body a {
+            color: #0066cc;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .message-body a:hover {
+            color: #0052a3;
+        }
+
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-size: 18px;
+            color: #6c757d;
+        }
+
+        .error {
+            color: #dc3545;
+            padding: 16px;
+            background: #f8d7da;
+            border: 1px solid #f5c2c7;
+            border-radius: 6px;
+            margin: 16px;
+        }
+
+        /* Scrollbar styling */
+        .column-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .column-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .column-content::-webkit-scrollbar-thumb {
+            background: #cbd5e0;
+            border-radius: 4px;
+        }
+
+        .column-content::-webkit-scrollbar-thumb:hover {
+            background: #a0aec0;
+        }
+
+        .info-banner {
+            background: #fff3cd;
+            border-bottom: 1px solid #ffc107;
+            padding: 10px 16px;
+            font-size: 13px;
+            color: #856404;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+            justify-content: space-between;
+        }
+
+        .info-banner-content {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-btn {
+            background: #856404;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: background 0.2s ease;
+        }
+
+        .back-btn:hover {
+            background: #6c5103;
+        }
+
+        .info-banner strong {
+            font-weight: 600;
+        }
+
+        .chat-title {
+            font-size: 12px;
+            color: #6c757d;
+            font-weight: normal;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div v-if="loading" class="loading">Loading data...</div>
+        <div v-else-if="error" class="error">{{ error }}</div>
+        <template v-else>
+            <div class="info-banner">
+                <div class="info-banner-content">
+                    ℹ️ <strong>Static Snapshot:</strong> This is an AI-analyzed snapshot of chat data, not a live view. 
+                    <span v-if="chatName" class="chat-title">• {{ chatName }}</span>
+                    <span v-if="exportDate">• Exported {{ exportDate }}</span>
+                </div>
+                <a href="index.html" class="back-btn">← Back to Chats</a>
+            </div>
+            <div class="columns-container">
+            <!-- Clusters Column -->
+            <div class="column" style="flex: 0 0 30%;">
+                <div class="column-header">
+                    <div class="column-header-top">
+                        <span>Clusters ({{ clusters.length }})</span>
+                        <span style="font-size: 11px; color: #6c757d; font-weight: normal; margin-left: 8px;">✨ AI-generated</span>
+                        <button v-if="selectedCluster" class="clear-filter-btn" @click="clearClusterSelection" title="Clear cluster filter">✕ Clear</button>
+                    </div>
+                    <div class="filter-input-wrapper">
+                        <input 
+                            type="text" 
+                            class="filter-input" 
+                            v-model="clusterFilter" 
+                            placeholder="Filter clusters by keyword..."
+                        />
+                        <button 
+                            v-if="clusterFilter" 
+                            class="filter-clear-btn visible" 
+                            @click="clusterFilter = ''"
+                            title="Clear filter"
+                        >×</button>
+                    </div>
+                </div>
+                <div class="column-content">
+                    <div
+                        v-for="cluster in clusters"
+                        :key="cluster.cluster_id"
+                        :class="['cluster-item', { 
+                            selected: selectedCluster?.cluster_id === cluster.cluster_id,
+                            highlighted: highlightedCluster?.cluster_id === cluster.cluster_id && !highlightedGroup,
+                            outlined: highlightedCluster?.cluster_id === cluster.cluster_id && highlightedGroup,
+                            collapsed: isClusterCollapsed(cluster.cluster_id)
+                        }]"
+                        @click="highlightCluster(cluster)"
+                    >
+                        <div class="select-icon" @click.stop="toggleSelectCluster(cluster)" :title="selectedCluster?.cluster_id === cluster.cluster_id ? 'Deselect to clear filter' : 'Select to filter this cluster'">
+                        </div>
+                        <div class="item-title">{{ cluster.meta_title }}</div>
+                        <div class="item-meta">
+                            Cluster #{{ cluster.cluster_id }} • {{ cluster.group_count }} groups • {{ cluster.total_message_count }} messages
+                        </div>
+                        <div class="item-summary">{{ cluster.meta_summary }}</div>
+                        <div class="item-keywords" v-if="cluster.meta_keywords && cluster.meta_keywords.length > 0">
+                            <span 
+                                class="keyword-tag" 
+                                :class="{ active: activeKeyword === keyword }"
+                                v-for="keyword in cluster.meta_keywords.slice(0, 5)" 
+                                :key="keyword"
+                                @click.stop="toggleKeywordFilter(keyword)"
+                                :title="'Filter by keyword: ' + keyword"
+                            >
+                                {{ keyword }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Groups Column -->
+            <div class="column" style="flex: 0 0 30%;">
+                <div class="column-header">
+                    <div class="column-header-top">
+                        <span>Groups ({{ sortedGroups.length }})</span>
+                        <span style="font-size: 11px; color: #6c757d; font-weight: normal; margin-left: 8px;">✨ AI-generated</span>
+                        <button v-if="selectedGroup" class="clear-filter-btn" @click="clearGroupSelection" title="Clear group filter">✕ Clear</button>
+                    </div>
+                    <div class="filter-input-wrapper">
+                        <input 
+                            type="text" 
+                            class="filter-input" 
+                            v-model="groupFilter" 
+                            placeholder="Filter groups by keyword..."
+                        />
+                        <button 
+                            v-if="groupFilter" 
+                            class="filter-clear-btn visible" 
+                            @click="groupFilter = ''"
+                            title="Clear filter"
+                        >×</button>
+                    </div>
+                </div>
+                <div class="column-content">
+                    <template v-for="(block, blockIdx) in groupBlocks" :key="blockIdx">
+                        <div
+                            v-for="group in block.groups"
+                            :key="group.groupKey"
+                            :class="['group-item', { 
+                                selected: selectedGroup?.groupKey === group.groupKey,
+                                highlighted: (highlightedGroup?.groupKey === group.groupKey) || (highlightedCluster && !highlightedGroup && group.cluster_id === highlightedCluster.cluster_id),
+                                outlined: highlightedGroup && highlightedGroup.groupKey !== group.groupKey && highlightedCluster && group.cluster_id === highlightedCluster.cluster_id,
+                                collapsed: isGroupCollapsed(group.groupKey)
+                            }]"
+                            :style="{ borderLeft: `4px solid ${getGroupColor(group.groupKey)}` }"
+                            @click="highlightGroup(group)"
+                        >
+                            <div class="select-icon" @click.stop="toggleSelectGroup(group)" :title="selectedGroup?.groupKey === group.groupKey ? 'Deselect to clear filter' : 'Select to filter this group'">
+                            </div>
+                            <div class="item-title">{{ group.title }}</div>
+                            <div class="item-meta">
+                                {{ formatDate(group.start_time) }} • {{ group.message_count }} messages
+                                <span v-if="group.outcome" :class="['outcome-badge', group.outcome]">
+                                    • {{ group.outcome }}
+                                </span>
+                            </div>
+                            <div class="item-summary">{{ group.summary }}</div>
+                            <div class="item-keywords" v-if="group.keywords && group.keywords.length > 0">
+                                <span 
+                                    class="keyword-tag" 
+                                    :class="{ active: activeKeyword === keyword }"
+                                    v-for="keyword in group.keywords.slice(0, 4)" 
+                                    :key="keyword"
+                                    @click.stop="toggleKeywordFilter(keyword)"
+                                    :title="'Filter by keyword: ' + keyword"
+                                >
+                                    {{ keyword }}
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <template v-if="block.collapsedCount > 0">
+                            <!-- Show expanded "before" groups -->
+                            <div
+                                v-for="group in block.beforeGroups"
+                                :key="'before-' + group.groupKey"
+                                :class="['group-item', 'context-group', { 
+                                    selected: selectedGroup?.groupKey === group.groupKey,
+                                    highlighted: (highlightedGroup?.groupKey === group.groupKey) || (highlightedCluster && !highlightedGroup && group.cluster_id === highlightedCluster.cluster_id),
+                                    outlined: highlightedGroup && highlightedGroup.groupKey !== group.groupKey && highlightedCluster && group.cluster_id === highlightedCluster.cluster_id
+                                }]"
+                                :style="{ borderLeft: `4px solid ${getGroupColor(group.groupKey)}` }"
+                                @click="highlightGroup(group)"
+                            >
+                                <div class="select-icon" @click.stop="toggleSelectGroup(group)" :title="selectedGroup?.groupKey === group.groupKey ? 'Deselect to clear filter' : 'Select to filter this group'">
+                                </div>
+                                <div class="item-title">{{ group.title }}</div>
+                                <div class="item-meta">
+                                    {{ formatDate(group.start_time) }} • {{ group.message_count }} messages
+                                    <span v-if="group.outcome" :class="['outcome-badge', group.outcome]">
+                                        • {{ group.outcome }}
+                                    </span>
+                                </div>
+                                <div class="item-summary">{{ group.summary }}</div>
+                                <div class="item-keywords" v-if="group.keywords && group.keywords.length > 0">
+                                    <span 
+                                        class="keyword-tag" 
+                                        :class="{ active: activeKeyword === keyword }"
+                                        v-for="keyword in group.keywords.slice(0, 4)" 
+                                        :key="keyword"
+                                        @click.stop="toggleKeywordFilter(keyword)"
+                                        :title="'Filter by keyword: ' + keyword"
+                                    >
+                                        {{ keyword }}
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <!-- Collapsed groups indicator with expand buttons -->
+                            <div v-if="block.remainingCollapsed > 0 || block.beforeGroups?.length > 0 || block.afterGroups?.length > 0" class="context-expander-container">
+                                <div class="expand-button-group">
+                                    <button 
+                                        v-if="block.beforeGroups?.length > 0" 
+                                        class="expand-context-btn collapse-btn" 
+                                        @click="collapseGroupBefore(blockIdx, 3)"
+                                        title="Hide 3 groups before"
+                                    >
+                                        ↑ -3
+                                    </button>
+                                    <button 
+                                        v-if="block.canExpandBefore" 
+                                        class="expand-context-btn" 
+                                        @click="expandGroupBefore(blockIdx, 3)"
+                                        title="Show 3 more groups before"
+                                    >
+                                        ↑ +3
+                                    </button>
+                                </div>
+                                <div class="context-expander">
+                                    <span>{{ block.remainingCollapsed }} collapsed groups...</span>
+                                </div>
+                                <div class="expand-button-group">
+                                    <button 
+                                        v-if="block.canExpandAfter" 
+                                        class="expand-context-btn" 
+                                        @click="expandGroupAfter(blockIdx, 3)"
+                                        title="Show 3 more groups after"
+                                    >
+                                        ↓ +3
+                                    </button>
+                                    <button 
+                                        v-if="block.afterGroups?.length > 0" 
+                                        class="expand-context-btn collapse-btn" 
+                                        @click="collapseGroupAfter(blockIdx, 3)"
+                                        title="Hide 3 groups after"
+                                    >
+                                        ↓ -3
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Show expanded "after" groups -->
+                            <div
+                                v-for="group in block.afterGroups"
+                                :key="'after-' + group.groupKey"
+                                :class="['group-item', 'context-group', { 
+                                    selected: selectedGroup?.groupKey === group.groupKey,
+                                    highlighted: (highlightedGroup?.groupKey === group.groupKey) || (highlightedCluster && !highlightedGroup && group.cluster_id === highlightedCluster.cluster_id),
+                                    outlined: highlightedGroup && highlightedGroup.groupKey !== group.groupKey && highlightedCluster && group.cluster_id === highlightedCluster.cluster_id
+                                }]"
+                                :style="{ borderLeft: `4px solid ${getGroupColor(group.groupKey)}` }"
+                                @click="highlightGroup(group)"
+                            >
+                                <div class="select-icon" @click.stop="toggleSelectGroup(group)" :title="selectedGroup?.groupKey === group.groupKey ? 'Deselect to clear filter' : 'Select to filter this group'">
+                                </div>
+                                <div class="item-title">{{ group.title }}</div>
+                                <div class="item-meta">
+                                    {{ formatDate(group.start_time) }} • {{ group.message_count }} messages
+                                    <span v-if="group.outcome" :class="['outcome-badge', group.outcome]">
+                                        • {{ group.outcome }}
+                                    </span>
+                                </div>
+                                <div class="item-summary">{{ group.summary }}</div>
+                                <div class="item-keywords" v-if="group.keywords && group.keywords.length > 0">
+                                    <span 
+                                        class="keyword-tag" 
+                                        :class="{ active: activeKeyword === keyword }"
+                                        v-for="keyword in group.keywords.slice(0, 4)" 
+                                        :key="keyword"
+                                        @click.stop="toggleKeywordFilter(keyword)"
+                                        :title="'Filter by keyword: ' + keyword"
+                                    >
+                                        {{ keyword }}
+                                    </span>
+                                </div>
+                            </div>
+                        </template>
+                    </template>
+                </div>
+            </div>
+
+            <!-- Messages Column -->
+            <div class="column" style="flex: 0 0 40%;">
+                <div class="column-header">
+                    <div class="column-header-top">
+                        <span>Messages ({{ allMessages.length }})</span>
+                        <span style="font-size: 11px; color: #28a745; font-weight: normal; margin-left: 8px;">📝 Original</span>
+                    </div>
+                    <div class="filter-input-wrapper">
+                        <input 
+                            type="text" 
+                            class="filter-input" 
+                            v-model="messageFilter" 
+                            placeholder="Filter messages by keyword..."
+                        />
+                        <button 
+                            v-if="messageFilter" 
+                            class="filter-clear-btn visible" 
+                            @click="messageFilter = ''"
+                            title="Clear filter"
+                        >×</button>
+                    </div>
+                </div>
+                <div class="column-content">
+                    <template v-for="(block, blockIdx) in messageBlocks" :key="blockIdx">
+                        <div
+                            v-for="message in block.messages"
+                            :key="message.event_id"
+                            :class="['message-item', { 
+                                highlighted: (highlightedGroup && message.groupKey === highlightedGroup.groupKey) || 
+                                            (highlightedCluster && !highlightedGroup && groups.find(g => g.groupKey === message.groupKey)?.cluster_id === highlightedCluster.cluster_id),
+                                outlined: highlightedGroup && message.groupKey !== highlightedGroup.groupKey && highlightedCluster && groups.find(g => g.groupKey === message.groupKey)?.cluster_id === highlightedCluster.cluster_id
+                            }]"
+                            :style="message.groupKey ? { borderLeft: `4px solid ${getGroupColor(message.groupKey)}` } : {}"
+                            @click="highlightMessageContext(message)"
+                            style="cursor: pointer;"
+                        >
+                            <div>
+                                <span class="message-sender">{{ getSenderName(message.sender) }}</span>
+                                <span class="message-timestamp">{{ formatTimestamp(message.timestamp) }}</span>
+                            </div>
+                            <div class="message-body" v-html="linkify(message.body)"></div>
+                        </div>
+                        
+                        <template v-if="block.collapsedCount > 0">
+                            <!-- Show expanded "before" messages -->
+                            <div
+                                v-for="message in block.beforeMessages"
+                                :key="'before-' + message.event_id"
+                                :class="['message-item', 'context-message', { 
+                                    highlighted: (highlightedGroup && message.groupKey === highlightedGroup.groupKey) || 
+                                                (highlightedCluster && !highlightedGroup && groups.find(g => g.groupKey === message.groupKey)?.cluster_id === highlightedCluster.cluster_id),
+                                    outlined: highlightedGroup && message.groupKey !== highlightedGroup.groupKey && highlightedCluster && groups.find(g => g.groupKey === message.groupKey)?.cluster_id === highlightedCluster.cluster_id
+                                }]"
+                                :style="message.groupKey ? { borderLeft: `4px solid ${getGroupColor(message.groupKey)}` } : {}"
+                                @click="highlightMessageContext(message)"
+                                style="cursor: pointer;"
+                            >
+                                <div>
+                                    <span class="message-sender">{{ getSenderName(message.sender) }}</span>
+                                    <span class="message-timestamp">{{ formatTimestamp(message.timestamp) }}</span>
+                                </div>
+                                <div class="message-body" v-html="linkify(message.body)"></div>
+                            </div>
+                            
+                            <!-- Collapsed messages indicator with expand buttons -->
+                            <div v-if="block.remainingCollapsed > 0 || block.beforeMessages?.length > 0 || block.afterMessages?.length > 0" class="context-expander-container">
+                                <div class="expand-button-group">
+                                    <button 
+                                        v-if="block.beforeMessages?.length > 0" 
+                                        class="expand-context-btn collapse-btn" 
+                                        @click="collapseMessageBefore(blockIdx, 3)"
+                                        title="Hide 3 messages before"
+                                    >
+                                        ↑ -3
+                                    </button>
+                                    <button 
+                                        v-if="block.canExpandBefore" 
+                                        class="expand-context-btn" 
+                                        @click="expandMessageBefore(blockIdx, 3)"
+                                        title="Show 3 more messages before"
+                                    >
+                                        ↑ +3
+                                    </button>
+                                </div>
+                                <div class="context-expander">
+                                    <span>{{ block.remainingCollapsed }} collapsed messages...</span>
+                                </div>
+                                <div class="expand-button-group">
+                                    <button 
+                                        v-if="block.canExpandAfter" 
+                                        class="expand-context-btn" 
+                                        @click="expandMessageAfter(blockIdx, 3)"
+                                        title="Show 3 more messages after"
+                                    >
+                                        ↓ +3
+                                    </button>
+                                    <button 
+                                        v-if="block.afterMessages?.length > 0" 
+                                        class="expand-context-btn collapse-btn" 
+                                        @click="collapseMessageAfter(blockIdx, 3)"
+                                        title="Hide 3 messages after"
+                                    >
+                                        ↓ -3
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Show expanded "after" messages -->
+                            <div
+                                v-for="message in block.afterMessages"
+                                :key="'after-' + message.event_id"
+                                :class="['message-item', 'context-message', { 
+                                    highlighted: (highlightedGroup && message.groupKey === highlightedGroup.groupKey) || 
+                                                (highlightedCluster && !highlightedGroup && groups.find(g => g.groupKey === message.groupKey)?.cluster_id === highlightedCluster.cluster_id),
+                                    outlined: highlightedGroup && message.groupKey !== highlightedGroup.groupKey && highlightedCluster && groups.find(g => g.groupKey === message.groupKey)?.cluster_id === highlightedCluster.cluster_id
+                                }]"
+                                :style="message.groupKey ? { borderLeft: `4px solid ${getGroupColor(message.groupKey)}` } : {}"
+                                @click="highlightMessageContext(message)"
+                                style="cursor: pointer;"
+                            >
+                                <div>
+                                    <span class="message-sender">{{ getSenderName(message.sender) }}</span>
+                                    <span class="message-timestamp">{{ formatTimestamp(message.timestamp) }}</span>
+                                </div>
+                                <div class="message-body" v-html="linkify(message.body)"></div>
+                            </div>
+                        </template>
+                    </template>
+                </div>
+            </div>
+            </div>
+        </template>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    loading: true,
+                    error: null,
+                    chatName: null,
+                    exportDate: null,
+                    clusters: [],
+                    groups: [],
+                    allMessages: [],
+                    selectedCluster: null,
+                    selectedGroup: null,
+                    highlightedCluster: null,
+                    highlightedGroup: null,
+                    activeKeyword: null,
+                    clusterFilter: '',
+                    groupFilter: '',
+                    messageFilter: '',
+                    expandedClusterIndices: new Set(),
+                    expandedGroupIndices: new Set(),
+                    expandedMessageIndices: new Set(),
+                    expandedMessageBlocks: new Map(), // blockIdx -> { beforeCount: number, afterCount: number }
+                    expandedGroupBlocks: new Map() // blockIdx -> { beforeCount: number, afterCount: number }
+                };
+            },
+            computed: {
+                sortedGroups() {
+                    return [...this.groups].sort((a, b) => {
+                        return new Date(a.start_time) - new Date(b.start_time);
+                    });
+                },
+                groupBlocks() {
+                    const groupsToUse = this.sortedGroups;
+                    
+                    // If groupFilter is set, use text filtering with collapse/expand
+                    if (this.groupFilter.trim() && !this.selectedCluster && !this.selectedGroup && !this.activeKeyword) {
+                        const filter = this.groupFilter.toLowerCase();
+                        const blocks = [];
+                        let currentBlock = { groups: [], collapsedCount: 0, collapsedStartIdx: -1 };
+                        let inRelevantSection = false;
+                        let collapsedStartIdx = -1;
+                        
+                        groupsToUse.forEach((group, idx) => {
+                            const matches = group.title?.toLowerCase().includes(filter) ||
+                                          group.summary?.toLowerCase().includes(filter) ||
+                                          group.keywords?.some(kw => kw.toLowerCase().includes(filter));
+                            
+                            if (matches) {
+                                if (!inRelevantSection && currentBlock.collapsedCount > 0) {
+                                    blocks.push(currentBlock);
+                                    currentBlock = { groups: [], collapsedCount: 0, collapsedStartIdx: -1 };
+                                }
+                                currentBlock.groups.push(group);
+                                inRelevantSection = true;
+                            } else {
+                                if (inRelevantSection) {
+                                    if (currentBlock.groups.length > 0) {
+                                        blocks.push(currentBlock);
+                                    }
+                                    collapsedStartIdx = idx;
+                                    currentBlock = { groups: [], collapsedCount: 1, collapsedStartIdx: collapsedStartIdx };
+                                    inRelevantSection = false;
+                                } else {
+                                    if (collapsedStartIdx === -1) {
+                                        collapsedStartIdx = idx;
+                                        currentBlock.collapsedStartIdx = collapsedStartIdx;
+                                    }
+                                    currentBlock.collapsedCount++;
+                                }
+                            }
+                        });
+                        
+                        if (currentBlock.groups.length > 0 || currentBlock.collapsedCount > 0) {
+                            blocks.push(currentBlock);
+                        }
+                        
+                        return blocks.map((block, blockIdx) => {
+                            if (block.collapsedCount > 0) {
+                                const expanded = this.expandedGroupBlocks.get(blockIdx) || { beforeCount: 0, afterCount: 0 };
+                                const startIdx = block.collapsedStartIdx;
+                                const endIdx = startIdx + block.collapsedCount;
+                                
+                                const beforeGroups = groupsToUse.slice(
+                                    Math.max(0, startIdx),
+                                    Math.min(startIdx + expanded.beforeCount, endIdx)
+                                );
+                                
+                                const afterGroups = groupsToUse.slice(
+                                    Math.max(startIdx, endIdx - expanded.afterCount),
+                                    endIdx
+                                );
+                                
+                                const totalShown = beforeGroups.length + afterGroups.length;
+                                const remaining = block.collapsedCount - totalShown;
+                                
+                                return {
+                                    ...block,
+                                    beforeGroups,
+                                    afterGroups,
+                                    remainingCollapsed: remaining,
+                                    canExpandBefore: expanded.beforeCount < block.collapsedCount,
+                                    canExpandAfter: expanded.afterCount < block.collapsedCount
+                                };
+                            }
+                            return block;
+                        });
+                    }
+                    
+                    // If activeKeyword is set, use keyword filtering with collapse/expand
+                    if (this.activeKeyword && !this.selectedCluster && !this.selectedGroup) {
+                        const blocks = [];
+                        let currentBlock = { groups: [], collapsedCount: 0, collapsedStartIdx: -1 };
+                        let inRelevantSection = false;
+                        let collapsedStartIdx = -1;
+                        
+                        groupsToUse.forEach((group, idx) => {
+                            const hasKeyword = group.keywords && group.keywords.some(kw => 
+                                kw.toLowerCase() === this.activeKeyword.toLowerCase()
+                            );
+                            
+                            if (hasKeyword) {
+                                if (!inRelevantSection && currentBlock.collapsedCount > 0) {
+                                    blocks.push(currentBlock);
+                                    currentBlock = { groups: [], collapsedCount: 0, collapsedStartIdx: -1 };
+                                }
+                                currentBlock.groups.push(group);
+                                inRelevantSection = true;
+                            } else {
+                                if (inRelevantSection) {
+                                    if (currentBlock.groups.length > 0) {
+                                        blocks.push(currentBlock);
+                                    }
+                                    collapsedStartIdx = idx;
+                                    currentBlock = { groups: [], collapsedCount: 1, collapsedStartIdx: collapsedStartIdx };
+                                    inRelevantSection = false;
+                                } else {
+                                    if (collapsedStartIdx === -1) {
+                                        collapsedStartIdx = idx;
+                                        currentBlock.collapsedStartIdx = collapsedStartIdx;
+                                    }
+                                    currentBlock.collapsedCount++;
+                                }
+                            }
+                        });
+                        
+                        if (currentBlock.groups.length > 0 || currentBlock.collapsedCount > 0) {
+                            blocks.push(currentBlock);
+                        }
+                        
+                        return blocks.map((block, blockIdx) => {
+                            if (block.collapsedCount > 0) {
+                                const expanded = this.expandedGroupBlocks.get(blockIdx) || { beforeCount: 0, afterCount: 0 };
+                                const startIdx = block.collapsedStartIdx;
+                                const endIdx = startIdx + block.collapsedCount;
+                                
+                                const beforeGroups = groupsToUse.slice(
+                                    Math.max(0, startIdx),
+                                    Math.min(startIdx + expanded.beforeCount, endIdx)
+                                );
+                                
+                                const afterGroups = groupsToUse.slice(
+                                    Math.max(startIdx, endIdx - expanded.afterCount),
+                                    endIdx
+                                );
+                                
+                                const totalShown = beforeGroups.length + afterGroups.length;
+                                const remaining = block.collapsedCount - totalShown;
+                                
+                                return {
+                                    ...block,
+                                    beforeGroups,
+                                    afterGroups,
+                                    remainingCollapsed: remaining,
+                                    canExpandBefore: expanded.beforeCount < block.collapsedCount,
+                                    canExpandAfter: expanded.afterCount < block.collapsedCount
+                                };
+                            }
+                            return block;
+                        });
+                    }
+                    
+                    if (!this.selectedCluster) {
+                        // If no cluster selected, show all filtered groups
+                        return [{
+                            groups: groupsToUse,
+                            collapsedCount: 0,
+                            collapsedStartIdx: -1
+                        }];
+                    }
+                    
+                    const blocks = [];
+                    let currentBlock = { groups: [], collapsedCount: 0, collapsedStartIdx: -1 };
+                    let inRelevantSection = false;
+                    let collapsedStartIdx = -1;
+                    
+                    groupsToUse.forEach((group, idx) => {
+                        const isRelevant = group.cluster_id === this.selectedCluster.cluster_id;
+                        
+                        if (isRelevant) {
+                            if (!inRelevantSection && currentBlock.collapsedCount > 0) {
+                                // End previous collapsed section
+                                blocks.push(currentBlock);
+                                currentBlock = { groups: [], collapsedCount: 0, collapsedStartIdx: -1 };
+                            }
+                            currentBlock.groups.push(group);
+                            inRelevantSection = true;
+                        } else {
+                            if (inRelevantSection) {
+                                // Start new collapsed section
+                                if (currentBlock.groups.length > 0) {
+                                    blocks.push(currentBlock);
+                                }
+                                collapsedStartIdx = idx;
+                                currentBlock = { groups: [], collapsedCount: 1, collapsedStartIdx: collapsedStartIdx };
+                                inRelevantSection = false;
+                            } else {
+                                if (collapsedStartIdx === -1) {
+                                    collapsedStartIdx = idx;
+                                    currentBlock.collapsedStartIdx = collapsedStartIdx;
+                                }
+                                currentBlock.collapsedCount++;
+                            }
+                        }
+                    });
+                    
+                    // Add last block
+                    if (currentBlock.groups.length > 0 || currentBlock.collapsedCount > 0) {
+                        blocks.push(currentBlock);
+                    }
+                    
+                    // Apply expanded context
+                    return blocks.map((block, blockIdx) => {
+                        if (block.collapsedCount > 0) {
+                            const expanded = this.expandedGroupBlocks.get(blockIdx) || { beforeCount: 0, afterCount: 0 };
+                            const startIdx = block.collapsedStartIdx;
+                            const endIdx = startIdx + block.collapsedCount;
+                            
+                            const beforeGroups = this.sortedGroups.slice(
+                                Math.max(0, startIdx),
+                                Math.min(startIdx + expanded.beforeCount, endIdx)
+                            );
+                            
+                            const afterGroups = this.sortedGroups.slice(
+                                Math.max(startIdx, endIdx - expanded.afterCount),
+                                endIdx
+                            );
+                            
+                            const totalShown = beforeGroups.length + afterGroups.length;
+                            const remaining = block.collapsedCount - totalShown;
+                            
+                            return {
+                                ...block,
+                                beforeGroups,
+                                afterGroups,
+                                remainingCollapsed: remaining,
+                                canExpandBefore: expanded.beforeCount < block.collapsedCount,
+                                canExpandAfter: expanded.afterCount < block.collapsedCount
+                            };
+                        }
+                        return block;
+                    });
+                },
+                messageBlocks() {
+                    const messagesToUse = this.allMessages;
+                    
+                    // If messageFilter is set, use text filtering with collapse/expand
+                    if (this.messageFilter.trim() && !this.selectedCluster && !this.selectedGroup) {
+                        const filter = this.messageFilter.toLowerCase();
+                        const blocks = [];
+                        let currentBlock = { messages: [], collapsedCount: 0, collapsedStartIdx: -1 };
+                        let inRelevantSection = false;
+                        let collapsedStartIdx = -1;
+                        
+                        messagesToUse.forEach((message, idx) => {
+                            const matches = message.body?.toLowerCase().includes(filter) ||
+                                          this.getSenderName(message.sender).toLowerCase().includes(filter);
+                            
+                            if (matches) {
+                                if (!inRelevantSection && currentBlock.collapsedCount > 0) {
+                                    blocks.push(currentBlock);
+                                    currentBlock = { messages: [], collapsedCount: 0, collapsedStartIdx: -1 };
+                                }
+                                currentBlock.messages.push(message);
+                                inRelevantSection = true;
+                            } else {
+                                if (inRelevantSection) {
+                                    if (currentBlock.messages.length > 0) {
+                                        blocks.push(currentBlock);
+                                    }
+                                    collapsedStartIdx = idx;
+                                    currentBlock = { messages: [], collapsedCount: 1, collapsedStartIdx: collapsedStartIdx };
+                                    inRelevantSection = false;
+                                } else {
+                                    if (collapsedStartIdx === -1) {
+                                        collapsedStartIdx = idx;
+                                        currentBlock.collapsedStartIdx = collapsedStartIdx;
+                                    }
+                                    currentBlock.collapsedCount++;
+                                }
+                            }
+                        });
+                        
+                        if (currentBlock.messages.length > 0 || currentBlock.collapsedCount > 0) {
+                            blocks.push(currentBlock);
+                        }
+                        
+                        return blocks.map((block, blockIdx) => {
+                            if (block.collapsedCount > 0) {
+                                const expanded = this.expandedMessageBlocks.get(blockIdx) || { beforeCount: 0, afterCount: 0 };
+                                const startIdx = block.collapsedStartIdx;
+                                const endIdx = startIdx + block.collapsedCount;
+                                
+                                const beforeMessages = messagesToUse.slice(
+                                    Math.max(0, startIdx),
+                                    Math.min(startIdx + expanded.beforeCount, endIdx)
+                                );
+                                
+                                const afterMessages = messagesToUse.slice(
+                                    Math.max(startIdx, endIdx - expanded.afterCount),
+                                    endIdx
+                                );
+                                
+                                const totalShown = beforeMessages.length + afterMessages.length;
+                                const remaining = block.collapsedCount - totalShown;
+                                
+                                return {
+                                    ...block,
+                                    beforeMessages,
+                                    afterMessages,
+                                    remainingCollapsed: remaining,
+                                    canExpandBefore: expanded.beforeCount < block.collapsedCount,
+                                    canExpandAfter: expanded.afterCount < block.collapsedCount
+                                };
+                            }
+                            return block;
+                        });
+                    }
+                    
+                    // Determine which messages are relevant based on selection
+                    const getRelevantGroupKeys = () => {
+                        if (this.selectedGroup) {
+                            // Only messages from the selected group
+                            return new Set([this.selectedGroup.groupKey]);
+                        } else if (this.selectedCluster) {
+                            // Messages from all groups in the selected cluster
+                            return new Set(
+                                this.groups
+                                    .filter(g => g.cluster_id === this.selectedCluster.cluster_id)
+                                    .map(g => g.groupKey)
+                            );
+                        }
+                        return new Set();
+                    };
+                    
+                    const relevantGroupKeys = getRelevantGroupKeys();
+                    if (relevantGroupKeys.size === 0) {
+                        // No selection, show all filtered messages
+                        return [{
+                            messages: messagesToUse,
+                            collapsedCount: 0,
+                            collapsedStartIdx: -1
+                        }];
+                    }
+                    
+                    const blocks = [];
+                    let currentBlock = { messages: [], collapsedCount: 0, collapsedStartIdx: -1 };
+                    let inRelevantSection = false;
+                    let collapsedStartIdx = -1;
+                    
+                    messagesToUse.forEach((message, idx) => {
+                        const isRelevant = message.groupKey && relevantGroupKeys.has(message.groupKey);
+                        
+                        if (isRelevant) {
+                            if (!inRelevantSection && currentBlock.collapsedCount > 0) {
+                                // End previous collapsed section
+                                blocks.push(currentBlock);
+                                currentBlock = { messages: [], collapsedCount: 0, collapsedStartIdx: -1 };
+                            }
+                            currentBlock.messages.push(message);
+                            inRelevantSection = true;
+                        } else {
+                            if (inRelevantSection) {
+                                // Start new collapsed section
+                                if (currentBlock.messages.length > 0) {
+                                    blocks.push(currentBlock);
+                                }
+                                collapsedStartIdx = idx;
+                                currentBlock = { messages: [], collapsedCount: 1, collapsedStartIdx: collapsedStartIdx };
+                                inRelevantSection = false;
+                            } else {
+                                if (collapsedStartIdx === -1) {
+                                    collapsedStartIdx = idx;
+                                    currentBlock.collapsedStartIdx = collapsedStartIdx;
+                                }
+                                currentBlock.collapsedCount++;
+                            }
+                        }
+                    });
+                    
+                    // Add last block
+                    if (currentBlock.messages.length > 0 || currentBlock.collapsedCount > 0) {
+                        blocks.push(currentBlock);
+                    }
+                    
+                    // Apply expanded context
+                    return blocks.map((block, blockIdx) => {
+                        if (block.collapsedCount > 0) {
+                            const expanded = this.expandedMessageBlocks.get(blockIdx) || { beforeCount: 0, afterCount: 0 };
+                            const startIdx = block.collapsedStartIdx;
+                            const endIdx = startIdx + block.collapsedCount;
+                            
+                            const beforeMessages = this.allMessages.slice(
+                                Math.max(0, startIdx),
+                                Math.min(startIdx + expanded.beforeCount, endIdx)
+                            );
+                            
+                            const afterMessages = this.allMessages.slice(
+                                Math.max(startIdx, endIdx - expanded.afterCount),
+                                endIdx
+                            );
+                            
+                            const remainingBefore = Math.max(0, startIdx + expanded.beforeCount - startIdx);
+                            const remainingAfter = Math.max(0, expanded.afterCount);
+                            const totalShown = beforeMessages.length + afterMessages.length;
+                            const remaining = block.collapsedCount - totalShown;
+                            
+                            return {
+                                ...block,
+                                beforeMessages,
+                                afterMessages,
+                                remainingCollapsed: remaining,
+                                canExpandBefore: remainingBefore < block.collapsedCount,
+                                canExpandAfter: remainingAfter < block.collapsedCount
+                            };
+                        }
+                        return block;
+                    });
+                }
+            },
+            methods: {
+                async loadData() {
+                    try {
+                        // Get chat ID from URL parameter
+                        const urlParams = new URLSearchParams(window.location.search);
+                        const chatId = urlParams.get('chat') || 'solid-specification';
+                        const basePath = `chats/${chatId}`;
+                        
+                        // Load chat metadata from chats.json
+                        try {
+                            const chatsResponse = await fetch('chats.json');
+                            if (chatsResponse.ok) {
+                                const chats = await chatsResponse.json();
+                                const chatInfo = chats.find(c => c.id === chatId);
+                                if (chatInfo) {
+                                    this.chatName = chatInfo.name;
+                                    if (chatInfo.exportDate) {
+                                        const date = new Date(chatInfo.exportDate);
+                                        this.exportDate = date.toLocaleDateString('en-US', { 
+                                            year: 'numeric', 
+                                            month: 'long', 
+                                            day: 'numeric' 
+                                        });
+                                    }
+                                }
+                            }
+                        } catch (e) {
+                            console.warn('Could not load chat metadata:', e);
+                        }
+                        
+                        // Load clusters from final_topic_report.json
+                        const clustersResponse = await fetch(`${basePath}/final_topic_report.json`);
+                        if (!clustersResponse.ok) {
+                            throw new Error(`Failed to fetch clusters: ${clustersResponse.status}`);
+                        }
+                        const clustersData = await clustersResponse.json();
+                        this.clusters = Array.isArray(clustersData) ? clustersData : [];
+                        
+                        // Load groups from clustered_groups.jsonl
+                        const groupsResponse = await fetch(`${basePath}/clustered_groups.jsonl`);
+                        if (!groupsResponse.ok) {
+                            throw new Error(`Failed to fetch groups: ${groupsResponse.status}`);
+                        }
+                        const groupsText = await groupsResponse.text();
+                        const lines = groupsText.trim().split('\n').filter(line => line.trim());
+                        const groupsWithCluster = lines.map(line => {
+                            try {
+                                return JSON.parse(line);
+                            } catch (e) {
+                                console.error('Error parsing line:', line, e);
+                                return null;
+                            }
+                        }).filter(g => g !== null);
+                        
+                        // Load all messages from export.json
+                        const messagesResponse = await fetch(`${basePath}/export.json`);
+                        if (!messagesResponse.ok) {
+                            throw new Error(`Failed to fetch messages: ${messagesResponse.status}`);
+                        }
+                        const exportData = await messagesResponse.json();
+                        const allExportMessages = exportData.messages || [];
+                        
+                        // Create event_id to group mapping
+                        const eventIdToGroup = new Map();
+                        groupsWithCluster.forEach((group, idx) => {
+                            const groupKey = `${group.cluster_id}-${idx}`;
+                            if (group.messages && Array.isArray(group.messages)) {
+                                group.messages.forEach(msg => {
+                                    eventIdToGroup.set(msg.event_id, groupKey);
+                                });
+                            }
+                        });
+                        
+                        // Process all messages from export.json
+                        this.allMessages = allExportMessages
+                            .filter(msg => msg.type === 'm.room.message' && msg.content && msg.content.body)
+                            .map((msg, idx) => {
+                                const groupKey = eventIdToGroup.get(msg.event_id);
+                                const group = groupKey ? groupsWithCluster.find(g => `${g.cluster_id}-${groupsWithCluster.indexOf(g)}` === groupKey) : null;
+                                
+                                return {
+                                    event_id: msg.event_id,
+                                    sender: msg.sender,
+                                    timestamp: new Date(msg.origin_server_ts).toISOString(),
+                                    body: msg.content.body,
+                                    groupKey: groupKey || null,
+                                    cluster_id: group ? group.cluster_id : null,
+                                    messageId: idx
+                                };
+                            });
+                        
+                        // Assign unique keys to groups
+                        this.groups = groupsWithCluster.map((group, idx) => {
+                            return {
+                                ...group,
+                                groupKey: `${group.cluster_id}-${idx}`,
+                                start_time: group.start_time ? new Date(group.start_time).toISOString() : 
+                                           (group.messages && group.messages[0] ? group.messages[0].timestamp : new Date(0).toISOString())
+                            };
+                        });
+                        
+                        // Sort all messages by timestamp
+                        this.allMessages.sort((a, b) => {
+                            return new Date(a.timestamp) - new Date(b.timestamp);
+                        });
+                        
+                        // Initially highlight the last message's context instead of selecting
+                        if (this.allMessages.length > 0) {
+                            const lastMessage = this.allMessages[this.allMessages.length - 1];
+                            this.highlightMessageContext(lastMessage);
+                        }
+                        
+                        this.loading = false;
+                        
+                        // Scroll columns appropriately after data loads
+                        this.$nextTick(() => {
+                            // Scroll all columns to bottom to show most recent content
+                            const columns = document.querySelectorAll('.column-content');
+                            columns.forEach(column => {
+                                column.scrollTop = column.scrollHeight;
+                            });
+                            
+                            // Then scroll highlighted items into view (if any)
+                            setTimeout(() => {
+                                const highlightedClusterEl = document.querySelector('.cluster-item.highlighted');
+                                const outlinedClusterEl = document.querySelector('.cluster-item.outlined');
+                                const highlightedGroupEl = document.querySelector('.group-item.highlighted');
+                                
+                                if (highlightedClusterEl) {
+                                    highlightedClusterEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                }
+                                if (outlinedClusterEl) {
+                                    outlinedClusterEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                }
+                                if (highlightedGroupEl) {
+                                    highlightedGroupEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                }
+                            }, 100);
+                        });
+                    } catch (err) {
+                        this.error = `Failed to load data: ${err.message}`;
+                        this.loading = false;
+                    }
+                },
+                selectCluster(cluster) {
+                    this.selectedCluster = cluster;
+                    this.selectedGroup = null;
+                    this.expandedMessageBlocks.clear(); // Reset expanded context
+                    this.expandedGroupBlocks.clear(); // Reset expanded context
+                    
+                    // Expand this cluster and collapse others
+                    this.expandedClusterIndices.clear();
+                    const clusterIndex = this.clusters.findIndex(c => c.cluster_id === cluster.cluster_id);
+                    this.expandedClusterIndices.add(clusterIndex);
+                    
+                    // Expand groups belonging to this cluster (these are "relevant")
+                    this.expandedGroupIndices.clear();
+                    this.sortedGroups.forEach((group, idx) => {
+                        if (group.cluster_id === cluster.cluster_id) {
+                            this.expandedGroupIndices.add(idx);
+                        }
+                    });
+                    
+                    // Expand messages belonging to groups in this cluster
+                    this.expandedMessageIndices.clear();
+                    this.allMessages.forEach((msg, idx) => {
+                        if (msg.cluster_id === cluster.cluster_id) {
+                            this.expandedMessageIndices.add(idx);
+                        }
+                    });
+                },
+                selectGroup(group) {
+                    this.selectedGroup = group;
+                    this.expandedMessageBlocks.clear(); // Reset expanded context
+                    
+                    // Expand this group and collapse others not in the same cluster
+                    this.expandedGroupIndices.clear();
+                    const groupIndex = this.sortedGroups.findIndex(g => g.groupKey === group.groupKey);
+                    this.expandedGroupIndices.add(groupIndex);
+                    
+                    // Also expand other groups in the same cluster
+                    this.sortedGroups.forEach((g, idx) => {
+                        if (g.cluster_id === group.cluster_id) {
+                            this.expandedGroupIndices.add(idx);
+                        }
+                    });
+                    
+                    // Expand messages belonging to this group
+                    this.expandedMessageIndices.clear();
+                    this.allMessages.forEach((msg, idx) => {
+                        if (msg.groupKey === group.groupKey) {
+                            this.expandedMessageIndices.add(idx);
+                        }
+                    });
+                },
+                isClusterCollapsed(clusterId) {
+                    // If no cluster selected, show all normally
+                    if (!this.selectedCluster) {
+                        return false;
+                    }
+                    const index = this.clusters.findIndex(c => c.cluster_id === clusterId);
+                    return !this.expandedClusterIndices.has(index);
+                },
+                isGroupCollapsed(groupKey) {
+                    // If no cluster selected, show all normally
+                    if (!this.selectedCluster) {
+                        return false;
+                    }
+                    const index = this.sortedGroups.findIndex(g => g.groupKey === groupKey);
+                    return !this.expandedGroupIndices.has(index);
+                },
+                isMessageCollapsed(messageIndex) {
+                    return !this.expandedMessageIndices.has(messageIndex);
+                },
+                expandClustersBefore(count) {
+                    const selectedIndex = this.selectedCluster 
+                        ? this.clusters.findIndex(c => c.cluster_id === this.selectedCluster.cluster_id)
+                        : 0;
+                    
+                    for (let i = Math.max(0, selectedIndex - count); i < selectedIndex; i++) {
+                        this.expandedClusterIndices.add(i);
+                    }
+                },
+                expandClustersAfter(count) {
+                    const selectedIndex = this.selectedCluster 
+                        ? this.clusters.findIndex(c => c.cluster_id === this.selectedCluster.cluster_id)
+                        : this.clusters.length - 1;
+                    
+                    for (let i = selectedIndex + 1; i <= Math.min(this.clusters.length - 1, selectedIndex + count); i++) {
+                        this.expandedClusterIndices.add(i);
+                    }
+                },
+                expandAllClusters() {
+                    this.clusters.forEach((_, idx) => this.expandedClusterIndices.add(idx));
+                },
+                expandGroupsBefore(count) {
+                    const selectedIndex = this.selectedGroup 
+                        ? this.sortedGroups.findIndex(g => g.groupKey === this.selectedGroup.groupKey)
+                        : 0;
+                    
+                    for (let i = Math.max(0, selectedIndex - count); i < selectedIndex; i++) {
+                        this.expandedGroupIndices.add(i);
+                    }
+                },
+                expandGroupsAfter(count) {
+                    const selectedIndex = this.selectedGroup 
+                        ? this.sortedGroups.findIndex(g => g.groupKey === this.selectedGroup.groupKey)
+                        : this.sortedGroups.length - 1;
+                    
+                    for (let i = selectedIndex + 1; i <= Math.min(this.sortedGroups.length - 1, selectedIndex + count); i++) {
+                        this.expandedGroupIndices.add(i);
+                    }
+                },
+                expandAllGroups() {
+                    this.sortedGroups.forEach((_, idx) => this.expandedGroupIndices.add(idx));
+                },
+                expandMessagesBefore(count) {
+                    const firstExpandedIndex = Math.min(...Array.from(this.expandedMessageIndices));
+                    
+                    if (isFinite(firstExpandedIndex)) {
+                        for (let i = Math.max(0, firstExpandedIndex - count); i < firstExpandedIndex; i++) {
+                            this.expandedMessageIndices.add(i);
+                        }
+                    }
+                },
+                expandMessagesAfter(count) {
+                    const lastExpandedIndex = Math.max(...Array.from(this.expandedMessageIndices));
+                    
+                    if (isFinite(lastExpandedIndex)) {
+                        for (let i = lastExpandedIndex + 1; i <= Math.min(this.allMessages.length - 1, lastExpandedIndex + count); i++) {
+                            this.expandedMessageIndices.add(i);
+                        }
+                    }
+                },
+                expandAllMessages() {
+                    this.allMessages.forEach((_, idx) => this.expandedMessageIndices.add(idx));
+                },
+                expandGroupContext(blockIdx) {
+                    // This can be implemented later to show collapsed groups
+                    console.log('Expand context for block', blockIdx);
+                },
+                expandGroupBefore(blockIdx, count) {
+                    const current = this.expandedGroupBlocks.get(blockIdx) || { beforeCount: 0, afterCount: 0 };
+                    this.expandedGroupBlocks.set(blockIdx, {
+                        beforeCount: current.beforeCount + count,
+                        afterCount: current.afterCount
+                    });
+                    this.expandedGroupBlocks = new Map(this.expandedGroupBlocks);
+                },
+                expandGroupAfter(blockIdx, count) {
+                    const current = this.expandedGroupBlocks.get(blockIdx) || { beforeCount: 0, afterCount: 0 };
+                    this.expandedGroupBlocks.set(blockIdx, {
+                        beforeCount: current.beforeCount,
+                        afterCount: current.afterCount + count
+                    });
+                    this.expandedGroupBlocks = new Map(this.expandedGroupBlocks);
+                },
+                toggleKeywordFilter(keyword) {
+                    if (this.activeKeyword === keyword) {
+                        // Deactivate keyword filter
+                        this.activeKeyword = null;
+                        this.expandedGroupBlocks.clear();
+                    } else {
+                        // Activate keyword filter
+                        this.activeKeyword = keyword;
+                        this.expandedGroupBlocks.clear();
+                        
+                        // Scroll to first matching group
+                        this.$nextTick(() => {
+                            const matchingGroups = this.sortedGroups.filter(g => 
+                                g.keywords && g.keywords.some(kw => kw.toLowerCase() === keyword.toLowerCase())
+                            );
+                            if (matchingGroups.length > 0) {
+                                const lastMatchingGroup = matchingGroups[matchingGroups.length - 1];
+                                setTimeout(() => {
+                                    const groupElements = document.querySelectorAll('.group-item:not(.context-group)');
+                                    for (let el of groupElements) {
+                                        if (el.textContent.includes(lastMatchingGroup.title)) {
+                                            el.scrollIntoView({ behavior: 'smooth', block: 'end' });
+                                            break;
+                                        }
+                                    }
+                                }, 100);
+                            }
+                        });
+                    }
+                },
+                collapseGroupBefore(blockIdx, count) {
+                    const current = this.expandedGroupBlocks.get(blockIdx) || { beforeCount: 0, afterCount: 0 };
+                    this.expandedGroupBlocks.set(blockIdx, {
+                        beforeCount: Math.max(0, current.beforeCount - count),
+                        afterCount: current.afterCount
+                    });
+                    this.expandedGroupBlocks = new Map(this.expandedGroupBlocks);
+                },
+                collapseGroupAfter(blockIdx, count) {
+                    const current = this.expandedGroupBlocks.get(blockIdx) || { beforeCount: 0, afterCount: 0 };
+                    this.expandedGroupBlocks.set(blockIdx, {
+                        beforeCount: current.beforeCount,
+                        afterCount: Math.max(0, current.afterCount - count)
+                    });
+                    this.expandedGroupBlocks = new Map(this.expandedGroupBlocks);
+                },
+                expandMessageContext(blockIdx) {
+                    // This can be implemented later to show collapsed messages
+                    console.log('Expand message context for block', blockIdx);
+                },
+                expandMessageBefore(blockIdx, count) {
+                    const current = this.expandedMessageBlocks.get(blockIdx) || { beforeCount: 0, afterCount: 0 };
+                    this.expandedMessageBlocks.set(blockIdx, {
+                        beforeCount: current.beforeCount + count,
+                        afterCount: current.afterCount
+                    });
+                    // Trigger reactivity
+                    this.expandedMessageBlocks = new Map(this.expandedMessageBlocks);
+                },
+                expandMessageAfter(blockIdx, count) {
+                    const current = this.expandedMessageBlocks.get(blockIdx) || { beforeCount: 0, afterCount: 0 };
+                    this.expandedMessageBlocks.set(blockIdx, {
+                        beforeCount: current.beforeCount,
+                        afterCount: current.afterCount + count
+                    });
+                    // Trigger reactivity
+                    this.expandedMessageBlocks = new Map(this.expandedMessageBlocks);
+                },
+                collapseMessageBefore(blockIdx, count) {
+                    const current = this.expandedMessageBlocks.get(blockIdx) || { beforeCount: 0, afterCount: 0 };
+                    this.expandedMessageBlocks.set(blockIdx, {
+                        beforeCount: Math.max(0, current.beforeCount - count),
+                        afterCount: current.afterCount
+                    });
+                    // Trigger reactivity
+                    this.expandedMessageBlocks = new Map(this.expandedMessageBlocks);
+                },
+                collapseMessageAfter(blockIdx, count) {
+                    const current = this.expandedMessageBlocks.get(blockIdx) || { beforeCount: 0, afterCount: 0 };
+                    this.expandedMessageBlocks.set(blockIdx, {
+                        beforeCount: current.beforeCount,
+                        afterCount: Math.max(0, current.afterCount - count)
+                    });
+                    // Trigger reactivity
+                    this.expandedMessageBlocks = new Map(this.expandedMessageBlocks);
+                },
+                highlightCluster(cluster) {
+                    this.highlightedCluster = cluster;
+                    // Don't set highlightedGroup to avoid confusion - we'll check via cluster_id
+                    this.highlightedGroup = null;
+                    
+                    // Scroll cluster into view and last highlighted group
+                    this.$nextTick(() => {
+                        const highlightedEl = document.querySelector('.cluster-item.highlighted');
+                        if (highlightedEl) {
+                            highlightedEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                        
+                        // Find and scroll to the last group in this cluster
+                        setTimeout(() => {
+                            const clusterGroups = this.sortedGroups.filter(g => g.cluster_id === cluster.cluster_id);
+                            if (clusterGroups.length > 0) {
+                                const lastGroup = clusterGroups[clusterGroups.length - 1];
+                                const groupElements = document.querySelectorAll('.group-item');
+                                for (let el of groupElements) {
+                                    if (el.textContent.includes(lastGroup.title)) {
+                                        el.scrollIntoView({ behavior: 'smooth', block: 'end' });
+                                        break;
+                                    }
+                                }
+                            }
+                        }, 100);
+                    });
+                },
+                toggleSelectCluster(cluster) {
+                    if (this.selectedCluster?.cluster_id === cluster.cluster_id) {
+                        // Deselect - clear filter
+                        this.selectedCluster = null;
+                        this.selectedGroup = null;
+                        this.expandedMessageBlocks.clear();
+                        this.expandedGroupBlocks.clear();
+                        this.expandedClusterIndices.clear();
+                        this.expandedGroupIndices.clear();
+                        this.expandedMessageIndices.clear();
+                    } else {
+                        // Select - apply filter
+                        this.selectCluster(cluster);
+                    }
+                },
+                highlightGroup(group) {
+                    this.highlightedGroup = group;
+                    this.highlightedCluster = this.clusters.find(c => c.cluster_id === group.cluster_id);
+                    
+                    // Scroll cluster and group into view, and last highlighted message
+                    this.$nextTick(() => {
+                        const outlinedClusterEl = document.querySelector('.cluster-item.outlined');
+                        const highlightedGroupEl = document.querySelector('.group-item.highlighted');
+                        
+                        if (outlinedClusterEl) {
+                            outlinedClusterEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                        
+                        setTimeout(() => {
+                            if (highlightedGroupEl) {
+                                highlightedGroupEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            }
+                            
+                            // Scroll to the last highlighted message
+                            const highlightedMessages = document.querySelectorAll('.message-item.highlighted');
+                            if (highlightedMessages.length > 0) {
+                                const lastHighlightedMessage = highlightedMessages[highlightedMessages.length - 1];
+                                lastHighlightedMessage.scrollIntoView({ behavior: 'smooth', block: 'end' });
+                            }
+                        }, 300);
+                    });
+                },
+                clearClusterSelection() {
+                    this.selectedCluster = null;
+                    this.selectedGroup = null;
+                    this.expandedMessageBlocks.clear();
+                    this.expandedGroupBlocks.clear();
+                    this.expandedClusterIndices.clear();
+                    this.expandedGroupIndices.clear();
+                    this.expandedMessageIndices.clear();
+                },
+                clearGroupSelection() {
+                    this.selectedGroup = null;
+                    this.expandedMessageBlocks.clear();
+                    if (this.selectedCluster) {
+                        // Re-expand all messages in the cluster
+                        this.expandedMessageIndices.clear();
+                        this.allMessages.forEach((msg, idx) => {
+                            if (msg.cluster_id === this.selectedCluster.cluster_id) {
+                                this.expandedMessageIndices.add(idx);
+                            }
+                        });
+                    }
+                },
+                toggleSelectGroup(group) {
+                    if (this.selectedGroup?.groupKey === group.groupKey) {
+                        // Deselect - go back to cluster-level selection if any
+                        this.selectedGroup = null;
+                        if (this.selectedCluster) {
+                            // Re-expand all messages in the cluster
+                            this.expandedMessageIndices.clear();
+                            this.allMessages.forEach((msg, idx) => {
+                                if (msg.cluster_id === this.selectedCluster.cluster_id) {
+                                    this.expandedMessageIndices.add(idx);
+                                }
+                            });
+                        }
+                    } else {
+                        // Select - apply filter
+                        this.selectGroup(group);
+                    }
+                },
+                toggleMessageExpansion(index) {
+                    if (this.expandedMessageIndices.has(index)) {
+                        this.expandedMessageIndices.delete(index);
+                    } else {
+                        this.expandedMessageIndices.add(index);
+                    }
+                },
+                formatDate(timestamp) {
+                    const date = new Date(timestamp);
+                    return date.toLocaleDateString('en-US', { 
+                        year: 'numeric', 
+                        month: 'short', 
+                        day: 'numeric' 
+                    });
+                },
+                formatTimestamp(timestamp) {
+                    const date = new Date(timestamp);
+                    return date.toLocaleString('en-US', { 
+                        year: 'numeric',
+                        month: 'short', 
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                },
+                getSenderName(sender) {
+                    // Extract username from Matrix ID
+                    const match = sender.match(/@([^-:]+)/);
+                    return match ? match[1] : sender;
+                },
+                linkify(text) {
+                    if (!text) return '';
+                    
+                    // Escape HTML first to prevent XSS
+                    const escaped = text
+                        .replace(/&/g, '&amp;')
+                        .replace(/</g, '&lt;')
+                        .replace(/>/g, '&gt;')
+                        .replace(/"/g, '&quot;')
+                        .replace(/'/g, '&#039;');
+                    
+                    // URL regex pattern
+                    const urlPattern = /(https?:\/\/[^\s<]+)/g;
+                    
+                    // Replace URLs with clickable links
+                    return escaped.replace(urlPattern, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>');
+                },
+                getGroupColor(groupKey) {
+                    // Generate deterministic color from groupKey
+                    let hash = 0;
+                    for (let i = 0; i < groupKey.length; i++) {
+                        hash = ((hash << 5) - hash) + groupKey.charCodeAt(i);
+                        hash = hash & hash;
+                    }
+                    // Use HSL for better color distribution
+                    // Hue: 0-360, Saturation: 40%, Lightness: 65%
+                    const hue = Math.abs(hash % 360);
+                    return `hsl(${hue}, 40%, 65%)`;
+                },
+                scrollToSelectedCluster() {
+                    this.$nextTick(() => {
+                        const selectedElement = document.querySelector('.cluster-item.selected');
+                        if (selectedElement) {
+                            selectedElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                    });
+                },
+                scrollColumnsToBottom() {
+                    const columns = document.querySelectorAll('.column-content');
+                    columns.forEach(column => {
+                        column.scrollTop = column.scrollHeight;
+                    });
+                },
+                highlightMessageContext(message) {
+                    if (!message.groupKey) {
+                        // Message not part of any group
+                        this.highlightedCluster = null;
+                        this.highlightedGroup = null;
+                        return;
+                    }
+                    
+                    // Find the group and cluster for this message
+                    const group = this.groups.find(g => g.groupKey === message.groupKey);
+                    if (group) {
+                        this.highlightedGroup = group;
+                        this.highlightedCluster = this.clusters.find(c => c.cluster_id === group.cluster_id);
+                        
+                        // Scroll highlighted items into view
+                        this.$nextTick(() => {
+                            const highlightedClusterEl = document.querySelector('.cluster-item.highlighted');
+                            const highlightedGroupEl = document.querySelector('.group-item.highlighted');
+                            
+                            if (highlightedClusterEl) {
+                                highlightedClusterEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            }
+                            
+                            // Delay group scroll slightly so cluster scroll completes first
+                            setTimeout(() => {
+                                if (highlightedGroupEl) {
+                                    highlightedGroupEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                }
+                            }, 300);
+                        });
+                    }
+                }
+            },
+            mounted() {
+                this.loadData();
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>
