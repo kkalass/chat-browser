@@ -1553,6 +1553,9 @@
                     this.expandedMessageBlocks.clear(); // Reset expanded context
                     this.expandedGroupBlocks.clear(); // Reset expanded context
                     
+                    // Highlight the cluster
+                    this.highlightCluster(cluster);
+                    
                     // Expand this cluster and collapse others
                     this.expandedClusterIndices.clear();
                     const clusterIndex = this.clusters.findIndex(c => c.cluster_id === cluster.cluster_id);
@@ -1577,6 +1580,9 @@
                 selectGroup(group) {
                     this.selectedGroup = group;
                     this.expandedMessageBlocks.clear(); // Reset expanded context
+                    
+                    // Highlight the group
+                    this.highlightGroup(group);
                     
                     // Expand this group and collapse others not in the same cluster
                     this.expandedGroupIndices.clear();
