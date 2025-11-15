@@ -572,6 +572,217 @@
             color: #6c757d;
             font-weight: normal;
         }
+
+        /* Keyword Panel Styles */
+        .keyword-panel {
+            background: white;
+            border-bottom: 2px solid #dee2e6;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            overflow: hidden;
+            max-height: 0;
+            padding: 0;
+        }
+
+        .keyword-panel.expanded {
+            max-height: 220px;
+            padding: 12px 16px;
+        }
+
+        .keyword-panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            gap: 16px;
+        }
+
+        .keyword-panel-title {
+            font-weight: 600;
+            font-size: 14px;
+            color: #495057;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        .keyword-panel-header .sidebar-filter {
+            flex: 1;
+            margin: 0;
+            padding: 6px 10px;
+            font-size: 12px;
+        }
+
+        .keyword-panel-close {
+            background: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 4px 12px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            font-weight: 600;
+        }
+
+        .keyword-panel-close:hover {
+            background: #5a6268;
+        }
+
+        .keyword-panel-content {
+            max-height: 165px;
+            overflow-y: auto;
+        }
+
+        .keyword-panel-grid {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 16px;
+            align-items: start;
+        }
+
+        .keyword-panel-left {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .keyword-panel-right {
+            min-height: 0;
+        }
+
+        .keyword-panel-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .keyword-panel-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .keyword-panel-content::-webkit-scrollbar-thumb {
+            background: #cbd5e0;
+            border-radius: 4px;
+        }
+
+        .keywords-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.2s ease;
+            font-weight: 600;
+        }
+
+        .keywords-btn:hover {
+            background: #5568d3;
+        }
+
+        .keywords-btn.active {
+            background: #0066cc;
+        }
+
+        .keyword-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .keyword-cloud-item {
+            background: #e9ecef;
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            color: #495057;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .keyword-cloud-item:hover {
+            background: #0066cc;
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0, 102, 204, 0.2);
+        }
+
+        .keyword-cloud-item.active {
+            background: #0066cc;
+            color: white;
+            font-weight: 600;
+            border-color: #0052a3;
+        }
+
+        .keyword-count {
+            background: rgba(255, 255, 255, 0.3);
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .keyword-cloud-item.active .keyword-count {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .sidebar-section {
+            margin-bottom: 24px;
+        }
+
+        .sidebar-section-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #6c757d;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .sidebar-filter {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            font-size: 13px;
+            margin-bottom: 12px;
+            transition: border-color 0.2s ease;
+        }
+
+        .sidebar-filter:focus {
+            outline: none;
+            border-color: #0066cc;
+        }
+
+        .sidebar-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 12px;
+            color: #6c757d;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 6px;
+        }
+
+        .sidebar-stat {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .sidebar-stat-value {
+            font-weight: 600;
+            color: #495057;
+        }
     </style>
 </head>
 <body>
@@ -585,7 +796,74 @@
                     <span v-if="chatName" class="chat-title">• {{ chatName }}</span>
                     <span v-if="exportDate">• Exported {{ exportDate }}</span>
                 </div>
-                <a href="index.html" class="back-btn">← Back to Chats</a>
+                <div style="display: flex; gap: 8px; align-items: center;">
+                    <button 
+                        @click="showKeywordPanel = !showKeywordPanel" 
+                        :class="['keywords-btn', { active: showKeywordPanel }]"
+                        :title="showKeywordPanel ? 'Hide keywords panel' : 'Show keywords panel'"
+                    >
+                        🏷️ Keywords ({{ aggregatedKeywords.length }})
+                    </button>
+                    <a href="index.html" class="back-btn">← Back to Chats</a>
+                </div>
+            </div>
+            
+            <!-- Keyword Panel -->
+            <div :class="['keyword-panel', { expanded: showKeywordPanel }]">
+                <div class="keyword-panel-header">
+                    <div class="keyword-panel-title">
+                        🏷️ Keywords ({{ aggregatedKeywords.length }})
+                    </div>
+                    <input 
+                        type="text" 
+                        v-model="keywordFilter" 
+                        class="sidebar-filter" 
+                        placeholder="Filter keywords..."
+                        @click.stop
+                    />
+                    <button @click="showKeywordPanel = false" class="keyword-panel-close">
+                        ✕ Close
+                    </button>
+                </div>
+                
+                <div class="keyword-panel-content">
+                    <div class="keyword-panel-grid">
+                        <!-- Left: Stats and Controls -->
+                        <div class="keyword-panel-left">
+                            <div class="sidebar-stats" style="margin-bottom: 0;">
+                                <div class="sidebar-stat">
+                                    <span>Active Filter:</span>
+                                    <span class="sidebar-stat-value">{{ activeKeyword || 'None' }}</span>
+                                </div>
+                            </div>
+                            <button 
+                                v-if="activeKeyword"
+                                @click="toggleKeywordFilter(activeKeyword)" 
+                                class="clear-filter-btn" 
+                                style="width: 100%; font-size: 11px; padding: 6px;"
+                            >
+                                ✕ Clear Filter
+                            </button>
+                        </div>
+                        
+                        <!-- Right: Keyword Cloud -->
+                        <div class="keyword-panel-right">
+                            <div class="keyword-cloud">
+                                <div 
+                                    v-for="kwData in filteredKeywords" 
+                                    :key="kwData.keyword"
+                                    :class="['keyword-cloud-item', { active: activeKeyword === kwData.keyword }]"
+                                    @click="toggleKeywordFilter(kwData.keyword)"
+                                    :title="`${kwData.count} occurrences • ${kwData.clusterIds.size} clusters • ${kwData.groupKeys.size} groups`"
+                                    :style="{ fontSize: getKeywordFontSize(kwData.count) + 'px' }"
+                                >
+                                    <span>{{ kwData.keyword }}</span>
+                                    <span class="keyword-count">{{ kwData.count }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="columns-container">
             <!-- Clusters Column -->
@@ -680,7 +958,6 @@
                                 outlined: highlightedGroup && highlightedGroup.groupKey !== group.groupKey && highlightedCluster && group.cluster_id === highlightedCluster.cluster_id,
                                 collapsed: isGroupCollapsed(group.groupKey)
                             }]"
-                            :style="{ borderLeft: `4px solid ${getGroupColor(group.groupKey)}` }"
                             @click="highlightGroup(group)"
                         >
                             <div class="select-icon" @click.stop="toggleSelectGroup(group)" :title="selectedGroup?.groupKey === group.groupKey ? 'Deselect to clear filter' : 'Select to filter this group'">
@@ -717,7 +994,6 @@
                                     highlighted: (highlightedGroup?.groupKey === group.groupKey) || (highlightedCluster && !highlightedGroup && group.cluster_id === highlightedCluster.cluster_id),
                                     outlined: highlightedGroup && highlightedGroup.groupKey !== group.groupKey && highlightedCluster && group.cluster_id === highlightedCluster.cluster_id
                                 }]"
-                                :style="{ borderLeft: `4px solid ${getGroupColor(group.groupKey)}` }"
                                 @click="highlightGroup(group)"
                             >
                                 <div class="select-icon" @click.stop="toggleSelectGroup(group)" :title="selectedGroup?.groupKey === group.groupKey ? 'Deselect to clear filter' : 'Select to filter this group'">
@@ -796,7 +1072,6 @@
                                     highlighted: (highlightedGroup?.groupKey === group.groupKey) || (highlightedCluster && !highlightedGroup && group.cluster_id === highlightedCluster.cluster_id),
                                     outlined: highlightedGroup && highlightedGroup.groupKey !== group.groupKey && highlightedCluster && group.cluster_id === highlightedCluster.cluster_id
                                 }]"
-                                :style="{ borderLeft: `4px solid ${getGroupColor(group.groupKey)}` }"
                                 @click="highlightGroup(group)"
                             >
                                 <div class="select-icon" @click.stop="toggleSelectGroup(group)" :title="selectedGroup?.groupKey === group.groupKey ? 'Deselect to clear filter' : 'Select to filter this group'">
@@ -859,7 +1134,6 @@
                                             (highlightedCluster && !highlightedGroup && groups.find(g => g.groupKey === message.groupKey)?.cluster_id === highlightedCluster.cluster_id),
                                 outlined: highlightedGroup && message.groupKey !== highlightedGroup.groupKey && highlightedCluster && groups.find(g => g.groupKey === message.groupKey)?.cluster_id === highlightedCluster.cluster_id
                             }]"
-                            :style="message.groupKey ? { borderLeft: `4px solid ${getGroupColor(message.groupKey)}` } : {}"
                             @click="highlightMessageContext(message)"
                             style="cursor: pointer;"
                         >
@@ -880,7 +1154,6 @@
                                                 (highlightedCluster && !highlightedGroup && groups.find(g => g.groupKey === message.groupKey)?.cluster_id === highlightedCluster.cluster_id),
                                     outlined: highlightedGroup && message.groupKey !== highlightedGroup.groupKey && highlightedCluster && groups.find(g => g.groupKey === message.groupKey)?.cluster_id === highlightedCluster.cluster_id
                                 }]"
-                                :style="message.groupKey ? { borderLeft: `4px solid ${getGroupColor(message.groupKey)}` } : {}"
                                 @click="highlightMessageContext(message)"
                                 style="cursor: pointer;"
                             >
@@ -943,7 +1216,6 @@
                                                 (highlightedCluster && !highlightedGroup && groups.find(g => g.groupKey === message.groupKey)?.cluster_id === highlightedCluster.cluster_id),
                                     outlined: highlightedGroup && message.groupKey !== highlightedGroup.groupKey && highlightedCluster && groups.find(g => g.groupKey === message.groupKey)?.cluster_id === highlightedCluster.cluster_id
                                 }]"
-                                :style="message.groupKey ? { borderLeft: `4px solid ${getGroupColor(message.groupKey)}` } : {}"
                                 @click="highlightMessageContext(message)"
                                 style="cursor: pointer;"
                             >
@@ -986,7 +1258,9 @@
                     expandedGroupIndices: new Set(),
                     expandedMessageIndices: new Set(),
                     expandedMessageBlocks: new Map(), // blockIdx -> { beforeCount: number, afterCount: number }
-                    expandedGroupBlocks: new Map() // blockIdx -> { beforeCount: number, afterCount: number }
+                    expandedGroupBlocks: new Map(), // blockIdx -> { beforeCount: number, afterCount: number }
+                    showKeywordPanel: false,
+                    keywordFilter: ''
                 };
             },
             computed: {
@@ -994,6 +1268,65 @@
                     return [...this.groups].sort((a, b) => {
                         return new Date(a.start_time) - new Date(b.start_time);
                     });
+                },
+                aggregatedKeywords() {
+                    const keywordMap = new Map();
+                    
+                    // Aggregate keywords from clusters
+                    this.clusters.forEach(cluster => {
+                        if (cluster.keywords && Array.isArray(cluster.keywords)) {
+                            cluster.keywords.forEach(kw => {
+                                const key = kw.toLowerCase();
+                                if (!keywordMap.has(key)) {
+                                    keywordMap.set(key, {
+                                        keyword: kw,
+                                        count: 0,
+                                        clusterIds: new Set(),
+                                        groupKeys: new Set()
+                                    });
+                                }
+                                const entry = keywordMap.get(key);
+                                entry.count++;
+                                entry.clusterIds.add(cluster.cluster_id);
+                            });
+                        }
+                    });
+                    
+                    // Aggregate keywords from groups
+                    this.groups.forEach(group => {
+                        if (group.keywords && Array.isArray(group.keywords)) {
+                            group.keywords.forEach(kw => {
+                                const key = kw.toLowerCase();
+                                if (!keywordMap.has(key)) {
+                                    keywordMap.set(key, {
+                                        keyword: kw,
+                                        count: 0,
+                                        clusterIds: new Set(),
+                                        groupKeys: new Set()
+                                    });
+                                }
+                                const entry = keywordMap.get(key);
+                                entry.count++;
+                                entry.groupKeys.add(group.groupKey);
+                                if (group.cluster_id) {
+                                    entry.clusterIds.add(group.cluster_id);
+                                }
+                            });
+                        }
+                    });
+                    
+                    // Convert to array and sort by count
+                    return Array.from(keywordMap.values())
+                        .sort((a, b) => b.count - a.count);
+                },
+                filteredKeywords() {
+                    if (!this.keywordFilter.trim()) {
+                        return this.aggregatedKeywords;
+                    }
+                    const filter = this.keywordFilter.toLowerCase();
+                    return this.aggregatedKeywords.filter(kw => 
+                        kw.keyword.toLowerCase().includes(filter)
+                    );
                 },
                 groupBlocks() {
                     const groupsToUse = this.sortedGroups;
@@ -1735,6 +2068,14 @@
                             }
                         });
                     }
+                },
+                getKeywordFontSize(count) {
+                    // Calculate font size based on count (min: 11px, max: 18px)
+                    const maxCount = Math.max(...this.aggregatedKeywords.map(kw => kw.count));
+                    const minCount = Math.min(...this.aggregatedKeywords.map(kw => kw.count));
+                    const range = maxCount - minCount || 1;
+                    const normalized = (count - minCount) / range;
+                    return Math.round(11 + (normalized * 7));
                 },
                 collapseGroupBefore(blockIdx, count) {
                     const current = this.expandedGroupBlocks.get(blockIdx) || { beforeCount: 0, afterCount: 0 };
