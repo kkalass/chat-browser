@@ -854,7 +854,7 @@
                                     :key="kwData.keyword"
                                     :class="['keyword-cloud-item', { active: activeKeyword === kwData.keyword }]"
                                     @click="toggleKeywordFilter(kwData.keyword)"
-                                    :title="`${kwData.count} occurrences • ${kwData.clusterIds.size} clusters • ${kwData.groupKeys.size} groups`"
+                                    :title="`${kwData.count} occurrences • ${kwData.clusterIds.size} topics • ${kwData.groupKeys.size} groups`"
                                     :style="{ fontSize: getKeywordFontSize(kwData.count) + 'px' }"
                                 >
                                     <span>{{ kwData.keyword }}</span>
@@ -870,16 +870,16 @@
             <div class="column" style="flex: 0 0 30%;">
                 <div class="column-header">
                     <div class="column-header-top">
-                        <span>Clusters ({{ clusters.length }})</span>
+                        <span>Topics ({{ clusters.length }})</span>
                         <span style="font-size: 11px; color: #6c757d; font-weight: normal; margin-left: 8px;">✨ AI-generated</span>
-                        <button v-if="selectedCluster" class="clear-filter-btn" @click="clearClusterSelection" title="Clear cluster filter">✕ Clear</button>
+                        <button v-if="selectedCluster" class="clear-filter-btn" @click="clearClusterSelection" title="Clear topic filter">✕ Clear</button>
                     </div>
                     <div class="filter-input-wrapper">
                         <input 
                             type="text" 
                             class="filter-input" 
                             v-model="clusterFilter" 
-                            placeholder="Filter clusters by keyword..."
+                            placeholder="Filter topics by keyword..."
                         />
                         <button 
                             v-if="clusterFilter" 
@@ -901,11 +901,11 @@
                         }]"
                         @click="highlightCluster(cluster)"
                     >
-                        <div class="select-icon" @click.stop="toggleSelectCluster(cluster)" :title="selectedCluster?.cluster_id === cluster.cluster_id ? 'Deselect to clear filter' : 'Select to filter this cluster'">
+                        <div class="select-icon" @click.stop="toggleSelectCluster(cluster)" :title="selectedCluster?.cluster_id === cluster.cluster_id ? 'Deselect to clear filter' : 'Select to filter this topic'">
                         </div>
                         <div class="item-title">{{ cluster.meta_title }}</div>
                         <div class="item-meta">
-                            Cluster #{{ cluster.cluster_id }} • {{ cluster.group_count }} groups • {{ cluster.total_message_count }} messages
+                            Topic #{{ cluster.cluster_id }} • {{ cluster.group_count }} groups • {{ cluster.total_message_count }} messages
                         </div>
                         <div class="item-summary">{{ cluster.meta_summary }}</div>
                         <div class="item-keywords" v-if="cluster.meta_keywords && cluster.meta_keywords.length > 0">

@@ -3,57 +3,60 @@
   "final_topics": [
     {
       "topic_id": 0,
-      "title": "Solid Practitioners Meetings: Logistics",
-      "summary": "These groups center around the logistical coordination and maintenance of the Solid Practitioners meetings. Discussions include scheduling, time confirmations, sharing meeting agendas, minutes, recordings, presentation materials, troubleshooting access issues, and ensuring smooth meeting operations.",
+      "title": "Solid Practitioners Meetings Logistics",
+      "summary": "These groups coordinate the logistics of the Solid Practitioners meetings, including scheduling, time confirmations, and sharing meeting agendas, notes, and recordings. Discussions also focus on improving meeting organization, note-taking equity, and resolving scheduling conflicts to ensure smooth and accessible meetings for participants.",
       "keywords": [
         "Meeting Schedule",
-        "HackMD",
         "Agenda",
         "Jitsi",
-        "Meeting Logistics",
-        "Logistics",
         "Practitioners Meeting",
+        "HackMD",
+        "Meeting Logistics",
         "Meeting Notes",
-        "UTC",
-        "Meeting"
+        "Logistics",
+        "Scheduling",
+        "UTC"
       ],
       "group_indices": [
-        1,
         3,
         4,
         5,
         17,
         20,
-        23,
         30,
         33,
         36,
         41,
-        47,
         54,
         58,
         59,
         62,
+        65,
         78,
         81,
-        90,
         95,
         97,
         110,
         115,
         118,
+        121,
         123,
         127,
         135,
         145,
         154,
         155,
+        156,
         160,
         161,
         162,
+        168,
         171,
         172,
         174,
+        175,
+        178,
+        185,
         186,
         189,
         190
@@ -61,36 +64,8 @@
     },
     {
       "topic_id": 1,
-      "title": "Community Introductions and Collaboration",
-      "summary": "This topic cluster centers on community introductions and initial collaborations within the Solid ecosystem. Discussions encompass welcoming new members, project introductions (including Sleepy Bike and Valueflows), inquiries about Solid integration from startups, and technical discussions such as migrating the Solid Contacts spec. Additionally, members share resources like academic papers and seek recommendations for Solid-related content to enhance the community catalog.",
-      "keywords": [
-        "Collaboration",
-        "Decentralization",
-        "Initiative",
-        "Reaction",
-        "Support",
-        "Banter",
-        "Introduction",
-        "Sleepy Bike",
-        "Project",
-        "Semantic Web"
-      ],
-      "group_indices": [
-        0,
-        2,
-        15,
-        16,
-        77,
-        124,
-        157,
-        164,
-        176
-      ]
-    },
-    {
-      "topic_id": 2,
-      "title": "Solid-OIDC Provider Standardization",
-      "summary": "The conversations focus on standardizing Solid-OIDC providers by defining how to programmatically retrieve metadata like labels and icons, and standardizing the information within Pod Provider WebID Documents. Additionally, the group explored existing implementations of the UMA authentication flow within Solid Pods beyond Inrupt ESS.",
+      "title": "Solid-OIDC Provider Metadata Standardization",
+      "summary": "These discussions center on standardizing metadata for Solid-OIDC providers to improve the user experience during login and registration. The conversations explore the need for programmatically accessible definitions, labels, and icons from Pod providers' WebID documents to ensure consistency and ease of use across different Solid applications.",
       "keywords": [
         "Solid-OIDC",
         "Metadata",
@@ -105,104 +80,425 @@
       ],
       "group_indices": [
         24,
-        25,
-        106
+        25
+      ]
+    },
+    {
+      "topic_id": 2,
+      "title": "Solid Application Interoperability (SAI)",
+      "summary": "These groups discuss user experience and access control considerations for Solid applications, particularly within the context of Solid Application Interoperability (SAI).  The conversations explore clear communication of data access levels (public, private, shared) to users, with a focus on effectively handling PII and leveraging naming conventions.",
+      "keywords": [
+        "SAI",
+        "PII",
+        "User Profile",
+        "UX",
+        "Access Control",
+        "Data Registration",
+        "WebID",
+        "Solid Application Interoperability",
+        "Access Grants",
+        "Specification"
+      ],
+      "group_indices": [
+        26,
+        35
       ]
     },
     {
       "topic_id": 3,
-      "title": "Sleepy.bike Project Development",
-      "summary": "The Sleepy.bike project discussions cover logistical and technical aspects, including clarifying its geographic reach and potential integration with WarmShowers. Additionally, the conversation includes requests for bike rental advice in Paris. A significant issue arose regarding internal project conflict, resulting in a division of the Sleepy.bike team.",
+      "title": "Community Pods and Group Management",
+      "summary": "The groups focus on community pod setup, access control, and architectural designs for federated geosearch. Discussions involve creating and debugging group pods on TrinPod, exploring access management using private triples, and recommending community pods for efficient data aggregation and governance in geospatial applications.",
+      "keywords": [
+        "Group Pod",
+        "TrinPod",
+        "Access Control",
+        "WebID",
+        "Turtle Parsing",
+        "Membership",
+        "Crosslink",
+        "Pod Discovery",
+        "Private Triples",
+        "Geospatial Index"
+      ],
+      "group_indices": [
+        21,
+        27,
+        48
+      ]
+    },
+    {
+      "topic_id": 4,
+      "title": "Solid Data Indexing and Search",
+      "summary": "The conversations revolve around Solid data indexing and search capabilities, aiming to improve search functionality in Solid applications. Discussions cover various indexing strategies, the need for a standardized search API, the sharing of existing implementations, and announcements for upcoming workshops and sessions related to decentralized search across Solid Pods.",
+      "keywords": [
+        "Indexing",
+        "Search",
+        "Decentralized Search",
+        "Search API",
+        "Solid Spec",
+        "TrinPod",
+        "SPARQL",
+        "Autocomplete",
+        "Meeting Logistics",
+        "Recording"
+      ],
+      "group_indices": [
+        29,
+        43,
+        50,
+        63,
+        103,
+        166
+      ]
+    },
+    {
+      "topic_id": 5,
+      "title": "Solid Web Components Development",
+      "summary": "These discussions center on developing web components for Solid, focusing on tools, libraries, and integration strategies. Developers coordinate meetups to tackle technical challenges like reactive rendering and interoperability, ultimately creating a GitHub wiki for ongoing collaboration.",
+      "keywords": [
+        "Web Components",
+        "Tools & Libraries",
+        "SAI",
+        "LDO.js",
+        "Demos",
+        "Meeting Minutes",
+        "Meetup",
+        "Coordination",
+        "LDO",
+        "rdflib"
+      ],
+      "group_indices": [
+        68,
+        69,
+        71
+      ]
+    },
+    {
+      "topic_id": 6,
+      "title": "Sleepy Bike Project Updates",
+      "summary": "The Sleepy Bike project's progress and challenges are discussed, including its geographic scope, relationship with WarmShowers, and technical implementation. Updates reveal internal struggles, resulting in a project 'schism', alongside requests for advice about bike rentals.",
       "keywords": [
         "Sleepy Bike",
+        "Introduction",
+        "Collaboration",
+        "Project",
         "WarmShowers",
         "Geographic Scope",
         "Adoption",
         "Travel Advice",
         "Biking",
-        "Paris",
-        "sleepy.bike",
-        "Sleepy.bike",
-        "Solid World"
+        "Paris"
       ],
       "group_indices": [
+        2,
         6,
         64,
         73
       ]
     },
     {
-      "topic_id": 4,
-      "title": "Solid Community Governance & Strategy",
-      "summary": "Solid community governance and strategy are discussed within these groups, focusing on ethical monetization approaches for practitioners while adhering to core values against data exploitation. Discussions include conflict resolution (SolidCouch), code of conduct enforcement, the role of censorship and privacy within Solid, and the overall scope and future direction of the practitioner group.",
+      "topic_id": 7,
+      "title": "Solid Governance and Community",
+      "summary": "Conversations revolve around Solid governance, including the Practitioners Group's role, elections for co-chairs, and representation on the ODI Advisory Committee. Issues of censorship, privacy, conflict resolution (like the SolidCouch issue), and collaboration with other communities like Valueflows are also addressed.",
       "keywords": [
         "Governance",
-        "Solid Practitioners",
-        "Monetization",
-        "Strategy",
-        "Reciprocity",
+        "ODI",
+        "Charter",
+        "Elections",
         "WarmShowers",
         "OpenHospitalityNetwork",
         "Privatization",
         "Community Governance",
-        "sleepy.bike"
+        "sleepy.bike",
+        "Group Scope"
       ],
       "group_indices": [
-        7,
         8,
         11,
         82,
-        180,
-        185
+        84,
+        111,
+        129,
+        134,
+        164,
+        165,
+        180
       ]
     },
     {
-      "topic_id": 5,
-      "title": "AI Agents and Solid Integration",
-      "summary": "These discussions explore the integration of AI agents, particularly LLMs, with Solid. Key themes include building personalized agents using Solid data, exploring privacy and data control through mechanisms like the Model Context Protocol, and addressing data transparency, consent, and the challenges of data forgetting within LLMs, specifically in relation to linked data principles.",
+      "topic_id": 8,
+      "title": "Solid Notifications Implementation",
+      "summary": "The implementation of Solid notifications is discussed, covering topics such as different approaches to webhooks and support across different Pod providers. A dedicated Matrix chat channel for Real Time Solid (RTS) efforts was created to facilitate better coordination, while scheduled meetings faced rescheduling and a hiatus due to low attendance.",
       "keywords": [
-        "LLM",
+        "Notifications",
+        "webhookChannel2023",
+        "CSS",
+        "NSS",
+        "Solid Symposium",
+        "Email Notifications",
+        "Practitioners Meeting",
+        "Scheduling",
+        "UTC",
+        "Attendance"
+      ],
+      "group_indices": [
+        61,
+        72,
+        133
+      ]
+    },
+    {
+      "topic_id": 9,
+      "title": "RDF and Linked Data Shapes",
+      "summary": "RDF and Linked Data Shapes are explored, including collaboration on SHACL shapes and ontologies, and developing a Linked Data Shape Manager. Discussions cover binary RDF formats like HDT and CBOR-LD, with one member releasing a tool to convert DICOM metadata to RDF.",
+      "keywords": [
+        "RDF",
+        "SHACL",
+        "Ontology",
+        "Collaboration",
+        "Products and Services",
+        "Linked Data Shapes",
+        "Interoperability",
+        "Data Fetching",
+        "Shape Manager",
+        "rdflib"
+      ],
+      "group_indices": [
+        42,
+        74,
+        122,
+        150
+      ]
+    },
+    {
+      "topic_id": 10,
+      "title": "Solid Monetization Ethics and Strategy",
+      "summary": "The group debated a proposal regarding \"Value Generation and Monetization Strategies\" for Solid Practitioners, balancing the need for economic sustainability (to drive adoption) with core community values opposing data privatization and exploitation, referencing the WarmShowers failure.",
+      "keywords": [
+        "Solid Practitioners",
+        "Monetization",
+        "Governance",
+        "Strategy",
+        "Reciprocity"
+      ],
+      "group_indices": [
+        7
+      ]
+    },
+    {
+      "topic_id": 11,
+      "title": "Solid Explainer and Onboarding",
+      "summary": "These groups are exploring ways to educate newcomers about Solid, including experimenting with a personalized GPT agent trained on Solid information. Discussions also focus on creating explainer content highlighting Solid's practical applications and coordinating efforts with the W3C Community Group 'Solid Explainer' initiative to improve onboarding.",
+      "keywords": [
         "GPT Agent",
         "AI",
         "Solid Onboarding",
         "Proof of Concept",
         "FAQs",
-        "MCP",
-        "Privacy",
-        "RAG",
-        "Data Integration"
-      ],
-      "group_indices": [
-        9,
-        96,
-        100
-      ]
-    },
-    {
-      "topic_id": 6,
-      "title": "Solid User Onboarding & Education",
-      "summary": "The conversations centered on improving Solid's user onboarding and developer experience through better educational content and clearer explanations of practical use cases, including Data Wallets. Participants also discussed the need for improved and updated official documentation, particularly from Inrupt, while highlighting the value of existing community resources.",
-      "keywords": [
         "Solid Explainer",
         "Onboarding",
         "Use Cases",
         "Matrix Channel",
-        "W3C CG",
-        "Data Wallets",
-        "Blog Post",
-        "Developer Experience",
-        "Documentation",
-        "Inrupt"
+        "W3C CG"
       ],
       "group_indices": [
-        12,
-        128,
-        181
+        9,
+        12
       ]
     },
     {
-      "topic_id": 7,
-      "title": "Solid Server-Side Pagination",
+      "topic_id": 12,
+      "title": "Group Scope and Project Focus",
+      "summary": "A member declined an invitation to join the W3C Solid Community Group due to time constraints, leading to a clarification that the Practitioners group prioritizes active project work over general Solid happenings.",
+      "keywords": [
+        "W3C Community Group",
+        "Scope",
+        "Priorities",
+        "Project Focus"
+      ],
+      "group_indices": [
+        19
+      ]
+    },
+    {
+      "topic_id": 13,
+      "title": "Solid Data Modules Promotion",
+      "summary": "These groups focus on promoting and sharing information about Solid Data Modules and Data Wallets. The conversations involve sharing content on platforms like wedistribute.org and disseminating blog posts to clarify concepts related to data management with Solid.",
+      "keywords": [
+        "Solid Data Modules",
+        "Promotion",
+        "Content Sharing",
+        "wedistribute.org",
+        "Data Wallets",
+        "Blog Post"
+      ],
+      "group_indices": [
+        34,
+        128
+      ]
+    },
+    {
+      "topic_id": 14,
+      "title": "Solid Career Data PoC Guidance",
+      "summary": "A newcomer sought advice for building a Proof of Concept (PoC) for career data management, leading to community recommendations favoring the Community Solid Server (CSS), Javascript/Typescript, and guidance on ontology and interoperability conventions.",
+      "keywords": [
+        "PoC",
+        "CSS",
+        "Javascript",
+        "Ontology",
+        "Data Interoperability"
+      ],
+      "group_indices": [
+        38
+      ]
+    },
+    {
+      "topic_id": 15,
+      "title": "Solvent Native Solid Apps",
+      "summary": "An announcement was made regarding Solvent, a project enabling Solid applications to run natively over a user's file system using Manas and Tauri.",
+      "keywords": [
+        "Solvent",
+        "Native Apps",
+        "Filesystem",
+        "Tauri",
+        "Manas"
+      ],
+      "group_indices": [
+        39
+      ]
+    },
+    {
+      "topic_id": 16,
+      "title": "Solid Localization Strategy",
+      "summary": "The Solid Localization Strategy groups are discussing the best tools and workflows for translating Solid projects into multiple languages. Conversations cover platforms like Weblate, frameworks like Fluent and Vue i18n, and integrating RDF data from sources like Wikidata for internationalization.",
+      "keywords": [
+        "Localization",
+        "Fluent",
+        "Weblate",
+        "Internationalization",
+        "Open Source",
+        "i18n",
+        "Wikidata",
+        "RDF",
+        "LDO.js"
+      ],
+      "group_indices": [
+        52,
+        66
+      ]
+    },
+    {
+      "topic_id": 17,
+      "title": "Solid Production Use and Servers",
+      "summary": "These groups explore the readiness of Solid for production use, covering topics like server implementations, security considerations (including HIPAA compliance), and infrastructure migrations.  Members are also sharing resources, such as a PeerTube channel for Solid practitioners and documentation for DIY Solid setups, along with announcements like the Solid World call for speakers.",
+      "keywords": [
+        "Production Use",
+        "Solid Specification",
+        "Solid Server",
+        "Trinpod",
+        "PeerTube",
+        "Fediverse",
+        "Object Storage",
+        "Sustainability",
+        "Video Hosting",
+        "ODRL"
+      ],
+      "group_indices": [
+        53,
+        101,
+        105,
+        140,
+        173
+      ]
+    },
+    {
+      "topic_id": 18,
+      "title": "Solid Job Search and Resources",
+      "summary": "These groups revolve around job opportunities within the Solid ecosystem. Participants are sharing job search resources and announcements, including ODI's recruitment for multiple Solid roles, with a focus on candidates able to work in London.",
+      "keywords": [
+        "Hiring",
+        "Job Search",
+        "Positions Wanted",
+        "Community Resources",
+        "ODI",
+        "Solid Jobs",
+        "London",
+        "Community Manager"
+      ],
+      "group_indices": [
+        56,
+        167
+      ]
+    },
+    {
+      "topic_id": 19,
+      "title": "Spanish-Language Solid Forum Discussions",
+      "summary": "Jeff Zucker shared a link to a Spanish-language discussion on the Solid forum (Podspace), leading to positive engagement and cross-invitation from Spanish-speaking members.",
+      "keywords": [
+        "Podspace",
+        "Forum",
+        "Spanish Speakers",
+        "Translation"
+      ],
+      "group_indices": [
+        60
+      ]
+    },
+    {
+      "topic_id": 20,
+      "title": "Solid Development Inspiration Sources",
+      "summary": "Mariha requested high-level vision and narrow technical resources to encourage a return to software development, receiving several links tailored to her background in distributed systems.",
+      "keywords": [
+        "Solid Resources",
+        "Distributed Systems",
+        "Software Engineering",
+        "Programming",
+        "Getting Started"
+      ],
+      "group_indices": [
+        67
+      ]
+    },
+    {
+      "topic_id": 21,
+      "title": "Solid and Fediverse Integration",
+      "summary": "These conversations centered on integrating Solid with the Fediverse, including discussions on specific tools like Mastopod and Peertube, the ActivityPods approach, and the launch of a new federated forum on We Distribute. Users shared experiences, troubleshooting tips, and announcements related to connecting Solid with decentralized social networks.",
+      "keywords": [
+        "Fediverse",
+        "ActivityPods",
+        "ActivityPub",
+        "Mastopod",
+        "Peertube",
+        "Mastodon",
+        "Spectra.video",
+        "Solid Integration",
+        "NSS",
+        "Meeting Minutes"
+      ],
+      "group_indices": [
+        98,
+        108,
+        112
+      ]
+    },
+    {
+      "topic_id": 23,
+      "title": "Group Membership Requirements",
+      "summary": "The group clarified that formal organizational affiliation is not required for membership in certain Solid groups, leading to a brief mention of Inrupt hiring status.",
+      "keywords": [
+        "Affiliation",
+        "Membership",
+        "W3C",
+        "Inrupt",
+        "Employment"
+      ],
+      "group_indices": [
+        16
+      ]
+    },
+    {
+      "topic_id": 24,
+      "title": "Solid Server-Side Pagination Challenges",
       "summary": "Participants discussed the current lack of standardized server-side pagination methods in Solid for handling large datasets like chat logs, noting existing workarounds and limitations regarding document vs. triple level operations.",
       "keywords": [
         "Pagination",
@@ -216,14 +512,585 @@
       ]
     },
     {
-      "topic_id": 8,
-      "title": "Solid Scope and Priorities",
-      "summary": "The conversation centers on the practical application of Solid, specifically concerning the level of involvement expected from external contributors and the platform's current state of maturity. Discussions address balancing active project work with broader community engagement, alongside differing perspectives on whether Solid is ready for widespread adoption or still in an early testing phase.",
+      "topic_id": 25,
+      "title": "Message Signing Standard (RFC 9421)",
+      "summary": "Following a discussion on cryptographic keys, an accepted standard (RFC 9421) for message signing was introduced, prompting planning for a future dedicated meeting in March to discuss its application within Solid.",
       "keywords": [
-        "W3C Community Group",
-        "Scope",
-        "Priorities",
-        "Project Focus",
+        "Private Keys",
+        "Message Signing",
+        "RFC 9421",
+        "Standard"
+      ],
+      "group_indices": [
+        45
+      ]
+    },
+    {
+      "topic_id": 26,
+      "title": "Server Practitioners Subgroup Proposal",
+      "summary": "A proposal was made and supported to establish a subgroup dedicated to Server Practitioners to enhance alignment and functionality deployment, alongside feedback requesting corrections to the recent search API meeting notes.",
+      "keywords": [
+        "Server Practitioners",
+        "Subgroup",
+        "Standardization",
+        "Meeting Notes",
+        "Search API"
+      ],
+      "group_indices": [
+        46
+      ]
+    },
+    {
+      "topic_id": 27,
+      "title": "Solid Hackathon Planning",
+      "summary": "The discussions revolved around planning non-competitive Solid hackathons focused on specific projects like PASS, outlining goals, structure, and reflecting on the nature of such events. A Gitter chat room link was shared, likely intended to facilitate real-time collaboration during the hackathon.",
+      "keywords": [
+        "Hackathon",
+        "Collaboration",
+        "PASS Project",
+        "Project Planning",
+        "Gitter"
+      ],
+      "group_indices": [
+        51,
+        70
+      ]
+    },
+    {
+      "topic_id": 28,
+      "title": "Solid Interoperability Practices Discussion",
+      "summary": "The discussions explore Solid interoperability challenges, sharing resources and exploring different architectural approaches. The focus is on contrasting 'everything apps' like Anytype with specialized apps relying on strong interoperability, highlighting the potential role of PodOS in bridging this gap.",
+      "keywords": [
+        "Interoperability",
+        "PDS",
+        "Solid Practices",
+        "Developer Challenges",
+        "Anytype",
+        "Local-First",
+        "App Interop",
+        "PodOS",
+        "Decentralization"
+      ],
+      "group_indices": [
+        76,
+        159
+      ]
+    },
+    {
+      "topic_id": 29,
+      "title": "Startup Introductions and Solid Integration",
+      "summary": "A non-technical startup from Australia introduced themselves, expressing interest in integrating Solid Pods and seeking connections with local experts or Inrupt for collaboration.",
+      "keywords": [
+        "Startup",
+        "Pods",
+        "Decentralization",
+        "Collaboration",
+        "Australia"
+      ],
+      "group_indices": [
+        77
+      ]
+    },
+    {
+      "topic_id": 30,
+      "title": "Oracle Aconex Accelerator Announcement",
+      "summary": "An announcement was made regarding the launch of the Oracle Aconex Accelerator, integrating Solid technology into Construction technology.",
+      "keywords": [
+        "Construction Technology",
+        "Oracle Aconex",
+        "Solid Applications",
+        "Accelerator"
+      ],
+      "group_indices": [
+        79
+      ]
+    },
+    {
+      "topic_id": 31,
+      "title": "Solid Search Research Project",
+      "summary": "Mohammad Bahrani from the University of Southampton introduced his research project focused on efficient, secure, and sovereign search over Solid pods using LLMs and Federated Learning.",
+      "keywords": [
+        "Information Retrieval",
+        "LLMs",
+        "Federated Learning",
+        "Solid Pods",
+        "WAIS"
+      ],
+      "group_indices": [
+        80
+      ]
+    },
+    {
+      "topic_id": 32,
+      "title": "Solid Catalog Restructuring",
+      "summary": "The team decided to separate the Solid Catalog data from specific applications by moving it to its own repository to improve data independence and requested community feedback on the structure.",
+      "keywords": [
+        "Solid Catalog",
+        "Repository Structure",
+        "Data Separation",
+        "Data Governance"
+      ],
+      "group_indices": [
+        85
+      ]
+    },
+    {
+      "topic_id": 33,
+      "title": "Activity Pods Technical Discussion",
+      "summary": "These conversations centered on the technical aspects of ActivityPods, including ActivityPub implementation over Solid, ODRL, and RDF document structure requirements. Developers shared compatibility reports detailing issues encountered while adapting applications to ActivityPods.",
+      "keywords": [
+        "ActivityPods",
+        "ActivityPub",
+        "Group Pods",
+        "RDF Structure",
+        "ODRL",
+        "Quad Store",
+        "Compatibility Report",
+        "App Development",
+        "Matrix"
+      ],
+      "group_indices": [
+        86,
+        104
+      ]
+    },
+    {
+      "topic_id": 34,
+      "title": "Conflict-Free Replicated Data Types",
+      "summary": "Links were shared referencing a W3C public-solid email announcing the scheduling of a meeting focused on Conflict-free Replicated Data Types (CRTDs) in Solid.",
+      "keywords": [
+        "CRTDs",
+        "W3C",
+        "Public Solid",
+        "Technical Meeting"
+      ],
+      "group_indices": [
+        87
+      ]
+    },
+    {
+      "topic_id": 35,
+      "title": "Solid Developers in Mexico Networking",
+      "summary": "Jeff Zucker facilitated an introduction between two members interested in discussing the application and policies of Solid technology within the context of the Mexican government.",
+      "keywords": [
+        "Solid Applications",
+        "Government Policy",
+        "Networking",
+        "Mexico"
+      ],
+      "group_indices": [
+        88
+      ]
+    },
+    {
+      "topic_id": 36,
+      "title": "ActivityPub Integration Inbox Validation",
+      "summary": "The discussion involved announcing a forum post on integrating ActivityPub into Solid specs, related concepts like inbox validation, and mention of lost notes regarding an AP layer experiment and a new abstraction use case.",
+      "keywords": [
+        "ActivityPub",
+        "Solid Specs",
+        "Inbox Validation",
+        "Abstraction",
+        "Use Case"
+      ],
+      "group_indices": [
+        91
+      ]
+    },
+    {
+      "topic_id": 37,
+      "title": "Solid Use Case Contributions Call",
+      "summary": "A request was made to community members to contribute their Solid projects and use cases to a list on the Solid forum to demonstrate Solid in action.",
+      "keywords": [
+        "Use Cases",
+        "Solid Deployments",
+        "Forum",
+        "Projects"
+      ],
+      "group_indices": [
+        92
+      ]
+    },
+    {
+      "topic_id": 38,
+      "title": "NSS Deployment Troubleshooting",
+      "summary": "A developer struggled with deploying NSS using Nginx and SSL until they identified and resolved a configuration mismatch in their firewall rules, confirming the use of Solid for multi-tenancy in a production app.",
+      "keywords": [
+        "NSS",
+        "Deployment",
+        "Firewall",
+        "Nginx",
+        "Self-Hosting"
+      ],
+      "group_indices": [
+        93
+      ]
+    },
+    {
+      "topic_id": 39,
+      "title": "Solid Events and Survey Invitations",
+      "summary": "The discussions involved planning an international panel for the upcoming Solid Symposium, inviting participation in a Solid panel discussion at the State of Open Con conference, and sharing a survey regarding SHACL shapes. There was also a discussion troubleshooting issues with link previews on Solid event calendar links.",
+      "keywords": [
+        "Solid Symposium",
+        "International Applications",
+        "Community Feedback",
+        "Panel Proposal",
+        "Conference",
+        "ODI",
+        "SHACL",
+        "Survey",
+        "Panel",
+        "Calendar"
+      ],
+      "group_indices": [
+        83,
+        94,
+        169
+      ]
+    },
+    {
+      "topic_id": 40,
+      "title": "LLM Privacy and Data Integrity",
+      "summary": "These discussions center on privacy and data integrity challenges within LLMs used with Solid.  Key concerns include data forgetting, user consent, transparency in LLM training data, and the exploration of tools like RDF and Model Context Protocol (MCP) to address these issues within the Solid ecosystem.",
+      "keywords": [
+        "LLM",
+        "RDF",
+        "Solid Ecosystem",
+        "SHACL",
+        "Collaboration",
+        "Organizations",
+        "MCP",
+        "Privacy",
+        "RAG",
+        "Data Integration"
+      ],
+      "group_indices": [
+        40,
+        96,
+        100
+      ]
+    },
+    {
+      "topic_id": 42,
+      "title": "Defining Product/Service Shapes",
+      "summary": "A new working group was announced to define a common shape for Products and Services, leading to a debate on whether to use 'Project' or 'ProductOrService' as the superclass and how to model organizational relationships.",
+      "keywords": [
+        "ProductOrService",
+        "Shape",
+        "Schema",
+        "Working Group",
+        "Project",
+        "Organization"
+      ],
+      "group_indices": [
+        28
+      ]
+    },
+    {
+      "topic_id": 43,
+      "title": "JavaScript RDF Tooling Overview",
+      "summary": "The focus here is on the availability and planning for JavaScript-based tools for working with RDF data. This includes discussion of RDF library support in other languages like Python and Perl, as well as scheduling an overview presentation of existing JavaScript RDF tooling.",
+      "keywords": [
+        "RDF",
+        "Python",
+        "Perl",
+        "rdflib",
+        "Libraries",
+        "JavaScript",
+        "Tooling",
+        "Presentation"
+      ],
+      "group_indices": [
+        44,
+        55
+      ]
+    },
+    {
+      "topic_id": 45,
+      "title": "Solid Catalog Development and Management",
+      "summary": "These conversations revolve around the development, maintenance, and governance of the Solid Catalog, a repository for Solid applications and resources. Topics include frontend development, search implementation, data correction, metadata definition, bug fixes, repository governance, and inclusion of research papers.",
+      "keywords": [
+        "Solid Catalog",
+        "Research Papers",
+        "SHACL Forms",
+        "Catalog Management",
+        "Frontend",
+        "LDO",
+        "NextUI",
+        "Search Functionality",
+        "Learning Resources",
+        "Research Topics"
+      ],
+      "group_indices": [
+        102,
+        119,
+        136,
+        137,
+        141,
+        143,
+        144,
+        149,
+        152,
+        153,
+        163,
+        176,
+        188
+      ]
+    },
+    {
+      "topic_id": 46,
+      "title": "Solid Architecture and Implementation",
+      "summary": "These discussions address the architecture and implementation of Solid, including debates on security versus interoperability in Datasolids, the architecture of projects like MANDAT, and sharing architecture-as-code tools for visualizing Solid setups.",
+      "keywords": [
+        "Datasolids",
+        "HIPAA",
+        "Security",
+        "Abstraction Layer",
+        "Siloing",
+        "Solid Server",
+        "Provenance",
+        "MANDAT",
+        "Data Delegation",
+        "RDP"
+      ],
+      "group_indices": [
+        139,
+        142,
+        184
+      ]
+    },
+    {
+      "topic_id": 47,
+      "title": "Authentication and Authorization Flows",
+      "summary": "The conversations in this cluster focus on various aspects of authentication and authorization within Solid. Topics covered include finding UMA flow implementations, harmonizing authentication specifications, authenticating non-web applications, and implementing SSO bridges for Solid applications.",
+      "keywords": [
+        "UMA Flow",
+        "Solid-OIDC",
+        "Authorization Server",
+        "Pod Implementation",
+        "Auth Spec",
+        "Harmonization",
+        "FedCM",
+        "STM",
+        "HackMD",
+        "AuthN"
+      ],
+      "group_indices": [
+        106,
+        107,
+        114,
+        125
+      ]
+    },
+    {
+      "topic_id": 49,
+      "title": "ODI Governance and Funding",
+      "summary": "The group was reminded to provide feedback on the proposed ODI governance structure and was provided instructions and encouragement to self-nominate for the Solid Operations Advisory Committee (OAC) before the March 30 deadline.",
+      "keywords": [
+        "ODI Governance",
+        "Operations Advisory Committee",
+        "Nominations",
+        "Feedback"
+      ],
+      "group_indices": [
+        120
+      ]
+    },
+    {
+      "topic_id": 50,
+      "title": "Solid Ecosystem Applications Development",
+      "summary": "Discussions focused on application development within the Solid ecosystem. This includes sharing and requesting information about projects like 'Solid Compound' for improved UX/DX, as well as the announcement and discussion of new tools like a CSS component scaffolder designed to simplify development. Participants also followed up on presentations with technical questions about PodQuest, WebID scoped indexes, and open-sourcing the application.",
+      "keywords": [
+        "Solid Compound",
+        "UX",
+        "DX",
+        "Project Link",
+        "CSS Component",
+        "Scaffolder",
+        "Developer Tools",
+        "API Endpoint",
+        "PodQuest",
+        "WebID"
+      ],
+      "group_indices": [
+        37,
+        130,
+        146
+      ]
+    },
+    {
+      "topic_id": 51,
+      "title": "Data Handling and Transparency Issues",
+      "summary": "Members discussed news regarding a non-Solid initiative led by RFK Jr. to aggregate health data for research, raising concerns about consent and centralized data control.",
+      "keywords": [
+        "Health Data",
+        "RFK Jr",
+        "Aggregation",
+        "Consent",
+        "NIH"
+      ],
+      "group_indices": [
+        138
+      ]
+    },
+    {
+      "topic_id": 52,
+      "title": "Inrupt Migration Issues Resolution",
+      "summary": "Users reported difficulties accessing resources due to broken links resulting from the Inrupt migration, including a Solid Symposium page and the Real Time Solid website, with the page owner acknowledging the issue.",
+      "keywords": [
+        "Inrupt Migration",
+        "Broken Links",
+        "Solid Symposium",
+        "RTS"
+      ],
+      "group_indices": [
+        132
+      ]
+    },
+    {
+      "topic_id": 54,
+      "title": "Web Access Control Discussions",
+      "summary": "Conversations revolved around Web Access Control (WAC) mechanisms within Solid. The group debated the historical use of `acl:trustedApp` and considered alternatives like SAI for authorization. They also explored the use of Group WebIDs versus URIs for access control, particularly for private group memberships, and inquired about dedicated channels for WAC discussions.",
+      "keywords": [
+        "Authorization",
+        "Trusted Apps",
+        "ACL",
+        "CSS",
+        "NSS",
+        "SAI",
+        "Group WebID",
+        "Access Control List",
+        "foaf:Group",
+        "Privacy"
+      ],
+      "group_indices": [
+        22,
+        49,
+        109
+      ]
+    },
+    {
+      "topic_id": 55,
+      "title": "Synovient vs. Solid Pod Comparison",
+      "summary": "A link to Synovient was shared, prompting a user to inquire about its technical differences from the open-source Solid Protocol, which could not be answered due to Synovient's lack of technical visibility.",
+      "keywords": [
+        "Synovient",
+        "Solid Pods",
+        "Open Source",
+        "Data Storage"
+      ],
+      "group_indices": [
+        116
+      ]
+    },
+    {
+      "topic_id": 56,
+      "title": "Mycelium Web Server Project Sharing",
+      "summary": "A user shared links to the GitHub repository and a Peertube video for MyceliumWebServer.",
+      "keywords": [
+        "MyceliumWebServer",
+        "GitHub",
+        "Peertube"
+      ],
+      "group_indices": [
+        117
+      ]
+    },
+    {
+      "topic_id": 57,
+      "title": "Contacts Specification Migration",
+      "summary": "The Contacts client-client spec group sought feedback from practitioners regarding the feasibility of migrating from `vcard:AddressBook` to `foaf:AddressBook`, acknowledging the need for backward compatibility support over several years.",
+      "keywords": [
+        "Contacts Spec",
+        "vcard",
+        "foaf",
+        "Backward Compatibility",
+        "Data Migration"
+      ],
+      "group_indices": [
+        124
+      ]
+    },
+    {
+      "topic_id": 58,
+      "title": "AI Code Generation Feedback & Security",
+      "summary": "Members shared mixed feedback on the utility and security of GenAI code editors/copilots, discussing both positive formatting capabilities and negative experiences involving bugs and potential security vulnerabilities.",
+      "keywords": [
+        "GenAI",
+        "Copilot",
+        "Code Generation",
+        "Security",
+        "Debugging"
+      ],
+      "group_indices": [
+        126
+      ]
+    },
+    {
+      "topic_id": 60,
+      "title": "Social Query Security",
+      "summary": "Josh Cornejo raises detailed questions regarding network security (DDoS) and loop prevention in decentralized social queries, which Niko addresses by detailing unique query IDs and asynchronous forwarding logic.",
+      "keywords": [
+        "Social Query",
+        "DDoS Protection",
+        "Access Control",
+        "Infinite Loops",
+        "NextGraph"
+      ],
+      "group_indices": [
+        158
+      ]
+    },
+    {
+      "topic_id": 61,
+      "title": "Podcast Interview Scheduling",
+      "summary": "Jeff followed up on scheduling a podcast interview with Damon, who apologized for the delay due to a family emergency and confirmed he would reach out via email.",
+      "keywords": [
+        "Podcast",
+        "Scheduling",
+        "Communication"
+      ],
+      "group_indices": [
+        177
+      ]
+    },
+    {
+      "topic_id": 62,
+      "title": "Jitsi Technical Glitch Report",
+      "summary": "These discussions centered on technical issues related to Jitsi meetings. Users reported problems accessing the February 19th meeting recording and received troubleshooting assistance. A separate report noted a brief glitch where a participant appeared frozen during a meeting.",
+      "keywords": [
+        "Meeting Recording",
+        "Video Access",
+        "Troubleshooting",
+        "WebM",
+        "Jitsi",
+        "Video Call",
+        "Glitch"
+      ],
+      "group_indices": [
+        47,
+        179
+      ]
+    },
+    {
+      "topic_id": 64,
+      "title": "Developer Experience and Documentation",
+      "summary": "Lukedary shared positive progress from a development day but criticized the poor quality and outdated state of official Solid documentation, especially from Inrupt, while praising community resources.",
+      "keywords": [
+        "Developer Experience",
+        "Documentation",
+        "Inrupt",
+        "Solid Potential"
+      ],
+      "group_indices": [
+        181
+      ]
+    },
+    {
+      "topic_id": 65,
+      "title": "Solid Adoption and Maturity Debate",
+      "summary": "Lukedary sought advice on selling Solid's data sovereignty benefit internally against existing centralized solutions, which sparked a debate between Jeff and Elf-pavlik regarding whether Solid should be characterized as an 'alpha test period' or a practical platform for applications today.",
+      "keywords": [
         "Adoption",
         "Data Sovereignty",
         "Maturity Model",
@@ -231,102 +1098,68 @@
         "Practitioners vs CG"
       ],
       "group_indices": [
-        19,
         183
       ]
     },
     {
-      "topic_id": 9,
-      "title": "TrinPod Group Pod Management",
-      "summary": "The TrinPod groups focused on the practical setup and functionality of group pods within the platform. Discussions covered troubleshooting technical issues during group creation and explored the privacy-conscious discovery mechanism for group pods, which leverages private triples in user's personal pods.",
+      "topic_id": 66,
+      "title": "LWS Naming and Solid Branding",
+      "summary": "A user inquired about a rumored name change for Solid, leading to a discussion distinguishing 'Linked Web Storage' as the technical specification from 'Solid' as the preferred solution brand.",
       "keywords": [
-        "Group Pod",
-        "TrinPod",
-        "WebID",
-        "Turtle Parsing",
-        "Membership",
-        "Crosslink",
-        "Pod Discovery",
-        "Private Triples",
-        "Access Control"
+        "Solid",
+        "Linked Web Storage",
+        "LWS",
+        "Branding",
+        "Naming Convention"
       ],
       "group_indices": [
-        21,
-        27
+        187
       ]
     },
     {
-      "topic_id": 10,
-      "title": "Solid Authorization & Access Control",
-      "summary": "Contains 4 conversation groups about solid authorization & access control",
+      "topic_id": 67,
+      "title": "Miscellaneous and Orphaned Messages",
+      "summary": "This topic groups miscellaneous and orphaned messages that did not fit into other categories. This included unrelated code snippets, administrative notes, social exchanges, and links to external resources. Users also sought and received links to previous meeting recordings.",
       "keywords": [
-        "Authorization",
-        "SAI",
-        "Trusted Apps",
-        "ACL",
-        "CSS",
-        "NSS",
-        "PII",
-        "User Profile",
-        "UX",
-        "Access Control"
-      ],
-      "group_indices": [
-        22,
-        26,
-        49,
-        142
-      ]
-    },
-    {
-      "topic_id": 11,
-      "title": "Products & Services Schema Definition",
-      "summary": "Contains 2 conversation groups about products & services schema definition",
-      "keywords": [
-        "ProductOrService",
-        "Shape",
-        "Schema",
-        "Working Group",
-        "Project",
-        "Organization",
-        "SHACL",
-        "Ontology",
-        "RDF",
-        "Collaboration"
-      ],
-      "group_indices": [
-        28,
-        42
-      ]
-    },
-    {
-      "topic_id": 12,
-      "title": "Solid Search API Standardization",
-      "summary": "Contains 5 conversation groups about solid search api standardization",
-      "keywords": [
-        "Indexing",
-        "Search",
-        "Search API",
-        "Solid Spec",
-        "TrinPod",
-        "SPARQL",
-        "Autocomplete",
-        "Meeting Logistics",
+        "orphaned",
+        "miscellaneous",
+        "Matrix Identity",
+        "W3C",
+        "Design Issues",
+        "Emoji Use",
+        "Meeting",
         "Recording",
-        "Agenda"
+        "Video",
+        "Vimeo"
       ],
       "group_indices": [
-        29,
-        43,
-        50,
-        63,
-        166
+        14,
+        75,
+        90,
+        113,
+        148
       ]
     },
     {
-      "topic_id": 13,
-      "title": "Solid Project Funding & Grants",
-      "summary": "Contains 3 conversation groups about solid project funding & grants",
+      "topic_id": 68,
+      "title": "Miscellaneous Social Logistics",
+      "summary": "This topic captures miscellaneous social interactions and channel logistics. Discussions involved greetings, directing users to appropriate channels, and general feedback regarding the Solid World event. There were also mentions of projects and updates on missed meetings.",
+      "keywords": [
+        "Greetings",
+        "Channel Management",
+        "Logistics",
+        "Solid World",
+        "Digital Twin"
+      ],
+      "group_indices": [
+        23,
+        57
+      ]
+    },
+    {
+      "topic_id": 69,
+      "title": "NGI Grant Application Updates",
+      "summary": "These conversations focus on the NGI Sargasso grant application process, including requests for transatlantic partnerships and documenting funding sources. There's also discussion surrounding transparency in the distribution plan for the ODI Solid grant, with specific inquiries about allocations for various stakeholders.",
       "keywords": [
         "Collaboration",
         "NGI Sargasso",
@@ -346,506 +1179,10 @@
       ]
     },
     {
-      "topic_id": 14,
-      "title": "Solid Data Modules Promotion",
-      "summary": "Participants discussed and agreed to share information about the Solid Data Modules project on wedistribute.org.",
+      "topic_id": 70,
+      "title": "Miscellaneous Announcements",
+      "summary": "This cluster contains various unrelated announcements ranging from product updates and technical integrations to event invitations and calls for proposals. Announcements include information about FediCon, an event for the Open Social Web, and a workshop by the ESPRESSO project on information retrieval at the Solid Symposium.",
       "keywords": [
-        "Solid Data Modules",
-        "Promotion",
-        "Content Sharing",
-        "wedistribute.org"
-      ],
-      "group_indices": [
-        34
-      ]
-    },
-    {
-      "topic_id": 15,
-      "title": "Solid Application Interoperability (SAI)",
-      "summary": "Contains 2 conversation groups about solid application interoperability (sai)",
-      "keywords": [
-        "SAI",
-        "Solid Application Interoperability",
-        "Access Grants",
-        "Specification",
-        "Architecture",
-        "Architecture as Code",
-        "LikeC4",
-        "Solid-OIDC"
-      ],
-      "group_indices": [
-        35,
-        184
-      ]
-    },
-    {
-      "topic_id": 16,
-      "title": "Career Data Management PoC",
-      "summary": "A newcomer sought advice for building a Proof of Concept (PoC) for career data management, leading to community recommendations favoring the Community Solid Server (CSS), Javascript/Typescript, and guidance on ontology and interoperability conventions.",
-      "keywords": [
-        "PoC",
-        "CSS",
-        "Javascript",
-        "Ontology",
-        "Data Interoperability"
-      ],
-      "group_indices": [
-        38
-      ]
-    },
-    {
-      "topic_id": 17,
-      "title": "Solvent Native Solid Apps",
-      "summary": "An announcement was made regarding Solvent, a project enabling Solid applications to run natively over a user's file system using Manas and Tauri.",
-      "keywords": [
-        "Solvent",
-        "Native Apps",
-        "Filesystem",
-        "Tauri",
-        "Manas"
-      ],
-      "group_indices": [
-        39
-      ]
-    },
-    {
-      "topic_id": 18,
-      "title": "Solid Ecosystem RDF Description",
-      "summary": "Prozion introduced a project focused on creating an RDF description of the Solid ecosystem and sought collaboration, receiving encouragement and links to related work on SHACL shapes for organizations.",
-      "keywords": [
-        "RDF",
-        "Solid Ecosystem",
-        "SHACL",
-        "Collaboration",
-        "Organizations"
-      ],
-      "group_indices": [
-        40
-      ]
-    },
-    {
-      "topic_id": 19,
-      "title": "RDF Libraries and Tools Discussion",
-      "summary": "Contains 4 conversation groups about rdf libraries and tools discussion",
-      "keywords": [
-        "RDF",
-        "Python",
-        "Perl",
-        "rdflib",
-        "Libraries",
-        "JavaScript",
-        "Tooling",
-        "Presentation",
-        "DICOM",
-        "Metadata Extraction"
-      ],
-      "group_indices": [
-        44,
-        55,
-        122,
-        150
-      ]
-    },
-    {
-      "topic_id": 20,
-      "title": "Digital Signatures & RFC 9421",
-      "summary": "Contains 2 conversation groups about digital signatures & rfc 9421",
-      "keywords": [
-        "Private Keys",
-        "Message Signing",
-        "RFC 9421",
-        "Standard",
-        "Digital Signatures",
-        "Search",
-        "Meeting Logistics",
-        "Group Pod",
-        "Meeting Notes"
-      ],
-      "group_indices": [
-        45,
-        65
-      ]
-    },
-    {
-      "topic_id": 21,
-      "title": "Server Practitioners Subgroup Proposal",
-      "summary": "A proposal was made and supported to establish a subgroup dedicated to Server Practitioners to enhance alignment and functionality deployment, alongside feedback requesting corrections to the recent search API meeting notes.",
-      "keywords": [
-        "Server Practitioners",
-        "Subgroup",
-        "Standardization",
-        "Meeting Notes",
-        "Search API"
-      ],
-      "group_indices": [
-        46
-      ]
-    },
-    {
-      "topic_id": 22,
-      "title": "Federated Geosearch Architecture Advice",
-      "summary": "The sleepy.bike team sought architectural advice on implementing a federated geospatial index, resulting in a community recommendation to utilize dedicated Community Pods for efficient data aggregation, access control, and group governance.",
-      "keywords": [
-        "Geospatial Index",
-        "Federated Search",
-        "Community Pods",
-        "Access Control",
-        "Architecture"
-      ],
-      "group_indices": [
-        48
-      ]
-    },
-    {
-      "topic_id": 23,
-      "title": "Solid Hackathon Planning & Collaboration",
-      "summary": "Contains 2 conversation groups about solid hackathon planning & collaboration",
-      "keywords": [
-        "Hackathon",
-        "Collaboration",
-        "PASS Project",
-        "Project Planning",
-        "Gitter"
-      ],
-      "group_indices": [
-        51,
-        70
-      ]
-    },
-    {
-      "topic_id": 24,
-      "title": "Solid Project Localization Strategies",
-      "summary": "Contains 2 conversation groups about solid project localization strategies",
-      "keywords": [
-        "Localization",
-        "Fluent",
-        "Weblate",
-        "Internationalization",
-        "Open Source",
-        "i18n",
-        "Wikidata",
-        "RDF",
-        "LDO.js"
-      ],
-      "group_indices": [
-        52,
-        66
-      ]
-    },
-    {
-      "topic_id": 25,
-      "title": "Solid Specification Production Readiness",
-      "summary": "A potential Solid user inquired about the specification's readiness for production environments, receiving affirmative responses conditioned on specific use cases, along with an advertisement for a production-ready server implementation.",
-      "keywords": [
-        "Production Use",
-        "Solid Specification",
-        "Solid Server",
-        "Trinpod"
-      ],
-      "group_indices": [
-        53
-      ]
-    },
-    {
-      "topic_id": 26,
-      "title": "Solid Community Job Search",
-      "summary": "The Solid community is actively involved in job searching and resource sharing, with members providing advice and support to those seeking new opportunities. Notably, ODI is hiring for multiple Solid-related roles, including development and community management positions, with a preference for candidates located in London.",
-      "keywords": [
-        "Hiring",
-        "Job Search",
-        "Positions Wanted",
-        "Community Resources",
-        "ODI",
-        "Solid Jobs",
-        "London",
-        "Community Manager"
-      ],
-      "group_indices": [
-        56,
-        167
-      ]
-    },
-    {
-      "topic_id": 27,
-      "title": "Solid World Event Feedback",
-      "summary": "Contains 2 conversation groups about solid world event feedback",
-      "keywords": [
-        "Solid World",
-        "Digital Twin",
-        "Greetings",
-        "Meeting Recording",
-        "NextGraph",
-        "Slide Deck"
-      ],
-      "group_indices": [
-        57,
-        156
-      ]
-    },
-    {
-      "topic_id": 28,
-      "title": "Podspace & Spanish Forum",
-      "summary": "Jeff Zucker shared a link to a Spanish-language discussion on the Solid forum (Podspace), leading to positive engagement and cross-invitation from Spanish-speaking members.",
-      "keywords": [
-        "Podspace",
-        "Forum",
-        "Spanish Speakers",
-        "Translation"
-      ],
-      "group_indices": [
-        60
-      ]
-    },
-    {
-      "topic_id": 29,
-      "title": "Solid Notifications Implementation",
-      "summary": "The conversations focused on the practical implementation of Solid notifications, including experiences with different approaches like webhookChannel2023 across various Pod providers. The group also managed the scheduling and eventual hiatus of biweekly practitioner meetings, which were primarily dedicated to discussing notifications and other general Solid-related topics.",
-      "keywords": [
-        "Notifications",
-        "webhookChannel2023",
-        "CSS",
-        "NSS",
-        "Solid Symposium",
-        "Email Notifications",
-        "Practitioners Meeting",
-        "Scheduling",
-        "UTC",
-        "Attendance"
-      ],
-      "group_indices": [
-        61,
-        72
-      ]
-    },
-    {
-      "topic_id": 30,
-      "title": "Seeking Solid Development Resources",
-      "summary": "Mariha requested high-level vision and narrow technical resources to encourage a return to software development, receiving several links tailored to her background in distributed systems.",
-      "keywords": [
-        "Solid Resources",
-        "Distributed Systems",
-        "Software Engineering",
-        "Programming",
-        "Getting Started"
-      ],
-      "group_indices": [
-        67
-      ]
-    },
-    {
-      "topic_id": 31,
-      "title": "Solid Web Component Coordination",
-      "summary": "Contains 2 conversation groups about solid web component coordination",
-      "keywords": [
-        "Web Components",
-        "Meetup",
-        "Coordination",
-        "LDO",
-        "rdflib",
-        "Dependencies",
-        "Aerogel",
-        "Interoperability",
-        "Reactive Rendering",
-        "rdflib.js"
-      ],
-      "group_indices": [
-        69,
-        71
-      ]
-    },
-    {
-      "topic_id": 32,
-      "title": "Linked Data Shape Management",
-      "summary": "Following a new proposal for a Linked Data Shape Manager, several practitioners joined forces to discuss interoperability and data fetching using shapes, culminating in the creation of a centralized Solid Shapes wiki and catalog.",
-      "keywords": [
-        "Linked Data Shapes",
-        "Interoperability",
-        "Data Fetching",
-        "Shape Manager",
-        "rdflib"
-      ],
-      "group_indices": [
-        74
-      ]
-    },
-    {
-      "topic_id": 33,
-      "title": "Solid Interoperability Challenges",
-      "summary": "A developer shared a resource summarizing challenges and practices concerning Solid interoperability and invited discussion on the Solid forum.",
-      "keywords": [
-        "Interoperability",
-        "PDS",
-        "Solid Practices",
-        "Developer Challenges"
-      ],
-      "group_indices": [
-        76
-      ]
-    },
-    {
-      "topic_id": 34,
-      "title": "Oracle Aconex Accelerator Launch",
-      "summary": "An announcement was made regarding the launch of the Oracle Aconex Accelerator, integrating Solid technology into Construction technology.",
-      "keywords": [
-        "Construction Technology",
-        "Oracle Aconex",
-        "Solid Applications",
-        "Accelerator"
-      ],
-      "group_indices": [
-        79
-      ]
-    },
-    {
-      "topic_id": 35,
-      "title": "Solid Search Research Project",
-      "summary": "Mohammad Bahrani from the University of Southampton introduced his research project focused on efficient, secure, and sovereign search over Solid pods using LLMs and Federated Learning.",
-      "keywords": [
-        "Information Retrieval",
-        "LLMs",
-        "Federated Learning",
-        "Solid Pods",
-        "WAIS"
-      ],
-      "group_indices": [
-        80
-      ]
-    },
-    {
-      "topic_id": 36,
-      "title": "Solid Symposium Panel Proposal",
-      "summary": "Contains 2 conversation groups about solid symposium panel proposal",
-      "keywords": [
-        "Solid Symposium",
-        "International Applications",
-        "Community Feedback",
-        "Panel Proposal",
-        "SoSy 2025",
-        "ESPRESSO",
-        "Decentralized Search",
-        "Information Retrieval",
-        "Access Control"
-      ],
-      "group_indices": [
-        83,
-        103
-      ]
-    },
-    {
-      "topic_id": 37,
-      "title": "Solid in Mexico Connections",
-      "summary": "Jeff Zucker facilitated an introduction between two members interested in discussing the application and policies of Solid technology within the context of the Mexican government.",
-      "keywords": [
-        "Solid Applications",
-        "Government Policy",
-        "Networking",
-        "Mexico"
-      ],
-      "group_indices": [
-        88
-      ]
-    },
-    {
-      "topic_id": 38,
-      "title": "Solid ActivityPub Integration",
-      "summary": "Contains 2 conversation groups about solid activitypub integration",
-      "keywords": [
-        "ActivityPub",
-        "Solid Specs",
-        "Inbox Validation",
-        "Abstraction",
-        "Use Case",
-        "Solid Integration",
-        "ActivityPods",
-        "NSS",
-        "Meeting Minutes"
-      ],
-      "group_indices": [
-        91,
-        108
-      ]
-    },
-    {
-      "topic_id": 39,
-      "title": "Solid Use Cases Collection",
-      "summary": "A request was made to community members to contribute their Solid projects and use cases to a list on the Solid forum to demonstrate Solid in action.",
-      "keywords": [
-        "Use Cases",
-        "Solid Deployments",
-        "Forum",
-        "Projects"
-      ],
-      "group_indices": [
-        92
-      ]
-    },
-    {
-      "topic_id": 40,
-      "title": "Node Solid Server Deployment",
-      "summary": "A developer struggled with deploying NSS using Nginx and SSL until they identified and resolved a configuration mismatch in their firewall rules, confirming the use of Solid for multi-tenancy in a production app.",
-      "keywords": [
-        "NSS",
-        "Deployment",
-        "Firewall",
-        "Nginx",
-        "Self-Hosting"
-      ],
-      "group_indices": [
-        93
-      ]
-    },
-    {
-      "topic_id": 41,
-      "title": "Solid Events and Surveys",
-      "summary": "This group contains two independent announcements: an invitation to participate in a Solid panel discussion at the State of Open Con conference, and a link to a survey regarding SHACL shapes.",
-      "keywords": [
-        "Conference",
-        "ODI",
-        "SHACL",
-        "Survey",
-        "Panel"
-      ],
-      "group_indices": [
-        94
-      ]
-    },
-    {
-      "topic_id": 42,
-      "title": "Fediverse Tools and Deployment",
-      "summary": "The conversation covered troubleshooting issues with Mastopod, coordinating a switch of Peertube hosting instances, and offering general recommendations for various Fediverse services and clients like Mastodon, Lemmy, and Pixelfed.",
-      "keywords": [
-        "Mastopod",
-        "Peertube",
-        "Fediverse",
-        "Mastodon",
-        "ActivityPods",
-        "Spectra.video"
-      ],
-      "group_indices": [
-        98
-      ]
-    },
-    {
-      "topic_id": 43,
-      "title": "CRTDs Meeting Scheduling",
-      "summary": "Links were shared referencing a W3C public-solid email announcing the scheduling of a meeting focused on Conflict-free Replicated Data Types (CRTDs) in Solid.",
-      "keywords": [
-        "CRTDs",
-        "W3C",
-        "Public Solid",
-        "Technical Meeting"
-      ],
-      "group_indices": [
-        87
-      ]
-    },
-    {
-      "topic_id": 44,
-      "title": "General Announcements & Updates",
-      "summary": "Contains 9 conversation groups about general announcements & updates",
-      "keywords": [
-        "Greeting",
-        "ODRL",
         "Solid Symposium",
         "TrinPod",
         "Matrix",
@@ -853,518 +1190,98 @@
         "Marketplace",
         "QR Codes",
         "Outreach",
-        "Greetings"
+        "ODRL",
+        "ESPRESSO Project",
+        "Information Retrieval"
       ],
       "group_indices": [
         32,
-        89,
-        99,
-        111,
-        113,
         131,
-        147,
-        170,
+        151,
         191
       ]
     },
     {
-      "topic_id": 45,
-      "title": "Solid Catalog Development & Management",
-      "summary": "Contains 12 conversation groups about solid catalog development & management",
-      "keywords": [
-        "Solid Catalog",
-        "Repository Structure",
-        "Data Governance",
-        "Research Papers",
-        "SHACL Forms",
-        "Catalog Management",
-        "Data Separation",
-        "Frontend",
-        "LDO",
-        "NextUI"
-      ],
-      "group_indices": [
-        85,
-        102,
-        119,
-        136,
-        137,
-        141,
-        144,
-        149,
-        152,
-        153,
-        163,
-        188
-      ]
-    },
-    {
-      "topic_id": 46,
-      "title": "ODI Governance and Funding Discussions",
-      "summary": "Contains 5 conversation groups about odi governance and funding discussions",
-      "keywords": [
-        "ODI",
-        "ODI Governance",
-        "Charter",
-        "Elections",
-        "Solid Governance",
-        "Community Participation",
-        "Project Roadmap",
-        "Operations Advisory Committee",
-        "Nominations",
-        "Feedback"
-      ],
-      "group_indices": [
-        84,
-        120,
-        129,
-        134,
-        165
-      ]
-    },
-    {
-      "topic_id": 47,
-      "title": "Authentication and Authorization Mechanisms",
-      "summary": "Contains 3 conversation groups about authentication and authorization mechanisms",
-      "keywords": [
-        "Auth Spec",
-        "Harmonization",
-        "FedCM",
-        "STM",
-        "HackMD",
-        "AuthN",
-        "OIDC",
-        "CSS Client Credentials",
-        "Solid-Node-Client",
-        "Non-Web Applications"
-      ],
-      "group_indices": [
-        107,
-        114,
-        125
-      ]
-    },
-    {
-      "topic_id": 49,
-      "title": "Solid Ecosystem Development Tools",
-      "summary": "Contains 3 conversation groups about solid ecosystem development tools",
-      "keywords": [
-        "Solid Compound",
-        "UX",
-        "DX",
-        "Project Link",
-        "Tools & Libraries",
-        "Web Components",
-        "SAI",
-        "LDO.js",
-        "Demos",
-        "Meeting Minutes"
-      ],
-      "group_indices": [
-        37,
-        68,
-        130
-      ]
-    },
-    {
-      "topic_id": 50,
-      "title": "Solid Related Events & Conferences",
-      "summary": "An announcement is shared regarding FediCon, an event focused on the Open Social Web, inviting projects for various social protocols.",
-      "keywords": [
-        "FediCon",
-        "Open Social Web",
-        "Social Protocols"
-      ],
-      "group_indices": [
-        151
-      ]
-    },
-    {
-      "topic_id": 52,
-      "title": "Real Time Solid (RTS) Efforts",
-      "summary": "Users discussed the need for a dedicated chat channel for coordinating Real Time Solid (RTS) efforts, ultimately deciding to create a new Matrix room after realizing the existing 'solid-notifications' Gitter room could not be renamed or easily repurposed.",
-      "keywords": [
-        "Real Time Solid",
-        "Matrix Channel",
-        "Gitter",
-        "Solid Notifications",
-        "QUERY Method"
-      ],
-      "group_indices": [
-        133
-      ]
-    },
-    {
-      "topic_id": 54,
-      "title": "Media Hosting and Sustainability",
-      "summary": "Contains 2 conversation groups about media hosting and sustainability",
-      "keywords": [
-        "PeerTube",
-        "Fediverse",
-        "Object Storage",
-        "Sustainability",
-        "Video Hosting",
-        "ODRL",
-        "Spectra",
-        "Video Recording",
-        "Jitsi",
-        "Upload Permissions"
-      ],
-      "group_indices": [
-        101,
-        121
-      ]
-    },
-    {
-      "topic_id": 55,
-      "title": "ActivityPods Adaptation",
-      "summary": "Contains 2 conversation groups about activitypods adaptation",
-      "keywords": [
-        "ActivityPods",
-        "ActivityPub",
-        "Group Pods",
-        "RDF Structure",
-        "ODRL",
-        "Quad Store",
-        "Compatibility Report",
-        "App Development",
-        "Matrix"
-      ],
-      "group_indices": [
-        86,
-        104
-      ]
-    },
-    {
-      "topic_id": 56,
-      "title": "Solid Infrastructure Migration (NSS->CSS)",
-      "summary": "Announcements were made regarding solidcommunity.net migrating from NSS to PIVOT (a CSS flavor) and the call for presenters for the upcoming Solid World meeting in February.",
-      "keywords": [
-        "NSS",
-        "CSS",
-        "PIVOT",
-        "SolidCommunity",
-        "Solid World",
-        "Migration"
-      ],
-      "group_indices": [
-        105
-      ]
-    },
-    {
-      "topic_id": 57,
-      "title": "Web Access Control (WAC) Discussion",
-      "summary": "A user inquired about a dedicated room for discussing Web Access Control (WAC) and was directed to the general Solid specification channel.",
-      "keywords": [
-        "WAC",
-        "Web Access Control",
-        "Solid Specification"
-      ],
-      "group_indices": [
-        109
-      ]
-    },
-    {
-      "topic_id": 58,
-      "title": "Federated We Distribute Forum",
-      "summary": "Announcement of a new federated forum on We Distribute powered by NodeBB and ActivityPub, highlighting its ability to track the Solid Practitioners PeerTube channel and inviting users to join the dedicated Solid section.",
-      "keywords": [
-        "Fediverse",
-        "ActivityPub",
-        "NodeBB",
-        "We Distribute",
-        "Forum"
-      ],
-      "group_indices": [
-        112
-      ]
-    },
-    {
-      "topic_id": 59,
-      "title": "Synovient vs. Solid Comparison",
-      "summary": "A link to Synovient was shared, prompting a user to inquire about its technical differences from the open-source Solid Protocol, which could not be answered due to Synovient's lack of technical visibility.",
-      "keywords": [
-        "Synovient",
-        "Solid Pods",
-        "Open Source",
-        "Data Storage"
-      ],
-      "group_indices": [
-        116
-      ]
-    },
-    {
-      "topic_id": 60,
-      "title": "Mycelium Web Server Links",
-      "summary": "A user shared links to the GitHub repository and a Peertube video for MyceliumWebServer.",
-      "keywords": [
-        "MyceliumWebServer",
-        "GitHub",
-        "Peertube"
-      ],
-      "group_indices": [
-        117
-      ]
-    },
-    {
-      "topic_id": 61,
-      "title": "Inrupt Migration Issues",
-      "summary": "Users reported difficulties accessing resources due to broken links resulting from the Inrupt migration, including a Solid Symposium page and the Real Time Solid website, with the page owner acknowledging the issue.",
-      "keywords": [
-        "Inrupt Migration",
-        "Broken Links",
-        "Solid Symposium",
-        "RTS"
-      ],
-      "group_indices": [
-        132
-      ]
-    },
-    {
-      "topic_id": 62,
-      "title": "GenAI Code Generation Discussion",
-      "summary": "Members shared mixed feedback on the utility and security of GenAI code editors/copilots, discussing both positive formatting capabilities and negative experiences involving bugs and potential security vulnerabilities.",
-      "keywords": [
-        "GenAI",
-        "Copilot",
-        "Code Generation",
-        "Security",
-        "Debugging"
-      ],
-      "group_indices": [
-        126
-      ]
-    },
-    {
-      "topic_id": 63,
-      "title": "External Health Data Aggregation",
-      "summary": "Members discussed news regarding a non-Solid initiative led by RFK Jr. to aggregate health data for research, raising concerns about consent and centralized data control.",
-      "keywords": [
-        "Health Data",
-        "RFK Jr",
-        "Aggregation",
-        "Consent",
-        "NIH"
-      ],
-      "group_indices": [
-        138
-      ]
-    },
-    {
-      "topic_id": 64,
-      "title": "Datasolids Architecture and Security",
-      "summary": "A detailed debate occurred regarding Datasolids' use of an abstraction layer and a siloed system for health data to meet HIPAA security requirements, contrasting this approach with standard Solid interoperability principles.",
-      "keywords": [
-        "Datasolids",
-        "HIPAA",
-        "Security",
-        "Abstraction Layer",
-        "Siloing",
-        "Solid Server",
-        "Provenance"
-      ],
-      "group_indices": [
-        139
-      ]
-    },
-    {
-      "topic_id": 65,
-      "title": "Enterprise Solid Security, HIPAA",
-      "summary": "The discussion centered on whether Enterprise Solid is HIPAA compliant and how its security model (interoperable, non-siloed) compares to traditional siloed applications, noting that compliance largely depends on process.",
-      "keywords": [
-        "Enterprise Solid",
-        "HIPAA",
-        "Security",
-        "Interoperability",
-        "Self-hosting"
-      ],
-      "group_indices": [
-        140
-      ]
-    },
-    {
-      "topic_id": 66,
-      "title": "Solid App Discoverability Issues",
-      "summary": "Users inquired about Solid apps not listed on the outdated apps page, leading to a confirmation that app listing efforts are transitioning to the new Solid Catalog and a clarification on the status of the sleepy.bike instance.",
-      "keywords": [
-        "Solid Apps",
-        "Solid Catalog",
-        "Discoverability",
-        "sleepy.bike",
-        "tired.bike"
-      ],
-      "group_indices": [
-        143
-      ]
-    },
-    {
-      "topic_id": 67,
-      "title": "PodQuest Technical Details",
-      "summary": "The group shared the video recording of recent presentations and posed follow-up questions regarding technical details of PodQuest, specifically WebID scoped indexes and open-sourcing the application.",
-      "keywords": [
-        "PodQuest",
-        "WebID",
-        "Open Source",
-        "Video Presentation"
-      ],
-      "group_indices": [
-        146
-      ]
-    },
-    {
-      "topic_id": 68,
-      "title": "Social Query Loop Prevention",
-      "summary": "Josh Cornejo raises detailed questions regarding network security (DDoS) and loop prevention in decentralized social queries, which Niko addresses by detailing unique query IDs and asynchronous forwarding logic.",
-      "keywords": [
-        "Social Query",
-        "DDoS Protection",
-        "Access Control",
-        "Infinite Loops",
-        "NextGraph"
-      ],
-      "group_indices": [
-        158
-      ]
-    },
-    {
-      "topic_id": 69,
-      "title": "Anytype and Local-First Applications",
-      "summary": "The discussion focuses on the 'everything app' Anytype, contrasting it with the philosophy of specialized apps with strong interop, a gap that PodOS aims to address.",
-      "keywords": [
-        "Anytype",
-        "Local-First",
-        "App Interop",
-        "PodOS",
-        "Decentralization"
-      ],
-      "group_indices": [
-        159
-      ]
-    },
-    {
-      "topic_id": 70,
-      "title": "Food Scarcity Meeting Planning",
-      "summary": "Contains 2 conversation groups about food scarcity meeting planning",
-      "keywords": [
-        "Practitioners Meeting",
-        "Food Scarcity",
-        "Supply Chains",
-        "Valueflows",
-        "Scheduling",
-        "Postponement",
-        "Agenda Change"
-      ],
-      "group_indices": [
-        168,
-        178
-      ]
-    },
-    {
       "topic_id": 71,
-      "title": "Solid Calendar Link Issues",
-      "summary": "The participants discussed finding the Solid Practitioners meeting schedule and troubleshooting why link previews (thumbnails/images) were missing on some Solid links but present on the W3C link, suggesting meta tags or caching issues as potential causes.",
+      "title": "Welcome and Initial Introductions",
+      "summary": "Participants shared enthusiasm for collaboration and briefly discussed past experiences with semantic web and podcasting.",
       "keywords": [
-        "Calendar",
-        "W3C",
-        "Metadata",
-        "Open Graph",
-        "Caching"
+        "Collaboration",
+        "Semantic Web",
+        "Podcasting",
+        "Demo Application"
       ],
       "group_indices": [
-        169
+        15
       ]
     },
     {
       "topic_id": 72,
-      "title": "Dokieli Presentation Feedback",
-      "summary": "Sarven Capadisli and Virginia Balseiro presented their dokieli project at the Practitioners meeting, and the recording's availability was announced after a delay for transcoding.",
+      "title": "Matrix Space Standardization",
+      "summary": "Participants extensively worked to identify the correct official Solid Matrix space, resolve administrative rights issues, standardize the public URL, and ensure the practitioners' channel was correctly included.",
       "keywords": [
-        "dokieli",
-        "Decentralized Publishing",
-        "Annotation",
-        "Meeting Recording",
-        "Practitioners Meeting"
+        "Matrix Space",
+        "Admin Rights",
+        "URL Standardization",
+        "Element",
+        "solid_project"
       ],
       "group_indices": [
-        175
-      ]
-    },
-    {
-      "topic_id": 73,
-      "title": "Podcast Interview Scheduling",
-      "summary": "Jeff followed up on scheduling a podcast interview with Damon, who apologized for the delay due to a family emergency and confirmed he would reach out via email.",
-      "keywords": [
-        "Podcast",
-        "Scheduling",
-        "Communication"
-      ],
-      "group_indices": [
-        177
+        1
       ]
     },
     {
       "topic_id": 74,
-      "title": "Ewingson's DIY Solid Setup",
-      "summary": "Ewingson shared documentation for his DIY Solid setup involving multiple IDPs and noted a bug in the Hydrogen Matrix client where editing messages causes duplication.",
+      "title": "Unix Timestamp Celebration",
+      "summary": "A brief, off-topic announcement celebrated the Unix Timestamp reaching 1.7 billion.",
       "keywords": [
-        "DIY Solid",
-        "IDP",
-        "Setup Documentation",
-        "Hydrogen",
-        "Matrix Client"
+        "Unix Timestamp",
+        "Programming",
+        "Milestone"
       ],
       "group_indices": [
-        173
+        10
       ]
     },
     {
       "topic_id": 75,
-      "title": "Solid Naming Convention Discussions",
-      "summary": "A user inquired about a rumored name change for Solid, leading to a discussion distinguishing 'Linked Web Storage' as the technical specification from 'Solid' as the preferred solution brand.",
+      "title": "Greetings and Reactions",
+      "summary": "These conversations involve simple greetings, positive reactions to group initiatives, and brief acknowledgements of statements. Interactions are light-hearted and focus on establishing a positive and welcoming atmosphere.",
       "keywords": [
-        "Solid",
-        "Linked Web Storage",
-        "LWS",
-        "Branding",
-        "Naming Convention"
+        "Initiative",
+        "Reaction",
+        "Support",
+        "Banter",
+        "Personal",
+        "Greeting",
+        "Chat"
       ],
       "group_indices": [
-        187
+        0,
+        99
       ]
     },
     {
       "topic_id": 76,
-      "title": "Jitsi Video Call Glitch",
-      "summary": "A participant noted a brief technical glitch where another user appeared frozen during the meeting.",
+      "title": "Miscellaneous Link Sharing",
+      "summary": "This cluster includes the sharing of miscellaneous external links and resources, ranging from utility tools and communication channels to academic papers and news articles. Specific links shared include ODRL examples, workshops related to geo data and AI control, and articles on decentralized systems and graph security.",
       "keywords": [
-        "Jitsi",
-        "Video Call",
-        "Glitch"
+        "Greetings",
+        "SHACL",
+        "Solid-ODI",
+        "Pod-in-a-client",
+        "ODRL",
+        "AI Agents",
+        "Geo Data",
+        "News",
+        "External Resource",
+        "arXiv"
       ],
       "group_indices": [
-        179
-      ]
-    },
-    {
-      "topic_id": 77,
-      "title": "Orphaned and Uncategorized Messages",
-      "summary": "Contains 4 conversation groups about orphaned and uncategorized messages",
-      "keywords": [
-        "orphaned",
-        "miscellaneous",
-        "Unix Timestamp",
-        "Programming",
-        "Milestone",
-        "Matrix Identity",
-        "W3C",
-        "Design Issues",
-        "Emoji Use"
-      ],
-      "group_indices": [
-        10,
-        14,
-        75,
-        148
+        89,
+        147,
+        157,
+        170
       ]
     }
   ]

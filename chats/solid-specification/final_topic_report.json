@@ -1,822 +1,515 @@
 [
   {
     "cluster_id": 0,
-    "meta_title": "RDF Handling and Vocabularies",
-    "meta_summary": "This topic cluster centers on the management, standardization, and practical application of RDF vocabularies and related technologies within the Solid ecosystem. Discussions include defining and locating specific RDF predicates, handling different RDF formats (Turtle, JSON-LD, etc.), managing vocabulary curation, and addressing issues related to ontology retrieval, caching, and updating, often in the context of specific use cases and Solid specifications. The community actively explores best practices for RDF data handling, including working with blank nodes, URI allocation, and aligning with existing W3C standards.",
+    "meta_title": "Solid Protocol Specification and Development",
+    "meta_summary": "These discussions revolve around the Solid protocol specification, focusing on completing, clarifying, and reviewing its various aspects.  Topics include HTTP semantics, URI persistence, WebSockets, specification document formatting, and addressing issues related to data pods, RDF merging, and conformance classes, all with the goal of achieving a stable and widely implementable standard. The community also grapples with methodologies for recording architectural decisions and formalizing specification development.",
     "meta_keywords": [
-      "Ontology",
-      "Vocabulary",
-      "RDF",
-      "Solid Vocab",
-      "N3",
       "Specification",
-      "RDFa",
-      "W3C",
-      "Blank Nodes",
-      "Turtle"
+      "Solid Protocol",
+      "Solid Specification",
+      "Protocol",
+      "Pull Request",
+      "Editor's Draft",
+      "N3 Patch",
+      "Content Negotiation",
+      "CSS",
+      "ACL"
     ],
-    "group_count": 45,
-    "total_message_count": 499,
+    "group_count": 64,
+    "total_message_count": 554,
     "timeline": {
-      "2020": 2,
-      "2021": 14,
-      "2022": 7,
-      "2023": 5,
-      "2024": 8,
-      "2025": 9
+      "2020": 1,
+      "2021": 17,
+      "2022": 11,
+      "2023": 12,
+      "2024": 13,
+      "2025": 10
     },
     "sample_group_titles": [
-      "Standardizing Container Metadata and Date/Time Units",
-      "Solid Glossary Project and RDF Definition Extraction",
-      "Dynamic @base/ @prefix Directives in Turtle for Streaming",
-      "Dispute over Solid Spec Vocabulary Design and Implementation PRs",
-      "ActivityStreams Ontology and Inbox Standards",
-      "RDF Vocabulary and Prefix Lookup Best Practices",
-      "Conflict over Solid Vocab Pull Requests and CG Meeting Agenda",
-      "Tooling and Repository Setup for Vocabulary Management",
-      "Server Requirements for Valid RDF Graph Acceptance",
-      "Defining SHACL Shapes and Ontology for Products and Services"
+      "Spec Proposal for Bulk Upload via Compressed Archives",
+      "Solid Protocol Guarantees Regarding Relative IRIs and RDF Serialization",
+      "Defining Minimum Solid Conformance (Vanilla Servers) and POST Behavior",
+      "Defining Solid Specification Process and Requirements for Convergence",
+      "Protocol Clarification on URI Slash Semantics and Redirects",
+      "Clarification on Solid Protocol Container Deletion",
+      "Solid Resource Modeling: Client vs. Server Managed Statements",
+      "Discussion and Clarification of N3 Patch usage in Solid Protocol (PR 608)",
+      "Decoupling Solid Specs, Local-First, and Scalability",
+      "Specification Development Methodology and Implementation Intent"
     ]
   },
   {
     "cluster_id": 1,
-    "meta_title": "Shape Validation and Shex",
-    "meta_summary": "This topic cluster revolves around shape validation in Solid, focusing on the use of ShEx and SHACL. Discussions cover standardization efforts, converting between the schema languages, implementation issues with blank nodes, and the potential of SHACL for defining normative data models. The need for active editors for key specifications and test suites for authorization are also highlighted.",
-    "meta_keywords": [
-      "SHACL",
-      "Specification",
-      "ShEx",
-      "Blank Nodes",
-      "Shape Validation",
-      "Shex",
-      "Data Interoperability",
-      "Schema Language",
-      "Data Validation",
-      "Standardization"
-    ],
-    "group_count": 10,
-    "total_message_count": 96,
-    "timeline": {
-      "2020": 1,
-      "2021": 1,
-      "2022": 1,
-      "2024": 1,
-      "2025": 6
-    },
-    "sample_group_titles": [
-      "SHACL Constraints and Internationalization (i18n)",
-      "Standardization of Schema Languages in Interoperability Specs",
-      "Debate on Using SHACL Shapes for Normative Data Model Specification",
-      "N3 Patch Implementation Issues with Blank Nodes",
-      "Scheduling STM for Shape Repositories and Tracking Prior Work",
-      "Status of Shex and Shape Validation",
-      "Tools and Limitations for Converting ShEx to SHACL",
-      "Review of N-PATCH Specification regarding Blank Nodes",
-      "Proposal for SAI Authorization Agent Refactoring and Test Suite",
-      "Call for Active Editors for Key Solid Specifications"
-    ]
-  },
-  {
-    "cluster_id": 2,
-    "meta_title": "HTTP Server Behavior and LDP",
-    "meta_summary": "These discussions center on the nuances of HTTP server behavior within the Solid ecosystem, particularly regarding its relationship with the Linked Data Platform (LDP). Topics include server handling of PUT/POST requests, URI management (including slash semantics and redirects), specification interpretation, and defining minimum conformance. The conversations also touch upon practical considerations like CORS configurations, response codes, and potential improvements to the protocol.",
-    "meta_keywords": [
-      "Solid Protocol",
-      "PUT",
-      "LDP",
-      "CORS",
-      "Containment Triples",
-      "Containers",
-      "Redirects",
-      "Authorization",
-      "POST",
-      "Container"
-    ],
-    "group_count": 24,
-    "total_message_count": 155,
-    "timeline": {
-      "2020": 1,
-      "2021": 7,
-      "2022": 6,
-      "2024": 8,
-      "2025": 2
-    },
-    "sample_group_titles": [
-      "Defining Minimum Solid Conformance (Vanilla Servers) and POST Behavior",
-      "Protocol Clarification on URI Slash Semantics and Redirects",
-      "Server Handling of LDP Containment Triples on PUT",
-      "Solid's Non-Normative Relationship with LDP",
-      "Debate on Solid Protocol's Dependency on LDP and LWS WG Scope",
-      "PUT Requests and Container Containment Modification",
-      "Defining HTTPS Redirection Status Codes",
-      "Server Redirection and Spec Normativity (MAY vs MUST)",
-      "Request for LWS Support of 303 Redirects for Cool URIs",
-      "PUT/POST Semantics and URI Allocation Consistency"
-    ]
-  },
-  {
-    "cluster_id": 3,
-    "meta_title": "Solid Specification Maturity and Roadmap",
-    "meta_summary": "The conversation groups center around the development and maturation of the Solid specifications, encompassing discussions about timelines, roadmap prioritization, and transitioning to W3C standards. Key areas of focus include specification documentation, architecture, implementation examples, pull request reviews, and the formalization of architectural decisions, all aimed at clarifying conformance and ensuring specification quality. The groups also address related topics like tooling, protocol versioning, dependency management, and the overall strategy for Solid's adoption and evolution as a protocol.",
-    "meta_keywords": [
-      "Specification",
-      "Solid Specification",
-      "Pull Request",
-      "Roadmap",
-      "Solid Protocol",
-      "WAC",
-      "Protocol",
-      "W3C",
-      "WG Charter",
-      "Solid CG"
-    ],
-    "group_count": 71,
-    "total_message_count": 467,
-    "timeline": {
-      "2020": 1,
-      "2021": 17,
-      "2022": 8,
-      "2023": 13,
-      "2024": 22,
-      "2025": 10
-    },
-    "sample_group_titles": [
-      "TPAC Video Preparation and Submission Coordination",
-      "Defining Solid Specification Process and Requirements for Convergence",
-      "Defining Specification Audience using ESCO vs. DX",
-      "Solidproject.org Content and Group Dynamics",
-      "Specification Development Methodology and Implementation Intent",
-      "Discussion on Solid Roadmap, Error Handling, and Constraint Discovery",
-      "Specification Tooling and Document Architecture",
-      "Review and Critique of Draft Solid Explainer Videos",
-      "Uncategorized Solid Updates and Technical Queries",
-      "Publication of Solid Protocol 0.9.0 and Forum Announcement"
-    ]
-  },
-  {
-    "cluster_id": 4,
-    "meta_title": "Content Negotiation and Representations",
-    "meta_summary": "These discussions revolve around content negotiation in Solid, focusing on HTTP headers (Accept, Content-Type, ETag), resource representations (RDF, JSON-LD, Turtle), and appropriate HTTP status codes for various scenarios. Participants debate best practices for serving different mime types, handling binary resources, standardizing checksums, and documenting specifications, while also considering caching, conditional requests, and the use of RDFa.",
-    "meta_keywords": [
-      "Content Negotiation",
-      "JSON-LD",
-      "HTTP",
-      "Solid Protocol",
-      "RDFa",
-      "RDF",
-      "ETag",
-      "Accept Header",
-      "Turtle",
-      "Server Behavior"
-    ],
-    "group_count": 15,
-    "total_message_count": 190,
-    "timeline": {
-      "2020": 1,
-      "2021": 4,
-      "2022": 2,
-      "2023": 3,
-      "2024": 2,
-      "2025": 3
-    },
-    "sample_group_titles": [
-      "Request and Discussion regarding Checksums and HTTP ETag Usage in Solid",
-      "Deep Dive on Resource Identification, Content Negotiation, and HTTP Status Codes",
-      "Resource Representation, Redirection, and Document Terminology",
-      "Conditional HTTP Requests and Content Negotiation Caching",
-      "Required Data Formats in Solid Protocol",
-      "Debate on Specification Metadata, RDFa, and Catalog Implementation",
-      "Debate on Specification Serialization, RDFa, and Project Fragmentation",
-      "HTTP Header Usage and RDF Representation Negotiation",
-      "Content Negotiation for Accept */*",
-      "RDF Representations for Non-RDF Sources"
-    ]
-  },
-  {
-    "cluster_id": 5,
-    "meta_title": "Solid-OIDC Authentication and Security",
-    "meta_summary": "The topic cluster explores various aspects of Solid-OIDC authentication and security, including implementation challenges, security reviews, and proposals for improvement. Key areas of focus include streamlining user onboarding, bot authentication, WebID profile verification, and the adoption of security best practices like RFC 9207 and PKCE, as well as exploring alternative authentication methods and addressing the lack of open-source implementations. The conversations aim to standardize and secure Solid-OIDC, ensuring a robust and user-friendly authentication experience within the Solid ecosystem.",
-    "meta_keywords": [
-      "Authentication",
-      "Solid-OIDC",
-      "Solid OIDC",
-      "OIDC",
-      "WebID",
-      "DPoP",
-      "PKCE",
-      "Specification",
-      "WebID-TLS",
-      "FedCM"
-    ],
-    "group_count": 47,
-    "total_message_count": 559,
-    "timeline": {
-      "2020": 1,
-      "2021": 11,
-      "2022": 10,
-      "2023": 12,
-      "2024": 7,
-      "2025": 6
-    },
-    "sample_group_titles": [
-      "Debugging Non-Browser (Bot) Authentication via Solid-OIDC on Trinpod",
-      "WebID, OIDC Issuers, and Federated Trust Model",
-      "Standardization of Identity Provider Metadata Retrieval",
-      "Streamlining User Onboarding via IDP Registration Flow",
-      "Review of Solid OIDC Security: Adopting RFC 9207 and Retaining PKCE",
-      "Solid OIDC Implementation and Security for Dokieli",
-      "Solid-OIDC UMA Authorization Flow and ACL Checking",
-      "DPoP Binding and Solid-OIDC Authentication Flow",
-      "Fetch API Credentials Usage in Solid-OIDC",
-      "Analysis of HTTP Signature and Unprompted Authentication"
-    ]
-  },
-  {
-    "cluster_id": 6,
-    "meta_title": "Authorization and Access Control",
-    "meta_summary": "This topic cluster focuses on authorization and access control mechanisms within the Solid ecosystem, primarily centered around Web Access Control (WAC) but also including discussions of Access Control Policies (ACP) and Solid Access Interoperability (SAI). The conversations cover a wide array of subjects including WAC specification details, implementation challenges, security concerns, comparisons to other authorization models, and proposals for extensions and improvements to better manage access to resources in Solid Pods.",
+    "meta_title": "Solid Security and Access Control (WAC)",
+    "meta_summary": "Solid security and access control (WAC) are intensely discussed, including the nuances of `acl:default` scopes, protecting system configurations, and standardizing WAC-Allow header syntax. The groups examine app security limitations within the Solid trust model, handling multiple authorization credentials (DPoP, HttpSig), defining storage ownership and permissions, and debating the default ACL for Pod root containers, all aiming for robust and flexible access control mechanisms.",
     "meta_keywords": [
       "WAC",
       "ACL",
       "Authorization",
       "Access Control",
       "ACP",
-      "Inheritance",
-      "TrinPod",
       "STM",
+      "Security",
+      "Inheritance",
       "SAI",
-      "Access Modes"
+      "Authorization Agent"
     ],
-    "group_count": 86,
-    "total_message_count": 1198,
+    "group_count": 104,
+    "total_message_count": 1402,
     "timeline": {
-      "2020": 1,
-      "2021": 25,
-      "2022": 9,
-      "2023": 14,
-      "2024": 19,
-      "2025": 18
+      "2021": 35,
+      "2022": 13,
+      "2023": 11,
+      "2024": 25,
+      "2025": 20
     },
     "sample_group_titles": [
       "WAC Agent-Aware Traversal vs. ACL Copying",
       "Debate on WAC ACL Hierarchy and User Intent",
+      "Defining Solid Storage Ownership and Permissions",
       "WAC Inheritance Flaw and Container Semantics",
       "Debate over WAC Security and Inrupt Implementation Stance",
       "WAC Group Management and Nesting",
       "Triple-Level Permissions in TrinPod (WebID Access Control)",
       "Defining \"Owner\" Control in WAC to prevent Pod lockout",
       "WAC Implementation Challenges with PUT and Content Negotiation",
-      "Authorization Standards, Scoping, and Consent Management Architecture",
-      "Clarifying acl:Origin Semantics and Client Authorization in Solid"
+      "Authorization Standards, Scoping, and Consent Management Architecture"
     ]
   },
   {
-    "cluster_id": 7,
-    "meta_title": "Data Interoperability Specification",
-    "meta_summary": "These groups focus on defining and standardizing data interoperability within the Solid ecosystem, covering specifications, ontologies, and best practices for data discovery, storage management, and access control.  Discussions include integrating Solid with other technologies, refining terminology, and addressing governance and maintenance of related projects, with a strong emphasis on application interoperability and practical implementations.",
+    "cluster_id": 2,
+    "meta_title": "Solid Authentication and OIDC/FedCM",
+    "meta_summary": "Conversations center around Solid authentication and OIDC/FedCM, covering topics such as PKCE workflow documentation and streamlining user onboarding via IDP registration. There is also extensive discussion on Solid-OIDC implementation challenges (particularly for bots), the use of nonces, WebID profiles as roots of trust, and security considerations for authentication.  Attendees actively work on browser test suites, community group drafts, and explore alternative authentication methods.",
     "meta_keywords": [
-      "Interoperability",
-      "Data Interoperability",
-      "RDF",
-      "C2C",
+      "Authentication",
+      "Solid-OIDC",
+      "WebID",
+      "FedCM",
+      "Solid OIDC",
+      "OIDC",
+      "DPoP",
+      "PKCE",
       "Authorization",
-      "Authorization Agent",
-      "Interop",
-      "Shape Trees",
-      "SHACL",
-      "Type Indexes"
+      "WebID-TLS"
     ],
-    "group_count": 26,
-    "total_message_count": 438,
+    "group_count": 59,
+    "total_message_count": 675,
     "timeline": {
       "2020": 1,
-      "2021": 7,
-      "2022": 2,
-      "2023": 1,
-      "2024": 6,
+      "2021": 10,
+      "2022": 9,
+      "2023": 15,
+      "2024": 15,
       "2025": 9
     },
     "sample_group_titles": [
+      "Debugging Non-Browser (Bot) Authentication via Solid-OIDC on Trinpod",
+      "WebID, OIDC Issuers, and Federated Trust Model",
+      "Standardization of Identity Provider Metadata Retrieval",
+      "Analyzing OIDC Tokens, Client Registration, and Origin Restrictions in Solid Servers",
+      "Streamlining User Onboarding via IDP Registration Flow",
+      "Security Risks of Pod Browsers and Need for Authorization Redirect",
+      "Review of Solid OIDC Security: Adopting RFC 9207 and Retaining PKCE",
+      "UMA, Solid-OIDC, and Alternative Authentication Debate",
+      "Solid OIDC Implementation and Security for Dokieli",
+      "Solid-OIDC UMA Authorization Flow and ACL Checking"
+    ]
+  },
+  {
+    "cluster_id": 3,
+    "meta_title": "Data Discovery and Interoperability",
+    "meta_summary": "Data discovery and interoperability are key topics, with discussions on the status of Shex and shape validation and the compatibility of Interop Spec Type Indexes. The groups compare data registration methods for discovery, debate support for multiple query mechanisms, and attempt to standardize practices for discovering search and service endpoints.  Emphasis is placed on ensuring safe app data storage management, defining domains for interoperability, and tackling challenges with client-managed container triples for a seamless data ecosystem.",
+    "meta_keywords": [
+      "Interoperability",
+      "SPARQL",
+      "Data Interoperability",
+      "Data Discovery",
+      "RDF",
+      "Indexing",
+      "CRDT",
+      "C2C",
+      "Authorization",
+      "Linked Data Fragments"
+    ],
+    "group_count": 51,
+    "total_message_count": 1067,
+    "timeline": {
+      "2020": 2,
+      "2021": 14,
+      "2022": 5,
+      "2023": 8,
+      "2024": 15,
+      "2025": 7
+    },
+    "sample_group_titles": [
+      "Cross-Namespace Resource Retrieval in Pods",
       "Debate on Defining and Renaming Client-to-Client (C2C) Terminology",
       "App Data Storage Management and Interoperability",
-      "Defining Client-to-Client (C2C) Interoperability Specifications",
-      "Data Interoperability Specification and Access Grants",
-      "Catalog and Specification Data Modeling",
-      "Review and Critique of Solid Address Book/Contacts Conventions",
-      "Discussion on Ontology API and Non-Native URI Retrieval",
-      "Enforcing Authorization Agent Policy Exclusivity",
-      "Discussion on Solid Specification Issue #227 and Container Descriptions",
-      "Discussion on Data Patterns, TrinPod, and RESTful Data Formats"
-    ]
-  },
-  {
-    "cluster_id": 8,
-    "meta_title": "Resource Typing and LDP Interaction",
-    "meta_summary": "These groups focus on clarifying and refining the Solid protocol's handling of resources and containers, especially regarding its relationship with the Linked Data Platform (LDP). Discussions include defining resource types, managing container lifecycles, addressing challenges with RDF merging and deletion, and standardizing the interaction between clients and servers in managing metadata. A key theme revolves around resolving ambiguities in the specification to improve interoperability and developer experience.",
-    "meta_keywords": [
-      "LDP",
-      "Solid Protocol",
-      "Container",
-      "Specification",
-      "Content-Type",
-      "Access Control",
-      "Description Resource",
-      "PUT",
-      "HATEOAS",
-      "POST"
-    ],
-    "group_count": 25,
-    "total_message_count": 294,
-    "timeline": {
-      "2021": 11,
-      "2022": 2,
-      "2023": 8,
-      "2024": 2,
-      "2025": 2
-    },
-    "sample_group_titles": [
       "Standardizing Handling of Client-Managed Container Triples and Description Resources",
-      "Defining Representations for Solid Containers (Issue 525)",
-      "Distinguishing Solid Resource Types (RDF, Container, Non-RDF)",
-      "Clarification on Solid Protocol Container Deletion",
-      "Debate on Solid's Underlying Model (Files vs. Triples)",
-      "Role of Description Resources and Resource Mutability",
-      "Solid's Relationship to Linked Data Platform (LDP)",
-      "Data Modeling Challenges for External References",
-      "Storage Discovery and Ownership in Solid Protocol",
-      "Storing Custom RDF Data in LDP Containers"
+      "Search and Service Endpoint Discovery Standardization",
+      "Debate on Standardized Server-Side Search vs. Client-Side Indexing for Big Data",
+      "Data Discovery, HATEOAS vs. Dedicated Search APIs",
+      "Architectural Debate: Systems Hierarchy vs. Decentralization",
+      "Defining Client-to-Client (C2C) Interoperability Specifications",
+      "Multi-Resource Querying and Indexing Strategies"
     ]
   },
   {
-    "cluster_id": 9,
-    "meta_title": "WebID and Decentralized Identifiers",
-    "meta_summary": "Contains 38 conversation groups about webid and decentralized identifiers",
+    "cluster_id": 4,
+    "meta_title": "RDF Data Handling and Modeling",
+    "meta_summary": "RDF data handling and modeling are examined in detail, including handling GPX data transformations and the use of dynamic Turtle directives. Participants discuss advanced data modeling techniques using lists, schema.org, blank nodes, and data model versioning in decentralized storage.  The groups address specific RDF formats, the implementation of HTTP ETags for data integrity, and explore different querying strategies and methods for representing non-RDF resources within the Solid framework.",
     "meta_keywords": [
-      "WebID",
-      "WebID Profile",
-      "DID",
-      "Specification",
+      "RDF",
       "Solid Protocol",
-      "Storage Discovery",
-      "solid:oidcIssuer",
-      "Authentication",
-      "303 Redirect",
-      "Solid Profile"
+      "N3",
+      "Blank Nodes",
+      "Specification",
+      "Solid Specification",
+      "SPARQL",
+      "Permanent URIs",
+      "TrinPod",
+      "JSON-LD"
     ],
-    "group_count": 38,
-    "total_message_count": 903,
+    "group_count": 42,
+    "total_message_count": 596,
     "timeline": {
-      "2021": 13,
-      "2022": 17,
-      "2023": 2,
-      "2024": 4,
-      "2025": 2
+      "2020": 2,
+      "2021": 8,
+      "2022": 5,
+      "2023": 10,
+      "2024": 5,
+      "2025": 12
     },
     "sample_group_titles": [
-      "Reliable Storage Discovery for Solid Applications and UX Implications",
-      "Solid Storage Discovery Mechanisms and Specification Interpretation",
-      "Debate over WebID Profile Structure and Profile Discovery Complexity",
-      "Debate on WebID Profile Architecture, Editability, and the 'Second Hop'",
-      "Separation of WebID and Solid Profile Documents",
-      "WebID Profile: Scope and Separation of Technical vs. Social Data",
-      "Defining Solid Profile Document Discovery",
-      "Discovery of Pod Storage Root from WebID",
-      "Storage Discovery Mechanism Debate",
-      "Managing Contextual Identities: Single WebID vs. Multiple WebIDs"
+      "Advanced RDF Data Modeling: Lists, Schema.org, and Validation",
+      "Request and Discussion regarding Checksums and HTTP ETag Usage in Solid",
+      "Dynamic @base/ @prefix Directives in Turtle for Streaming",
+      "N3 Patch, SPARQL Update, and Blank Node Handling in Solid Protocol",
+      "SHACL Constraints and Internationalization (i18n)",
+      "NextGraph Introduction, Performance, and CRDT Data Model",
+      "Local Querying of Triples about External URIs",
+      "Server Requirements for Valid RDF Graph Acceptance",
+      "Catalog and Specification Data Modeling",
+      "Data Organization: Hierarchical URIs vs. Permanent URIs and Metadata"
     ]
   },
   {
-    "cluster_id": 10,
-    "meta_title": "Community Group Meeting Logistics",
-    "meta_summary": "Contains 154 conversation groups about community group meeting logistics",
+    "cluster_id": 5,
+    "meta_title": "Solid Community Group Management",
+    "meta_summary": "These discussions focus on the administrative and governance aspects of the Solid Community Group. Topics include charter reviews, chair elections, meeting coordination, licensing of specifications, and transitioning the group away from panels to more focused work items.",
     "meta_keywords": [
-      "CG Meeting",
       "Agenda",
-      "Logistics",
-      "STM",
-      "Minutes",
-      "Meeting Minutes",
-      "Scheduling",
-      "Meeting Logistics",
+      "Solid CG",
+      "CG Meeting",
       "W3C",
-      "Solid CG"
+      "CG Charter",
+      "Meeting Logistics",
+      "Licensing",
+      "W3C Process",
+      "Meeting Minutes",
+      "Affiliation"
     ],
-    "group_count": 154,
-    "total_message_count": 1604,
+    "group_count": 89,
+    "total_message_count": 1031,
     "timeline": {
-      "2021": 14,
-      "2022": 12,
-      "2023": 37,
-      "2024": 69,
-      "2025": 22
+      "2021": 10,
+      "2022": 2,
+      "2023": 29,
+      "2024": 37,
+      "2025": 11
     },
     "sample_group_titles": [
+      "Transfer of Solid-PREP Repository to Solid Organization",
       "Solid CG Chair Election Procedures, Dates, and W3C API Tooling",
       "Clarifying Candidate Eligibility and Official Election Announcement",
       "Solid CG Meetings, Logistics, and Chair Roles Conflict",
       "Debate on Review and Timeliness of Publishing Affiliation Voter Data",
       "Solid CG Election Results Verification and Process",
       "Defining Eligible Voters and Selection Criteria for CG Election",
-      "Improving Meeting Minutes and Scribing Processes",
       "Coordination of Solid CG Chair Election 2023",
-      "CG Meeting Agenda Management and TPAC Planning",
-      "Solid CG Scribing, Privacy, and Meeting Tools Debate"
+      "Solid Channel Permissions and Archiving",
+      "CG Governance Issues and Unauthorized Repository Transfers"
+    ]
+  },
+  {
+    "cluster_id": 6,
+    "meta_title": "Solid Server Configuration and Deployment",
+    "meta_summary": "These groups discuss the practicalities of setting up and deploying Solid servers, including authorization, domain structure, and server configuration. Conversations cover specific server implementations (CSS, NSS, Manas, TrinPod), reverse proxy recommendations, automation of deployment, and approaches to supporting user-supplied domain names for pods.",
+    "meta_keywords": [
+      "Solid Server",
+      "Rust",
+      "Implementation",
+      "CSS",
+      "Specification",
+      "DNS",
+      "Server Implementation",
+      "Server Deployment",
+      "Performance",
+      "WAC"
+    ],
+    "group_count": 18,
+    "total_message_count": 171,
+    "timeline": {
+      "2020": 1,
+      "2021": 3,
+      "2022": 3,
+      "2023": 5,
+      "2024": 3,
+      "2025": 3
+    },
+    "sample_group_titles": [
+      "Comparison of Solid Server Internal Storage Abstraction",
+      "Implementing a Solid Server and Finding Concise Requirements",
+      "Domain Structure and Provisioning Complexity",
+      "LWS WG Status, ActivityPods, and Authorization",
+      "Automating Deployment to Solid Pods via GitHub Actions",
+      "CSS/Pivot Storage Name Uppercase Bug",
+      "Authorization and Server Setup Tools",
+      "Returning Developer Praises Spec and Plans Rust Server Implementation",
+      "Implementing Custom Domains for Storage Pods",
+      "Rust Solid Server Development and Funding Request"
+    ]
+  },
+  {
+    "cluster_id": 7,
+    "meta_title": "Solid Pod Structure and Management",
+    "meta_summary": "These discussions center on the structure and management of Solid Pods, including container lifecycle, metadata standardization, and storage discovery mechanisms. Topics range from defining application data storage locations and handling recursive deletions to maintaining URI persistence and exploring corporate control over pod storage while upholding user data ownership.",
+    "meta_keywords": [
+      "WebID",
+      "Solid Protocol",
+      "LDP",
+      "Container",
+      "Access Control",
+      "Storage Discovery",
+      "pim:Storage",
+      "Metadata",
+      "Pod Structure",
+      "Pod Storage"
+    ],
+    "group_count": 26,
+    "total_message_count": 502,
+    "timeline": {
+      "2021": 11,
+      "2022": 5,
+      "2023": 4,
+      "2024": 5,
+      "2025": 1
+    },
+    "sample_group_titles": [
+      "Solid Storage Discovery Mechanisms and Specification Interpretation",
+      "Standardizing Container Metadata and Date/Time Units",
+      "Standardizing Application Data Storage Location",
+      "Container Paging Solution Proposal and Discussion",
+      "Discovery of Pod Storage Root from WebID",
+      "Defining Representations for Solid Containers (Issue 525)",
+      "Storage Discovery Mechanism Debate",
+      "Corporate Control over Pod Storage and User Data Ownership",
+      "Storage Discovery and Data Pod Interaction Mechanics",
+      "Trinpod Implementation of Multi-Pod Architecture and Ownership"
+    ]
+  },
+  {
+    "cluster_id": 8,
+    "meta_title": "Solid API Design and Development",
+    "meta_summary": "These groups discuss the design and development of the Solid API, focusing on distinguishing resource types, implementing PATCH requests, and securing data fetching across pods. Conversations also include standardizing PATCH mechanisms, clarifying status codes, describing the API with OpenAPI/RDF, and announcing new repositories for Solid contacts.",
+    "meta_keywords": [
+      "PATCH",
+      "NSS",
+      "HTTP Status Codes",
+      "RDFSource",
+      "NonRDFSource",
+      "Content-Type",
+      "LDP",
+      "Container",
+      "Resource Typing",
+      "URI"
+    ],
+    "group_count": 10,
+    "total_message_count": 123,
+    "timeline": {
+      "2021": 2,
+      "2022": 1,
+      "2023": 2,
+      "2024": 5
+    },
+    "sample_group_titles": [
+      "Debugging Solid Test Case Failure (PATCH 200 vs 201) in Node Solid Server Context",
+      "PATCH Standardization and Conformance Reporting",
+      "Distinguishing Solid Resource Types (RDF, Container, Non-RDF)",
+      "Describing the Solid API with OpenAPI and RDF",
+      "Solid Protocol PATCH Status Code Clarification",
+      "URI Opaqueness and Resource Type Heuristics",
+      "Deciding on PATCH implementation for testing (N3 vs SPARQL)",
+      "Secure Data Fetching and Proposed Query Parameters for Cross-Pod Interaction",
+      "Request for Solid Chat Specification PR Reviews",
+      "New Repository for Solid Contacts"
+    ]
+  },
+  {
+    "cluster_id": 9,
+    "meta_title": "Solid Vocabulary and Ontologies",
+    "meta_summary": "These discussions focus on Solid vocabularies and ontologies, including defining terms for users/agents, standardizing pod ownership, and identifying ontologies for filenames and folders. The groups also discuss the use of ActivityStreams, Linked Data Signatures, best practices for RDF vocabulary, and updates to W3C namespaces.",
+    "meta_keywords": [
+      "Ontology",
+      "Vocabulary",
+      "RDF",
+      "Solid Vocab",
+      "W3C",
+      "WebID",
+      "SHACL",
+      "Agent",
+      "Predicate",
+      "ACP"
+    ],
+    "group_count": 36,
+    "total_message_count": 368,
+    "timeline": {
+      "2021": 12,
+      "2022": 7,
+      "2023": 3,
+      "2024": 5,
+      "2025": 9
+    },
+    "sample_group_titles": [
+      "Dispute over Solid Spec Vocabulary Design and Implementation PRs",
+      "Standardizing Pod Ownership Terminology",
+      "ActivityStreams Ontology and Inbox Standards",
+      "RDF Vocabulary and Prefix Lookup Best Practices",
+      "Conflict over Solid Vocab Pull Requests and CG Meeting Agenda",
+      "Standardization and Usage of vcard:WebId in WebID Profiles",
+      "Tooling and Repository Setup for Vocabulary Management",
+      "Defining SHACL Shapes and Ontology for Products and Services",
+      "Review and Critique of Solid Address Book/Contacts Conventions",
+      "Defining Solid User/Agent Ontology"
+    ]
+  },
+  {
+    "cluster_id": 10,
+    "meta_title": "Solid Tooling and Developer Experience",
+    "meta_summary": "These groups focus on the tooling and developer experience surrounding Solid. Discussions cover a range of topics, including RDF file viewing and manipulation, bug reporting procedures, specification generation, and troubleshooting common development issues like Matrix communication problems and authentication failures. The goal is to identify, develop, and improve tools and resources that streamline Solid development and adoption.",
+    "meta_keywords": [
+      "RDFa",
+      "Specification",
+      "RDF",
+      "dokieli",
+      "Matrix",
+      "Turtle",
+      "solidcommunity.net",
+      "Documentation",
+      "Developer Experience",
+      "SPARQL"
+    ],
+    "group_count": 32,
+    "total_message_count": 426,
+    "timeline": {
+      "2020": 1,
+      "2021": 5,
+      "2022": 5,
+      "2023": 7,
+      "2024": 8,
+      "2025": 6
+    },
+    "sample_group_titles": [
+      "Reliable Storage Discovery for Solid Applications and UX Implications",
+      "Solid Graph Visualization Tools and Features",
+      "Creating a Solid Project Repository List and Defining Software Vocabularies",
+      "Development and Deployment of CG Activity Monitor",
+      "Defining Specification Audience using ESCO vs. DX",
+      "Troubleshooting Mashlib Access on Trinpod",
+      "Curation and Conformance Testing for Solid Libraries (DX)",
+      "Specification Tooling and Document Architecture",
+      "Matrix/Element Communication Issues",
+      "Implementation Query Redirection and Chat Guidelines"
     ]
   },
   {
     "cluster_id": 11,
-    "meta_title": "Solid Pod Structure and Storage",
-    "meta_summary": "Contains 11 conversation groups about solid pod structure and storage",
+    "meta_title": "Solid Conformance and Testing",
+    "meta_summary": "Solid conformance and testing discussions center on ensuring that Solid implementations adhere to the specifications. The conversations cover topics such as the development and announcement of conformance test suites, linking specification requirements to tests, and reporting strategies for implementation conformance. The group aims to establish a robust QA system for Solid.",
     "meta_keywords": [
-      "WebID",
-      "Access Control",
-      "Pod Structure",
-      "POSIX",
-      "Windows",
-      "Data Ownership",
-      "ActivityPub",
-      "FOLLOW",
-      "Group Pod",
-      "Provisioning"
-    ],
-    "group_count": 11,
-    "total_message_count": 148,
-    "timeline": {
-      "2020": 1,
-      "2021": 5,
-      "2022": 3,
-      "2024": 2
-    },
-    "sample_group_titles": [
-      "Standardizing Application Data Storage Location",
-      "Comparison of Solid Server Internal Storage Abstraction",
-      "Storage Discovery and Data Pod Interaction Mechanics",
-      "Trinpod Implementation of Multi-Pod Architecture and Ownership",
-      "Data Model Versioning in Decentralized Storage",
-      "Updating Solid Pod Provider List",
-      "Implementing Custom Domains for Storage Pods",
-      "Discussion of Group Pod provisioning use case",
-      "Miscellaneous Unrelated Queries",
-      "Apps Container Authentication Requirement"
-    ]
-  },
-  {
-    "cluster_id": 12,
-    "meta_title": "Query Mechanisms and Scalability",
-    "meta_summary": "Contains 15 conversation groups about query mechanisms and scalability",
-    "meta_keywords": [
-      "SPARQL",
-      "Linked Data Fragments",
-      "Querying",
-      "Indexing",
-      "Comunica",
-      "Apache Solr",
-      "Scalability",
-      "Search API",
-      "LDF",
-      "RDF"
-    ],
-    "group_count": 15,
-    "total_message_count": 371,
-    "timeline": {
-      "2021": 1,
-      "2022": 3,
-      "2023": 3,
-      "2024": 4,
-      "2025": 4
-    },
-    "sample_group_titles": [
-      "Cross-Namespace Resource Retrieval in Pods",
-      "Multi-Resource Querying and Indexing Strategies",
-      "Solid Search API Proposal and SPARQL Debate",
-      "NextGraph Introduction, Performance, and CRDT Data Model",
-      "Local Querying of Triples about External URIs",
-      "Comparison of SPARQL vs Apache Solr for Solid Search and Indexing",
-      "Debate on Supporting Multiple Query Mechanisms",
-      "RDF, SPARQL, and Triplestore Scalability",
-      "Querying Strategies and Scalability",
-      "Brainstorming a Solid Search API Implementation"
-    ]
-  },
-  {
-    "cluster_id": 13,
-    "meta_title": "Notifications and Web Push Protocol",
-    "meta_summary": "Contains 31 conversation groups about notifications and web push protocol",
-    "meta_keywords": [
-      "Solid Notifications",
-      "STM",
-      "Scheduling",
-      "Notifications Protocol",
-      "Notifications",
-      "PREP",
-      "Notifications Panel",
-      "LDN",
-      "Implementation",
-      "CSS"
-    ],
-    "group_count": 31,
-    "total_message_count": 233,
-    "timeline": {
-      "2021": 3,
-      "2022": 4,
-      "2023": 6,
-      "2024": 17,
-      "2025": 1
-    },
-    "sample_group_titles": [
-      "TrinPod Event API vs Solid Notifications/PREP",
-      "PREP Notifications Implementation and Technical Debugging",
-      "Solid Notifications Protocol Status and Implementation Advice",
-      "Debate on Solid Architectural Representation and LDN Relevance",
-      "Solid Notifications Special Topic Meeting Planning",
-      "Solid Notifications STM Session (Mar 12)",
-      "Practitioners Meeting Scheduling: Solid Notifications",
-      "WebSocket Limits and Notification Scaling Challenges",
-      "Introduction and Incubation Discussion for the Per Resource Events Protocol",
-      "Solid Notifications Protocol: WebSockets vs. Streaming HTTP"
-    ]
-  },
-  {
-    "cluster_id": 14,
-    "meta_title": "Error Handling and Constraints",
-    "meta_summary": "Contains 4 conversation groups about error handling and constraints",
-    "meta_keywords": [
-      "HTTP Status Codes",
-      "PATCH",
-      "501",
-      "405",
-      "HTTP Methods",
-      "Protocol Compliance",
-      "Solid Protocol 0.10",
-      "Constraints",
-      "Problem Details",
-      "Storage Owner"
-    ],
-    "group_count": 4,
-    "total_message_count": 51,
-    "timeline": {
-      "2022": 1,
-      "2023": 1,
-      "2024": 2
-    },
-    "sample_group_titles": [
-      "Debugging Solid Test Case Failure (PATCH 200 vs 201) in Node Solid Server Context",
-      "Solid Protocol Constraints and Error Details",
-      "HTTP Error Codes for Unsupported Methods",
-      "Solid Protocol PATCH Status Code Clarification"
-    ]
-  },
-  {
-    "cluster_id": 15,
-    "meta_title": "Permanent Identifiers and URIs",
-    "meta_summary": "Contains 3 conversation groups about permanent identifiers and uris",
-    "meta_keywords": [
-      "URI Persistence",
-      "Specification",
-      "TR",
-      "Compliance",
-      "Editor's Draft",
-      "Base URI",
-      "RFC 3986",
-      "Fetch API",
-      "baseIRI",
-      "Redirects"
-    ],
-    "group_count": 3,
-    "total_message_count": 39,
-    "timeline": {
-      "2021": 2,
-      "2022": 1
-    },
-    "sample_group_titles": [
-      "PDS Interop Solid Storage Link Metadata Specification",
-      "Solid Specification URI Persistence and Reliability",
-      "Establishing Base URI from Retrieval URL (RFC 3986)"
-    ]
-  },
-  {
-    "cluster_id": 16,
-    "meta_title": "Auxiliary Resources and Linking",
-    "meta_summary": "Contains 4 conversation groups about auxiliary resources and linking",
-    "meta_keywords": [
-      "Auxiliary Resources",
-      "Auxiliary Resource",
-      "Terminology",
-      "Resource Access",
-      "Protocol Specification",
-      "GitHub Labels",
-      "Archive Links",
-      ".meta extension",
-      "Link Header",
-      "Solid Storage Specification"
-    ],
-    "group_count": 4,
-    "total_message_count": 21,
-    "timeline": {
-      "2021": 2,
-      "2022": 2
-    },
-    "sample_group_titles": [
-      "Solid Storage Spec Feedback on Auxiliary Resources",
-      "Auxiliary Resource Chaining and Core Terminology",
-      "Review of \"auxiliary resources\" label and concept",
-      "Archival Links and Auxiliary Resources"
-    ]
-  },
-  {
-    "cluster_id": 17,
-    "meta_title": "Data Portability and Pod Downloads",
-    "meta_summary": "Contains 3 conversation groups about data portability and pod downloads",
-    "meta_keywords": [
-      "Canonicalization",
-      "urda2015",
-      "Use Cases",
-      "Pod Scenarios",
-      "Pod Download",
-      "Data Portability",
-      "Pod Export",
-      "N-Quads",
-      "RDF",
-      "Container Resource"
-    ],
-    "group_count": 3,
-    "total_message_count": 11,
-    "timeline": {
-      "2021": 2,
-      "2024": 1
-    },
-    "sample_group_titles": [
-      "Solid Pod Export Format Standard Discussion",
-      "Discussion on canonicalization methods and potential use cases",
-      "Discussing Methods for Full Pod Download"
-    ]
-  },
-  {
-    "cluster_id": 18,
-    "meta_title": "Solid Implementer Experience and QA",
-    "meta_summary": "Contains 34 conversation groups about solid implementer experience and qa",
-    "meta_keywords": [
-      "Dokieli",
-      "WAC",
-      "Implementation",
       "Conformance",
       "Solid QA",
-      "CSS",
-      "Solid Specification",
       "RDFa",
       "Test Suite",
-      "Implementer Feedback"
-    ],
-    "group_count": 34,
-    "total_message_count": 241,
-    "timeline": {
-      "2021": 7,
-      "2022": 8,
-      "2023": 6,
-      "2024": 8,
-      "2025": 5
-    },
-    "sample_group_titles": [
-      "Debate on Requirements and Scope for a Usable End-to-End Solid Demo",
-      "Curation and Conformance Testing for Solid Libraries (DX)",
-      "Feedback and Bug Reporting on Solidproject.org Redesign Staging Site",
-      "Solid QA System and Implementation Reporting Strategy",
-      "Humor and the P vs NP Problem",
-      "Solid Implementer Feedback Session Logistics",
-      "Dokieli Application Demonstrating Specification Conformance and Test Coverage",
-      "Implementation Query Redirection and Chat Guidelines",
-      "Automating Deployment to Solid Pods via GitHub Actions",
-      "Identifying AI Spam and Handling Large Files in Java Libraries"
-    ]
-  },
-  {
-    "cluster_id": 19,
-    "meta_title": "TrinPod Implementation and Testing",
-    "meta_summary": "Contains 6 conversation groups about trinpod implementation and testing",
-    "meta_keywords": [
-      "TrinPod",
-      "WebID",
-      "Ontology",
-      "303 Redirect",
-      "RDF/XML",
-      "Compliance",
-      "Linked Data Hypergraph (LDH)",
-      "Path URIs",
-      "Permanent URIs",
-      "Architecture"
-    ],
-    "group_count": 6,
-    "total_message_count": 165,
-    "timeline": {
-      "2021": 2,
-      "2022": 1,
-      "2023": 3
-    },
-    "sample_group_titles": [
-      "TrinPod WebID Design and RDF/Ontology Compliance Fixes",
-      "Architectural Debate: Systems Hierarchy vs. Decentralization",
-      "Trinpod Data Model, WebID Retrieval, and Fine-Grained Permissions",
-      "TrinPod Systems Ontology and Container Handling",
-      "TrinPod Scalability and Performance Metrics",
-      "TrinPod Linked Data Hypergraph Architecture Presentation"
-    ]
-  },
-  {
-    "cluster_id": 20,
-    "meta_title": "Application Security and Trusted Apps",
-    "meta_summary": "Contains 19 conversation groups about application security and trusted apps",
-    "meta_keywords": [
-      "Security",
-      "Trusted App",
-      "OAuth",
-      "STM",
-      "HTML",
-      "Security Considerations",
-      "Trust Model",
-      "App Security",
-      "Data Access",
-      "Permissions"
-    ],
-    "group_count": 19,
-    "total_message_count": 126,
-    "timeline": {
-      "2021": 3,
-      "2022": 3,
-      "2023": 1,
-      "2024": 7,
-      "2025": 5
-    },
-    "sample_group_titles": [
-      "Specifying Trusted App Authorization Redirects",
-      "Security Risks of Pod Browsers and Need for Authorization Redirect",
-      "Handling Malicious IP Requests and HTTP Response Codes",
-      "Same-Origin Security Implications of HTML/JS on Solid Pods",
-      "Solid Trust Model and App Security Limitations",
-      "App Security and Authorization Mechanisms",
-      "Security Best Practices Document Naming Change",
-      "Security Considerations on HTML Authentication",
-      "Planning Collaboration for SoSy 2026 Session on Application Authorization",
-      "Client Architecture and Security"
-    ]
-  },
-  {
-    "cluster_id": 21,
-    "meta_title": "PATCH vs SPARQL Updates Debate",
-    "meta_summary": "Contains 12 conversation groups about patch vs sparql updates debate",
-    "meta_keywords": [
-      "PATCH",
-      "SPARQL Update",
-      "N3 Patch",
-      "Solid Protocol",
-      "N3",
-      "Solid Specification",
+      "Specification",
+      "Specification Conformance",
+      "Quality Assurance",
       "WAC",
-      "SPARQL",
-      "NSS",
-      "Resource Creation"
+      "Conformance Test Suite",
+      "Inrupt"
     ],
     "group_count": 12,
-    "total_message_count": 211,
+    "total_message_count": 76,
     "timeline": {
-      "2021": 3,
+      "2021": 2,
       "2022": 2,
-      "2023": 4,
+      "2023": 5,
       "2024": 1,
       "2025": 2
     },
     "sample_group_titles": [
-      "Solid Protocol Guarantees Regarding Relative IRIs and RDF Serialization",
-      "PATCH Standardization and Conformance Reporting",
-      "N3 Patch, SPARQL Update, and Blank Node Handling in Solid Protocol",
-      "Security and Permissions for SPARQL Update (PATCH)",
-      "Clarifying SPARQL Update Status in Solid Specifications",
-      "Discussion and Clarification of N3 Patch usage in Solid Protocol (PR 608)",
-      "Clarification on RDF PATCH and Resource Creation",
-      "Patching Mechanisms: SPARQL Update vs N3 Patch",
-      "Deciding on PATCH implementation for testing (N3 vs SPARQL)",
-      "N3 Patch Format Proposal for Solid Updates"
+      "Solid QA System and Implementation Reporting Strategy",
+      "Dokieli Application Demonstrating Specification Conformance and Test Coverage",
+      "N3 Patch Conformance and Blank Node Handling",
+      "Alignment of WAC with Solid Protocol Specification Terms",
+      "Linking Solid Specification Requirements to Tests",
+      "Conformance Test Suite Announcement and Feedback",
+      "Solid Specification Terminology and Conformance",
+      "Solid QA STM Scheduling Proposal",
+      "Follow-up on Longstanding WAC and Solid-OIDC Issues",
+      "Conformance Test Harness Release v1.1.9"
     ]
   },
   {
-    "cluster_id": 22,
-    "meta_title": "Verifiable Credentials Standards & Integration",
-    "meta_summary": "Contains 8 conversation groups about verifiable credentials standards & integration",
+    "cluster_id": 12,
+    "meta_title": "Decentralized Identifiers (DIDs) and Integration",
+    "meta_summary": "The Decentralized Identifiers (DIDs) integration groups explore the potential of using DIDs within the Solid ecosystem. Conversations focus on the `did:solid` method, its advantages and disadvantages compared to existing approaches, as well as general brainstorming on integrating Solid with other decentralized technologies. The group considers how DIDs can enhance identity management within Solid.",
+    "meta_keywords": [
+      "DID",
+      "WebID",
+      "Identity Panel",
+      "Issue Transfer",
+      "Specification Issue",
+      "did:solid",
+      "did:web",
+      "DNSsec",
+      "RFC7231",
+      "W3C"
+    ],
+    "group_count": 5,
+    "total_message_count": 57,
+    "timeline": {
+      "2021": 4,
+      "2024": 1
+    },
+    "sample_group_titles": [
+      "Exploring the did:solid Method",
+      "Solid Integration with Decentralized Technologies",
+      "Status of Decentralized Identifiers (DIDs) in Solid",
+      "Decentralized Identifiers (DID) and Proof-of-Work",
+      "Identity Panel Issue Transfer (DID/WebID)"
+    ]
+  },
+  {
+    "cluster_id": 13,
+    "meta_title": "Verifiable Credentials Integration",
+    "meta_summary": "These groups discuss the integration of Verifiable Credentials (VCs) with Solid. Discussions include proposals for VC integration panels, use case brainstorming, and technical details related to VC signatures and data models. The goal is to explore how VCs can enhance trust and data ownership within Solid applications.",
     "meta_keywords": [
       "Verifiable Credentials",
-      "Linked Data Signatures",
-      "W3C",
       "Signature",
       "JSON-LD",
-      "WG",
-      "Solid CG",
+      "Http Sig Authentication",
+      "DID",
+      "SSI",
+      "LDP",
       "VC Panel",
       "LDN",
       "Canonicalization"
     ],
-    "group_count": 8,
-    "total_message_count": 102,
+    "group_count": 7,
+    "total_message_count": 94,
     "timeline": {
-      "2021": 5,
+      "2021": 4,
       "2023": 2,
       "2025": 1
     },
@@ -825,54 +518,257 @@
       "Solid and Verifiable Credentials Integration and Panel Proposal",
       "Issues with Verifiable Credentials Data Model N3 Mapping",
       "Verifiable Credentials Signature and Structure",
-      "Solid CG Support for Linked Data Signatures WG",
-      "Updates on Linked Data Signatures and DID methods",
+      "Http Sig Authentication Proposal Update",
       "Credentials CG Call Announcement",
       "Proposal for a session on Solid-related VC use cases"
     ]
   },
   {
-    "cluster_id": 23,
-    "meta_title": "Community Dynamics and Code of Conduct",
-    "meta_summary": "Contains 27 conversation groups about community dynamics and code of conduct",
+    "cluster_id": 14,
+    "meta_title": "Solid and Linked Data Updates",
+    "meta_summary": "These groups discuss updates to Solid and Linked Data technologies. The conversations cover proposals for patch formats for Solid updates (like N3 Patch), clarifying SPARQL Update status, and exploring other related technologies like TREE, LDES, and CRDTs for improved scalability. A key goal is to improve data management and synchronization within Solid.",
     "meta_keywords": [
-      "Code of Conduct",
-      "Community",
-      "Communication",
-      "Henry Story",
-      "Process Improvement",
-      "orphaned",
-      "miscellaneous",
-      "Ombuds",
-      "Twitter",
-      "External Link"
+      "PATCH",
+      "Specification",
+      "CRDT",
+      "LDES",
+      "SPARQL",
+      "N3",
+      "NSS",
+      "PREP",
+      "RDF Patches",
+      "IETF"
     ],
-    "group_count": 27,
-    "total_message_count": 176,
+    "group_count": 7,
+    "total_message_count": 66,
     "timeline": {
-      "2021": 2,
-      "2022": 3,
-      "2023": 5,
-      "2024": 13,
-      "2025": 4
+      "2021": 1,
+      "2023": 2,
+      "2024": 2,
+      "2025": 2
     },
     "sample_group_titles": [
-      "Debate on Inclusive Language, 'Guys', and Solid Code of Conduct Enforcement",
-      "Improving the Solid CG Meeting Minutes Publishing Process",
-      "Disagreement on Container Description Management and Subsequent Tone Intervention",
-      "Debate on Unilateral Closing of GitHub Issues",
-      "Coordination of TPAC Video Release and Social Media Promotion",
-      "Solid CG Group Dynamics and Conduct Dispute",
-      "Passing of Henry Story (bblfish)",
-      "Standalone Links and General Chatter",
-      "Planning a Special Topic Meeting on Solid Community Group Dynamics",
-      "Formalizing Solid Community and FOSS Security Risks"
+      "Clarifying SPARQL Update Status in Solid Specifications",
+      "CRDT Special Topic Meeting Scheduling and Follow-up",
+      "Discussion on TREE, LDES, and CRDT for Scalability",
+      "LDES in LDP for Append-Only Containers",
+      "Proposal for a Solid-PREP Task Force on RDF Patches",
+      "N3 Patch Format Proposal for Solid Updates",
+      "Updates on LDES Working Group Activities"
     ]
   },
   {
-    "cluster_id": 24,
-    "meta_title": "GitHub Management and Workflow",
-    "meta_summary": "Contains 33 conversation groups about github management and workflow",
+    "cluster_id": 15,
+    "meta_title": "Solid and LDP Compatibility",
+    "meta_summary": "These discussions focus on Solid's compatibility and relationship with the Linked Data Platform (LDP). The core issues revolve around whether Solid should be considered an extension or divergence from LDP, addressing instances where Solid intentionally deviates from LDP for practical reasons, and clarifying how servers should handle LDP containment triples within the Solid protocol.",
+    "meta_keywords": [
+      "LDP",
+      "Solid Protocol",
+      "Specification",
+      "Trellis",
+      "Containment Triples",
+      "PUT",
+      "Clarification",
+      "Documentation",
+      "CORS",
+      "LDP Test Suite"
+    ],
+    "group_count": 10,
+    "total_message_count": 107,
+    "timeline": {
+      "2021": 6,
+      "2022": 2,
+      "2024": 2
+    },
+    "sample_group_titles": [
+      "Permanent Resource URIs vs. Dynamic Path URIs in LDP Containment",
+      "Server Handling of LDP Containment Triples on PUT",
+      "Solid's Relationship to Linked Data Platform (LDP)",
+      "Solid's Non-Normative Relationship with LDP",
+      "Requirements for Content-Type during Container Creation via POST",
+      "Debate on Solid Protocol's Dependency on LDP and LWS WG Scope",
+      "PUT Requests and Container Containment Modification",
+      "Clarification on Solid Specification regarding LDP",
+      "Challenges with LDP Indirect Containers and Access Control",
+      "Solid Protocol Relationship to Linked Data Platform"
+    ]
+  },
+  {
+    "cluster_id": 16,
+    "meta_title": "HTTP Protocol Compliance in Solid",
+    "meta_summary": "This topic centers on ensuring Solid implementations adhere to HTTP protocol standards. Conversations cover various aspects of HTTP, including proper usage of headers, content negotiation, handling of PUT/POST requests, and appropriate server redirection, with a specific focus on achieving consistent URI allocation and clarifying the underlying model of Solid (files vs. triples) within the context of HTTP.",
+    "meta_keywords": [
+      "Content Negotiation",
+      "HTTP",
+      "HTTP Headers",
+      "PUT",
+      "HTTP Status Codes",
+      "Content-Type",
+      "POST",
+      "Redirects",
+      "Link Header",
+      "CORS"
+    ],
+    "group_count": 24,
+    "total_message_count": 146,
+    "timeline": {
+      "2020": 2,
+      "2021": 6,
+      "2022": 4,
+      "2023": 3,
+      "2024": 7,
+      "2025": 2
+    },
+    "sample_group_titles": [
+      "Deep Dive on Resource Identification, Content Negotiation, and HTTP Status Codes",
+      "Debate on Solid's Underlying Model (Files vs. Triples)",
+      "URI Handling, HTTP Redirects, and Fragment Identifiers in Solid",
+      "Conditional HTTP Requests and Content Negotiation Caching",
+      "Establishing Base URI from Retrieval URL (RFC 3986)",
+      "HTTP Header Usage and RDF Representation Negotiation",
+      "Content Negotiation for Accept */*",
+      "Defining HTTPS Redirection Status Codes",
+      "Server Redirection and Spec Normativity (MAY vs MUST)",
+      "Request for LWS Support of 303 Redirects for Cool URIs"
+    ]
+  },
+  {
+    "cluster_id": 17,
+    "meta_title": "Error Reporting and Handling",
+    "meta_summary": "These discussions concentrate on standardizing error reporting and handling within the Solid ecosystem. The aim is to define clear HTTP error codes for unsupported methods, clarify the use of constraint discovery mechanisms, and establish standardized machine-readable error feedback, as specified in the Solid Protocol, without fundamentally altering resource access rights.",
+    "meta_keywords": [
+      "Problem Details",
+      "Error Handling",
+      "Solid Roadmap",
+      "ldp:constrainedBy",
+      "Constraint Discovery",
+      "HTTP Status Codes",
+      "501",
+      "405",
+      "HTTP Methods",
+      "Protocol Compliance"
+    ],
+    "group_count": 3,
+    "total_message_count": 26,
+    "timeline": {
+      "2021": 1,
+      "2022": 1,
+      "2023": 1
+    },
+    "sample_group_titles": [
+      "Discussion on Solid Roadmap, Error Handling, and Constraint Discovery",
+      "Solid Protocol Constraints and Error Details",
+      "HTTP Error Codes for Unsupported Methods"
+    ]
+  },
+  {
+    "cluster_id": 18,
+    "meta_title": "Data Backup and Resilience",
+    "meta_summary": "This topic explores methods for data backup, resilience, and migration within Solid pods. The discussions range from practical approaches for downloading complete pods, to proposals for implementing link forwarding mechanisms during pod migration, and to broader considerations about the importance of data redundancy, immutability, and data replication strategies for personal data stored in Solid.",
+    "meta_keywords": [
+      "Pod Download",
+      "Data Portability",
+      "Solid Migrator",
+      "Link Forwarding",
+      "Auxiliary Resources",
+      "HTTP Redirect",
+      "Data Resilience",
+      "Backup",
+      "Personal Pod",
+      "Data Loss"
+    ],
+    "group_count": 4,
+    "total_message_count": 26,
+    "timeline": {
+      "2021": 3,
+      "2025": 1
+    },
+    "sample_group_titles": [
+      "Pod Value and Data Backup Resilience",
+      "Discussion on Data Replication, Immutability, and Temporal State",
+      "Proposal for Link Forwarding via Solid Migrator",
+      "Discussing Methods for Full Pod Download"
+    ]
+  },
+  {
+    "cluster_id": 19,
+    "meta_title": "Solid and W3C Collaboration",
+    "meta_summary": "This topic encompasses Solid's collaboration and integration efforts with various W3C groups and standards. The conversations include scheduling and recapping joint meetings with groups like the Credentials CG, expressing support for W3C Working Groups such as Linked Data Signatures and RDF Canonicalization, and managing the progress of the Solid Working Group charter within the W3C framework.",
+    "meta_keywords": [
+      "W3C",
+      "WG Charter",
+      "Coordination",
+      "Working Group",
+      "Charter",
+      "Solid CG",
+      "Credentials CG",
+      "Scheduling",
+      "CCG",
+      "Collaboration"
+    ],
+    "group_count": 24,
+    "total_message_count": 140,
+    "timeline": {
+      "2021": 6,
+      "2022": 4,
+      "2023": 4,
+      "2024": 8,
+      "2025": 2
+    },
+    "sample_group_titles": [
+      "Post-CCG Meeting Success and Next Steps",
+      "Joint Social CG Meeting Scheduling and Review",
+      "W3C CCG Call Recap and Coordination Plans",
+      "Planning Joint Meeting with W3C Credentials CG",
+      "Credentials CG Meeting Preparation",
+      "Scheduling Joint Meeting with Credentials CG",
+      "WG Codename Banter ('PUMPKIN')",
+      "Solid CG Support for Linked Data Signatures WG",
+      "Status of Solid Specification Transition to a W3C Working Group",
+      "Solid Working Group Charter Progress"
+    ]
+  },
+  {
+    "cluster_id": 20,
+    "meta_title": "Solid Application Development and Showcases",
+    "meta_summary": "These groups discuss practical application development on Solid, including specific apps like Mycelium and Dokieli. Discussions cover topics such as integrating webhooks, developing search APIs using SPARQL, debugging browser compatibility, and addressing data management and storage concerns within decentralized Solid chat applications.",
+    "meta_keywords": [
+      "Solid Chat",
+      "Solid ACL Tool",
+      "Inrupt",
+      "Support",
+      "Webhooks",
+      "Access Revocation",
+      "Pod Registration",
+      "Seamless Integration",
+      "Search API",
+      "SPARQL"
+    ],
+    "group_count": 10,
+    "total_message_count": 63,
+    "timeline": {
+      "2021": 2,
+      "2022": 2,
+      "2024": 4,
+      "2025": 2
+    },
+    "sample_group_titles": [
+      "Deep Dive into Solid Chat Protocol Semantics and Social Implications",
+      "Dokieli Demo and Browser Compatibility Debugging",
+      "Brainstorming a Solid Search API Implementation",
+      "Solid Chat Data Management and Decentralized Storage",
+      "Mycelium App Bug Fix for Type Index PUT requests",
+      "Redirecting Request for Help with Inrupt ACL Tool",
+      "Link Share for a Solid App",
+      "Seamless App Integration Features (Webhooks and Registration API)",
+      "Solid Implementation Showcase and Review",
+      "Miscellaneous Link to App Development Chat"
+    ]
+  },
+  {
+    "cluster_id": 21,
+    "meta_title": "Github Management and Pull Requests",
+    "meta_summary": "These groups focus on the management of Solid's GitHub repositories and pull requests, including branch renaming, pull request review processes, and repository archiving. Discussions also cover the use of GitHub features like Mermaid diagrams, issue tracker moderation, contribution guidelines, and repository restructuring within the Solid organization.",
     "meta_keywords": [
       "GitHub",
       "Pull Request",
@@ -885,463 +781,140 @@
       "GitHub Issue",
       "Repository Migration"
     ],
-    "group_count": 33,
-    "total_message_count": 263,
+    "group_count": 30,
+    "total_message_count": 132,
     "timeline": {
       "2021": 4,
       "2022": 6,
       "2023": 7,
-      "2024": 13,
+      "2024": 10,
       "2025": 3
     },
     "sample_group_titles": [
-      "Transfer of Solid-PREP Repository to Solid Organization",
       "Guidance on Using GitHub PR Review Suggestions for Meeting Minutes",
-      "CG Meeting Minutes PR Management",
+      "Debate on Unilateral Closing of GitHub Issues",
       "solid/security-bp Repository Initialization",
-      "General Announcements and Links",
       "GitHub Issue Tracker Moderation",
       "Archiving the solid-spec Repository",
-      "HackMD Team Membership Management",
       "Improving CG Minutes Commit History using Squash Merges",
-      "Repository Transfer to Solid Organization"
+      "Repository Transfer to Solid Organization",
+      "Merging Specification Pull Requests",
+      "Repository Restructuring and Documentation Move",
+      "Renaming Solid Specification GitHub Branch"
+    ]
+  },
+  {
+    "cluster_id": 22,
+    "meta_title": "Dokieli Integration and Development",
+    "meta_summary": "These groups center on Dokieli, a decentralized article editor, and its integration with Solid. Discussions include requirements for collaborative text editing using tools like Dokieli, comparing bookmarking apps, exploring text selection features, sharing visualizations, and verifying implementations such as N3 Patch.",
+    "meta_keywords": [
+      "Dokieli",
+      "dokieli",
+      "Visualization",
+      "Contacts",
+      "Diagram",
+      "Concepts",
+      "Collaborative Editing",
+      "Say Editor",
+      "RDFa",
+      "Braid"
+    ],
+    "group_count": 7,
+    "total_message_count": 38,
+    "timeline": {
+      "2021": 1,
+      "2023": 2,
+      "2024": 3,
+      "2025": 1
+    },
+    "sample_group_titles": [
+      "Requirements for Collaborative Text Editing in Solid",
+      "Comparing Solid Bookmarking Apps and Dokieli's Web Annotation Use",
+      "Dokie.li Text Selection Features",
+      "Reflection on the Empodera Talk and Dokieli's Spirit",
+      "Dokieli Contacts Visualization Shared",
+      "Sharing Dokieli Requirements Diagram",
+      "Public Verification of N3 Patch Implementation in Dokieli"
+    ]
+  },
+  {
+    "cluster_id": 23,
+    "meta_title": "Solid Ecosystem and Adoption",
+    "meta_summary": "These groups discuss the Solid ecosystem and its wider adoption, including integrating Solid with ActivityPub for decentralized social networking, transitioning community chat platforms, and exploring use cases in areas like smart cities. Discussions also cover monetization models, ecosystem monitor quality, external critiques of Solid, and coordination efforts for promoting Solid's adoption and addressing breaking changes.",
+    "meta_keywords": [
+      "ActivityPub",
+      "Decentralization",
+      "Collaboration",
+      "Applications",
+      "Interoperability",
+      "Pod Providers",
+      "Solid",
+      "CSS",
+      "Notifications",
+      "Gitter"
+    ],
+    "group_count": 36,
+    "total_message_count": 300,
+    "timeline": {
+      "2021": 1,
+      "2022": 5,
+      "2023": 7,
+      "2024": 20,
+      "2025": 3
+    },
+    "sample_group_titles": [
+      "Ecosystem Coordination, Website Content, and Handling Breaking Changes",
+      "TPAC Video Preparation and Submission Coordination",
+      "Solidproject.org Content and Group Dynamics",
+      "Feedback and Bug Reporting on Solidproject.org Redesign Staging Site",
+      "Launch of Solid Practitioners Group and Link Formatting Discussion",
+      "Review and Critique of Draft Solid Explainer Videos",
+      "Legal Analysis of UK Online Safety Act (OSA) and Solid Pods",
+      "Transitioning Community Chat from Gitter to Matrix",
+      "ActivityPub Adoption and Implementation Concerns",
+      "Coordination of TPAC Video Release and Social Media Promotion"
+    ]
+  },
+  {
+    "cluster_id": 24,
+    "meta_title": "Solid Community Updates and Announcements",
+    "meta_summary": "These groups encompass community updates and announcements, including welcoming new members, announcing protocol releases and meeting schedules, and sharing condolences for community members. Discussions also provide overviews of recent progress, announcements of grant awards, and sharing of resources relevant to the Solid community.",
+    "meta_keywords": [
+      "Meeting",
+      "Community",
+      "W3C Solid CG",
+      "Solid community",
+      "Introduction",
+      "Welcome",
+      "Solid Protocol 0.9.0",
+      "Publication",
+      "Specification",
+      "Solid Forum"
+    ],
+    "group_count": 12,
+    "total_message_count": 59,
+    "timeline": {
+      "2021": 2,
+      "2022": 3,
+      "2023": 2,
+      "2025": 5
+    },
+    "sample_group_titles": [
+      "Publication of Solid Protocol 0.9.0 and Forum Announcement",
+      "W3C Solid CG Weekly Meeting Announcements",
+      "Passing of Henry Story (bblfish)",
+      "CG Watercooler Chat and Shared Resources",
+      "NLnet Grant Announcements",
+      "Meeting Announcements and General Links",
+      "New Member Introduction",
+      "General Announcements Acknowledgment",
+      "Administrative Announcements",
+      "Recent Solid CG Progress Overview"
     ]
   },
   {
     "cluster_id": 25,
-    "meta_title": "Resource Movement and URI Persistence",
-    "meta_summary": "Contains 6 conversation groups about resource movement and uri persistence",
-    "meta_keywords": [
-      "URI Persistence",
-      "TrinPod",
-      "HTTP Redirects",
-      "URI Path",
-      "LDP Containment",
-      "Permanent Identifiers (PIDs)",
-      "ws:Storage",
-      "ldp:Resource",
-      "URI Permanence",
-      "Hierarchical Paths"
-    ],
-    "group_count": 6,
-    "total_message_count": 79,
-    "timeline": {
-      "2021": 3,
-      "2022": 1,
-      "2025": 2
-    },
-    "sample_group_titles": [
-      "Permanent Resource URIs vs. Dynamic Path URIs in LDP Containment",
-      "Data Organization: Hierarchical URIs vs. Permanent URIs and Metadata",
-      "URI Handling, HTTP Redirects, and Fragment Identifiers in Solid",
-      "Maintaining URI Persistence When Moving Resources",
-      "Proposal for Link Forwarding via Solid Migrator",
-      "TrinPod's Permanent URI Strategy for Resource Paths"
-    ]
-  },
-  {
-    "cluster_id": 26,
-    "meta_title": "Solid Tooling and Libraries",
-    "meta_summary": "Contains 20 conversation groups about solid tooling and libraries",
-    "meta_keywords": [
-      "RDF",
-      "RDFa",
-      "dokieli",
-      "Visualization",
-      "GitHub",
-      "Interoperability",
-      "Turtle",
-      "File Viewing",
-      "Pod",
-      "Solid ACL Tool"
-    ],
-    "group_count": 20,
-    "total_message_count": 140,
-    "timeline": {
-      "2020": 1,
-      "2021": 4,
-      "2022": 1,
-      "2023": 4,
-      "2024": 8,
-      "2025": 2
-    },
-    "sample_group_titles": [
-      "Solid Graph Visualization Tools and Features",
-      "Creating a Solid Project Repository List and Defining Software Vocabularies",
-      "Troubleshooting Mashlib Access on Trinpod",
-      "Miscellaneous Technical References and Social Exchanges",
-      "Launch of Solid Practitioners Group and Link Formatting Discussion",
-      "Miscellaneous Technical and Informational Updates",
-      "Resolving meet.jit.si Authentication Issues",
-      "RDF File Viewing Tools",
-      "Technical Links and External Solid Context",
-      "Redirecting Request for Help with Inrupt ACL Tool"
-    ]
-  },
-  {
-    "cluster_id": 27,
-    "meta_title": "Handling Non-RDF Resources and Media",
-    "meta_summary": "The discussion focuses on best practices for handling Non-RDF Sources (media files) in Solid, including how to model multiple encodings/variants, authenticated fetching using blobs, and choosing a predicate like `nfo:fileName` for suggested filenames.",
-    "meta_keywords": [
-      "Non-RDF Sources",
-      "Media Handling",
-      "Authentication",
-      "Blobs",
-      "nfo:fileName"
-    ],
-    "group_count": 1,
-    "total_message_count": 3,
-    "timeline": {
-      "2023": 1
-    },
-    "sample_group_titles": [
-      "Handling Media and Non-RDF Resources"
-    ]
-  },
-  {
-    "cluster_id": 28,
-    "meta_title": "Solid Server Deployment and Hosting",
-    "meta_summary": "Contains 11 conversation groups about solid server deployment and hosting",
-    "meta_keywords": [
-      "Rust",
-      "Solid Server",
-      "Implementation",
-      "Server Implementation",
-      "Specification",
-      "Server",
-      "Hardware",
-      "Geek",
-      "Subdomains",
-      "Wildcard Certs"
-    ],
-    "group_count": 11,
-    "total_message_count": 86,
-    "timeline": {
-      "2021": 4,
-      "2022": 1,
-      "2023": 4,
-      "2024": 1,
-      "2025": 1
-    },
-    "sample_group_titles": [
-      "Implementing a Solid Server and Finding Concise Requirements",
-      "Domain Structure and Provisioning Complexity",
-      "Returning Developer Praises Spec and Plans Rust Server Implementation",
-      "Rust Solid Server Development and Funding Request",
-      "Server Deployment: Reverse Proxy Recommendations",
-      "Pod Provider Longevity and Trust",
-      "Miscellaneous Hardware Chatter",
-      "Supporting User-Supplied Domain Names for Pods",
-      "Solidcommunity.net CSS Fork Governance",
-      "Pivot Server Development Component Update"
-    ]
-  },
-  {
-    "cluster_id": 29,
-    "meta_title": "Data Discovery Strategies and Indexes",
-    "meta_summary": "Contains 10 conversation groups about data discovery strategies and indexes",
-    "meta_keywords": [
-      "Data Discovery",
-      "Type Index",
-      "Data Registration",
-      "Interoperability Panel",
-      "PoLP",
-      "Discovery Section",
-      "Specification",
-      "Compatibility",
-      "Implementation",
-      "Pods"
-    ],
-    "group_count": 10,
-    "total_message_count": 210,
-    "timeline": {
-      "2021": 3,
-      "2022": 1,
-      "2023": 3,
-      "2024": 1,
-      "2025": 2
-    },
-    "sample_group_titles": [
-      "Search and Service Endpoint Discovery Standardization",
-      "Debate on Standardized Server-Side Search vs. Client-Side Indexing for Big Data",
-      "Data Discovery, HATEOAS vs. Dedicated Search APIs",
-      "Comparison of Type Indexes and Data Registration for Discovery",
-      "Data Discovery via Indexes vs. Profiles and Fine-Grained Authorization",
-      "Data Discoverability and Storage Organization Mechanisms",
-      "Proposal for Search Functionality as a New Solid Work Item",
-      "Concern over Discovery Spec Incompatibility",
-      "Search Spec Inquiry",
-      "New Repository for Solid Contacts"
-    ]
-  },
-  {
-    "cluster_id": 30,
-    "meta_title": "Pod Ownership and Terminology",
-    "meta_summary": "Contains 7 conversation groups about pod ownership and terminology",
-    "meta_keywords": [
-      "Storage",
-      "WebID",
-      "Solid Pod",
-      "Terminology",
-      "pim:Storage",
-      "Pod Ownership",
-      "ACP",
-      "WAC",
-      "Namespace",
-      "Controller"
-    ],
-    "group_count": 7,
-    "total_message_count": 232,
-    "timeline": {
-      "2021": 5,
-      "2022": 2
-    },
-    "sample_group_titles": [
-      "Defining Solid Pod, Agent, and Storage Terminology",
-      "Defining Solid Storage Ownership and Permissions",
-      "Standardizing Pod Ownership Terminology",
-      "Corporate Control over Pod Storage and User Data Ownership",
-      "Relationship Between WebID Document Location and Storage Ownership",
-      "Defining Pod, Storage, and pim:storage Claims",
-      "Clarification of \"Data Pod\" and pim:Storage Terminology"
-    ]
-  },
-  {
-    "cluster_id": 31,
-    "meta_title": "RDF Modeling Best Practices",
-    "meta_summary": "Contains 6 conversation groups about rdf modeling best practices",
-    "meta_keywords": [
-      "RDF Modeling",
-      "schema:step",
-      "rdf:List",
-      "Domain/Range",
-      "Validation",
-      "RDF List",
-      "schema:rangeIncludes",
-      "Inference",
-      "Linked Data",
-      "sameAs"
-    ],
-    "group_count": 6,
-    "total_message_count": 139,
-    "timeline": {
-      "2021": 3,
-      "2022": 3
-    },
-    "sample_group_titles": [
-      "Advanced RDF Data Modeling: Lists, Schema.org, and Validation",
-      "Standardization and Usage of vcard:WebId in WebID Profiles",
-      "Solid Resource Modeling: Client vs. Server Managed Statements",
-      "Linked Data Profile Traversal and App Requirements",
-      "RDF Graph vs. File Management in Solid",
-      "RDF List and Schema Inference"
-    ]
-  },
-  {
-    "cluster_id": 32,
-    "meta_title": "Matrix and Chat Platform Issues",
-    "meta_summary": "Contains 43 conversation groups about matrix and chat platform issues",
-    "meta_keywords": [
-      "miscellaneous",
-      "orphaned",
-      "Matrix",
-      "Gitter",
-      "Element",
-      "Decryption",
-      "Miscellaneous",
-      "Migration",
-      "Chat",
-      "Decryption Error"
-    ],
-    "group_count": 43,
-    "total_message_count": 208,
-    "timeline": {
-      "2021": 6,
-      "2022": 7,
-      "2023": 15,
-      "2024": 12,
-      "2025": 3
-    },
-    "sample_group_titles": [
-      "Solid Channel Permissions and Archiving",
-      "Coordination, Announcements, and Chat Tool Feedback",
-      "Administrative and Standalone Topics",
-      "Matrix/Element Communication Issues",
-      "Transitioning Community Chat from Gitter to Matrix",
-      "Miscellaneous Status Updates and Link Shares",
-      "Miscellaneous Links and Feedback",
-      "Bitcoin API Testing in the Wrong Chat Room",
-      "Confusion over Gitter/Matrix Chat Channels",
-      "Humorous Exchange on Typing Errors in Cinny"
-    ]
-  },
-  {
-    "cluster_id": 33,
-    "meta_title": "W3C Process and Governance",
-    "meta_summary": "Contains 38 conversation groups about w3c process and governance",
-    "meta_keywords": [
-      "W3C",
-      "WG Charter",
-      "Licensing",
-      "CG Charter",
-      "W3C Process",
-      "Charter",
-      "W3C CLA",
-      "Governance",
-      "governance",
-      "Process"
-    ],
-    "group_count": 38,
-    "total_message_count": 195,
-    "timeline": {
-      "2022": 4,
-      "2023": 17,
-      "2024": 14,
-      "2025": 3
-    },
-    "sample_group_titles": [
-      "CG Governance Issues and Unauthorized Repository Transfers",
-      "Solid Governance and Process Updates: Charters, TPAC, and GitHub Discussions",
-      "Discussion on Solid CG Meeting Procedures, Agenda, and Minutes",
-      "Proposals for Semantic Versioning and Requirements Management",
-      "Solid Protocol Copyright and Licensing Ambiguity",
-      "W3C Meeting Process and Documentation Standards",
-      "Guidance on W3C Spec Derivation and spec:statement Usage",
-      "Documentation and Discussion Setup for CG Procedures",
-      "WG Codename Banter ('PUMPKIN')",
-      "Dispute Over License Compliance in Solid Notifications Specification"
-    ]
-  },
-  {
-    "cluster_id": 34,
-    "meta_title": "Ecosystem Monitor and Data Quality",
-    "meta_summary": "Contains 7 conversation groups about ecosystem monitor and data quality",
-    "meta_keywords": [
-      "Ecosystem Monitor",
-      "Data Quality",
-      "RDF",
-      "CG Data Analysis",
-      "GitHub Actions",
-      "Client Credentials",
-      "Mermaid",
-      "Spelling Consistency",
-      "Dashboard Sorting",
-      "W3C Accounts"
-    ],
-    "group_count": 7,
-    "total_message_count": 89,
-    "timeline": {
-      "2023": 2,
-      "2024": 5
-    },
-    "sample_group_titles": [
-      "Ecosystem Coordination, Website Content, and Handling Breaking Changes",
-      "Development and Deployment of CG Activity Monitor",
-      "Coordination and Strategy for the Solid Efforts Catalog",
-      "Data Sourcing Philosophy and Application Prototyping",
-      "Improving Ecosystem Monitor Data Quality",
-      "Solid Ecosystem Monitor Repository Transfer",
-      "Announcement of Solid Catalog Repository"
-    ]
-  },
-  {
-    "cluster_id": 35,
-    "meta_title": "Client-to-Client Interoperability Specifications",
-    "meta_summary": "Contains 13 conversation groups about client-to-client interoperability specifications",
-    "meta_keywords": [
-      "Interoperability",
-      "ERP",
-      "C2C",
-      "Specification",
-      "Cross-Pod",
-      "Query Parameters",
-      "Secure Fetch",
-      "Iframe",
-      "Data Browser",
-      "Client Interop"
-    ],
-    "group_count": 13,
-    "total_message_count": 77,
-    "timeline": {
-      "2023": 6,
-      "2024": 5,
-      "2025": 2
-    },
-    "sample_group_titles": [
-      "Requirements for Collaborative Text Editing in Solid",
-      "Standardizing Proxy Use in Solid Applications",
-      "Defining Domains for Client-Client Interoperability",
-      "Client-Client STM and ShapeTrees Follow-up",
-      "Adding Solid ERP Client-to-Client Specification as a Work Item",
-      "Client2Client Shapes and Data Interoperability",
-      "Strategy for App Interoperability Specification Development",
-      "Secure Data Fetching and Proposed Query Parameters for Cross-Pod Interaction",
-      "Defining Scope for Domain-Specific Interop Models in Solid Specs",
-      "New Work Item and Data Shape Validation Discussion"
-    ]
-  },
-  {
-    "cluster_id": 36,
-    "meta_title": "End-to-End Encryption Considerations",
-    "meta_summary": "Contains 3 conversation groups about end-to-end encryption considerations",
-    "meta_keywords": [
-      "E2EE",
-      "Authorization",
-      "Cryptographic Capabilities",
-      "WAC",
-      "ACP",
-      "STM",
-      "Solid Community AU",
-      "Scheduling",
-      "Postponement",
-      "Matrix"
-    ],
-    "group_count": 3,
-    "total_message_count": 11,
-    "timeline": {
-      "2024": 3
-    },
-    "sample_group_titles": [
-      "Planning and Postponement of Solid Community AU STM on E2EE",
-      "NextGraph E2EE Implementation and Authorization Mapping",
-      "Invitation to Solid E2EE Matrix Room"
-    ]
-  },
-  {
-    "cluster_id": 37,
-    "meta_title": "Scalability Solutions and Techniques",
-    "meta_summary": "Contains 7 conversation groups about scalability solutions and techniques",
-    "meta_keywords": [
-      "CRDT",
-      "Scalability",
-      "Braid",
-      "TREE",
-      "Container Representation",
-      "Authorization Check",
-      "Paging",
-      "SPARQL Query",
-      "Blockchain",
-      "CRDTs"
-    ],
-    "group_count": 7,
-    "total_message_count": 134,
-    "timeline": {
-      "2021": 2,
-      "2024": 5
-    },
-    "sample_group_titles": [
-      "Container Paging Solution Proposal and Discussion",
-      "Scaling Container Representation and Data Discovery",
-      "Solid Integration with Decentralized Technologies",
-      "Discussion on TREE, LDES, and CRDT for Scalability",
-      "Organizing the Special Topic Meeting on CRDTs",
-      "Planning CRDT Special Topic Meeting",
-      "CRDT and Data Synchronization Research"
-    ]
-  },
-  {
-    "cluster_id": 38,
-    "meta_title": "Healthcare and FHIR Integration",
+    "meta_title": "Solid + FHIR Healthcare Integration",
     "meta_summary": "The discussion confirmed interest in mapping Fast Healthcare Interoperability Resources (FHIR) to Solid Pods, reviewed existing projects (Dutch work, NHS, Vito), and proposed methods for coordinating future work.",
     "meta_keywords": [
       "FHIR",
@@ -1360,563 +933,283 @@
     ]
   },
   {
-    "cluster_id": 39,
-    "meta_title": "ActivityPub and Fediverse Adoption",
-    "meta_summary": "Contains 7 conversation groups about activitypub and fediverse adoption",
+    "cluster_id": 26,
+    "meta_title": "Solid UX and Design Improvements",
+    "meta_summary": "These discussions revolve around improving the Solid ecosystem's user experience and design. They cover topics from reporting and diagnosing dark mode bugs in W3C services, to debating the scope and technical challenges of building a usable end-to-end Solid demo that showcases user-controlled storage and interoperability.",
     "meta_keywords": [
-      "ActivityPub",
-      "Fediverse",
-      "Solid",
+      "UX",
+      "Meeting",
+      "Jitsi",
+      "UX/DX",
+      "Logistics",
+      "W3C",
+      "htmldiff",
       "CSS",
-      "Decentralization",
-      "Federation",
-      "Outbox",
-      "Inbox",
-      "Permissions",
-      "Notifications"
-    ],
-    "group_count": 7,
-    "total_message_count": 33,
-    "timeline": {
-      "2022": 2,
-      "2023": 2,
-      "2024": 3
-    },
-    "sample_group_titles": [
-      "ActivityPub Adoption and Implementation Concerns",
-      "Exploring ActivityPub Implementation in Solid and Addressing Decentralization Challenges",
-      "Solid and ActivityPub for Decentralized Data Exchange",
-      "Unrelated Informational Links",
-      "FediForum and ActivityPods Announcement",
-      "Discussion on Solid and Event-Driven Architectures",
-      "ActivityPub and Fediverse Adoption News"
-    ]
-  },
-  {
-    "cluster_id": 40,
-    "meta_title": "Data Replication and Immutability",
-    "meta_summary": "Contains 2 conversation groups about data replication and immutability",
-    "meta_keywords": [
-      "URI Structure",
-      "LDES",
-      "Hypermedia",
-      "Portability",
-      "Containers",
-      "Data Replication",
-      "Immutability",
-      "Temporal State",
-      "ACID",
-      "TrinPod"
-    ],
-    "group_count": 2,
-    "total_message_count": 11,
-    "timeline": {
-      "2025": 2
-    },
-    "sample_group_titles": [
-      "Discussion on Data Replication, Immutability, and Temporal State",
-      "URI Structure, Portability, and LDES"
-    ]
-  },
-  {
-    "cluster_id": 41,
-    "meta_title": "FedCM and Identity Management",
-    "meta_summary": "Contains 5 conversation groups about fedcm and identity management",
-    "meta_keywords": [
-      "FedCM",
-      "WebID",
-      "Pivot",
-      "Demo",
-      "CG Meeting",
-      "OIDC",
-      "Solid-OIDC",
-      "Identity",
-      "Interoperability",
-      "UX"
+      "Dark Mode",
+      "ReSpec"
     ],
     "group_count": 5,
-    "total_message_count": 29,
+    "total_message_count": 38,
     "timeline": {
       "2024": 4,
       "2025": 1
     },
     "sample_group_titles": [
-      "Implementing FedCM for Solid OIDC Authorization",
-      "Solid Login User Experience and FedCM",
-      "Solid Participation in FedCM Identity Meetings",
-      "Update on Solid-FedCM Implementation and Next Steps",
-      "Proposal for FedCM Wildcard Feature Demo on CG Call"
+      "Debate on Requirements and Scope for a Usable End-to-End Solid Demo",
+      "UX/DX Meeting Details and Symposium Streaming",
+      "Locating the UX/DX Meeting",
+      "W3C Diff Service Dark Mode Bug Diagnosis",
+      "User Experience Suggestion"
     ]
   },
   {
-    "cluster_id": 42,
-    "meta_title": "Social CG and Joint Meetings",
-    "meta_summary": "Contains 9 conversation groups about social cg and joint meetings",
+    "cluster_id": 27,
+    "meta_title": "Meeting Minutes and Logistics",
+    "meta_summary": "These conversations focus on the logistical aspects of Solid Community Group (CG) and Community Collaboration Group (CCG) meetings. Common topics include scheduling, announcing meeting times and links (often in UTC), sharing agendas and minutes, and addressing time zone conflicts or daylight savings adjustments.",
     "meta_keywords": [
-      "Social CG",
-      "Joint Meeting",
-      "Solid CG",
+      "CG Meeting",
+      "Agenda",
+      "Logistics",
+      "Minutes",
+      "Meeting Minutes",
+      "STM",
       "Scheduling",
-      "W3C Credentials CG",
-      "Coordination",
-      "Authentication",
-      "Identity",
-      "Credentials CG",
-      "DID"
+      "Meeting Logistics",
+      "TPAC",
+      "W3C"
     ],
-    "group_count": 9,
-    "total_message_count": 65,
+    "group_count": 96,
+    "total_message_count": 833,
     "timeline": {
-      "2021": 2,
-      "2023": 4,
+      "2021": 6,
+      "2022": 9,
+      "2023": 24,
+      "2024": 45,
+      "2025": 12
+    },
+    "sample_group_titles": [
+      "Improving Meeting Minutes and Scribing Processes",
+      "CG Meeting Agenda Management and TPAC Planning",
+      "Solid CG Scribing, Privacy, and Meeting Tools Debate",
+      "Solid Community Group Weekly Meeting Logistics",
+      "CG Logistics, Project Links, and Standalone Queries",
+      "Solid CG Meeting Logistics and Notes",
+      "Finalizing Solid CCG Introduction Meeting Agenda Structure",
+      "Solid Specification Meeting Logistics and Updates",
+      "Solid CG Meeting Logistics and AI Transcription",
+      "Solid CG Meeting Management and Scheduling"
+    ]
+  },
+  {
+    "cluster_id": 28,
+    "meta_title": "Community Conduct and Governance",
+    "meta_summary": "This topic involves discussions related to community conduct, governance, and inclusivity within the Solid ecosystem. It includes debates about inclusive language, reminders about public communication preferences, interventions by moderators to address tone, and addressing potential Code of Conduct violations, and appointing ombuds.",
+    "meta_keywords": [
+      "Code of Conduct",
+      "Communication",
+      "Ombuds",
+      "Inclusive Language",
+      "W3C CEPC",
+      "Gendered Language",
+      "DEI",
+      "Community",
+      "Etiquette",
+      "Moderation"
+    ],
+    "group_count": 8,
+    "total_message_count": 55,
+    "timeline": {
+      "2022": 1,
+      "2023": 2,
+      "2024": 2,
       "2025": 3
     },
     "sample_group_titles": [
-      "Joint Social CG Meeting Scheduling and Review",
-      "Planning Joint Meeting with W3C Credentials CG",
-      "Credentials CG Meeting Preparation",
-      "Distribution of Dokieli Presentation Recording",
-      "Status Updates and External Links",
-      "Solid/Social CG Joint Meeting Date Poll",
-      "Solid and Social CG Joint Meeting Scheduling and Agenda",
-      "Announcement of Joint Solid CG and Social CG Meeting",
-      "Solid Practitioners Meeting Announcement"
+      "Debate on Inclusive Language, 'Guys', and Solid Code of Conduct Enforcement",
+      "Solid CG Group Dynamics and Conduct Dispute",
+      "Solid Community Group Code of Conduct Enforcement",
+      "Moderation and Communication Guidelines",
+      "Public Communication Preference Reminder",
+      "Request for Review of CoC Committee Membership PR",
+      "ODI Takes on Solid Code of Conduct Ombuds Role",
+      "Sharing W3C Code of Conduct Update"
     ]
   },
   {
-    "cluster_id": 43,
-    "meta_title": "Bulk Upload and Compression",
-    "meta_summary": "The discussion centered on proposing a Solid specification for bulk file uploads using compressed archives and Link headers to enable server-side decompression and preserve folder hierarchy, contrasting this with inefficient client-side file-by-file transfers and addressing challenges concerning auxiliary resources like ACLs.",
+    "cluster_id": 29,
+    "meta_title": "Solid Glossary and Terminology",
+    "meta_summary": "These conversations center on defining and clarifying terminology related to Solid, such as \"Pod,\" \"Storage,\" and \"WebID.\" The goal is to establish clear and consistent definitions for key concepts within the Solid ecosystem, sometimes by creating an RDF glossary or renaming certain specifications for clarity.",
     "meta_keywords": [
-      "Bulk Upload",
-      "Compression",
-      "HTTP PUT",
-      "Auxiliary Resources",
-      "ACL",
-      "Solid Specification",
-      "Data Migration"
+      "Storage",
+      "Terminology",
+      "WebID",
+      "Solid Protocol",
+      "Pod",
+      "pim:storage",
+      "Definition",
+      "Solid Pod",
+      "Solid Agent",
+      "data pod"
     ],
-    "group_count": 1,
-    "total_message_count": 60,
-    "timeline": {
-      "2022": 1
-    },
-    "sample_group_titles": [
-      "Spec Proposal for Bulk Upload via Compressed Archives"
-    ]
-  },
-  {
-    "cluster_id": 44,
-    "meta_title": "New Member Introductions",
-    "meta_summary": "Contains 3 conversation groups about new member introductions",
-    "meta_keywords": [
-      "Solid community",
-      "Introduction",
-      "Welcome",
-      "Ping",
-      "Acknowledgement",
-      "Greetings",
-      "Personal update"
-    ],
-    "group_count": 3,
-    "total_message_count": 6,
-    "timeline": {
-      "2021": 2,
-      "2023": 1
-    },
-    "sample_group_titles": [
-      "Pings and General Reactions",
-      "New Member Introduction",
-      "Miscellaneous Personal Update"
-    ]
-  },
-  {
-    "cluster_id": 45,
-    "meta_title": "Long Term Archival Considerations",
-    "meta_summary": "Contains 2 conversation groups about long term archival considerations",
-    "meta_keywords": [
-      "Data Resilience",
-      "Backup",
-      "Personal Pod",
-      "Data Loss",
-      "PREP",
-      "RDF Patches",
-      "IETF",
-      "Task Force",
-      "Specification"
-    ],
-    "group_count": 2,
-    "total_message_count": 17,
-    "timeline": {
-      "2021": 1,
-      "2023": 1
-    },
-    "sample_group_titles": [
-      "Pod Value and Data Backup Resilience",
-      "Proposal for a Solid-PREP Task Force on RDF Patches"
-    ]
-  },
-  {
-    "cluster_id": 46,
-    "meta_title": "Monetization Models for Solid Pods",
-    "meta_summary": "Participants briefly discussed the idea of developing monetization models for professional Solid Pod providers, agreeing that while important for business models, it is not a suitable topic for the specification Community Group.",
-    "meta_keywords": [
-      "Monetization",
-      "Pod Providers",
-      "Business Model",
-      "Adoption"
-    ],
-    "group_count": 1,
-    "total_message_count": 4,
-    "timeline": {
-      "2024": 1
-    },
-    "sample_group_titles": [
-      "Monetization Models for Professional Solid Pods"
-    ]
-  },
-  {
-    "cluster_id": 47,
-    "meta_title": "Discussion of External Critiques",
-    "meta_summary": "Contains 7 conversation groups about discussion of external critiques",
-    "meta_keywords": [
-      "orphaned",
-      "miscellaneous",
-      "Community Feedback",
-      "Critique",
-      "Solid Adoption",
-      "Analysis",
-      "Data Ownership",
-      "Interoperability",
-      "Autonomous Data",
-      "Solid Principles"
-    ],
-    "group_count": 7,
-    "total_message_count": 16,
-    "timeline": {
-      "2022": 1,
-      "2024": 5,
-      "2025": 1
-    },
-    "sample_group_titles": [
-      "LWS Protocol Authentication and Authorization Scope",
-      "Orphaned Messages (Catch-all)",
-      "External Critique of Solid Feedback Analysis",
-      "Review of External Solid Commentary",
-      "Orphaned Messages (Catch-all)",
-      "Orphaned Messages (Catch-all)",
-      "Orphaned Messages (Catch-all)"
-    ]
-  },
-  {
-    "cluster_id": 48,
-    "meta_title": "Non-Functional Requirements Discussion",
-    "meta_summary": "Contains 14 conversation groups about non-functional requirements discussion",
-    "meta_keywords": [
-      "orphaned",
-      "miscellaneous",
-      "File-based system",
-      "Link Relation",
-      "rel=meta",
-      "Permissions",
-      "HTTP Header",
-      "AI",
-      "DEI",
-      "Solid World"
-    ],
-    "group_count": 14,
-    "total_message_count": 38,
+    "group_count": 6,
+    "total_message_count": 154,
     "timeline": {
       "2021": 3,
       "2022": 1,
-      "2023": 8,
-      "2024": 1,
-      "2025": 1
+      "2024": 2
     },
     "sample_group_titles": [
-      "Social Announcements and Protocol Promotion",
-      "Inquiry on Solid and AI/DEI Projects",
-      "Discussion on Non-Functional Requirements (NFR) for Solid Protocols",
-      "Miscellaneous Technical Notes",
-      "Miscellaneous Comments",
-      "Orphaned Messages (Catch-all)",
-      "Orphaned Messages (Catch-all)",
-      "Orphaned Messages (Catch-all)",
-      "Orphaned Messages (Catch-all)",
-      "Orphaned Messages (Catch-all)"
+      "Defining Solid Pod, Agent, and Storage Terminology",
+      "Solid Glossary Project and RDF Definition Extraction",
+      "Defining Pod, Storage, and pim:storage Claims",
+      "Debating 'Sovereign Linked Data' vs 'Social Linked Data'",
+      "Renaming 'Client-Client Specs' to 'Application Domain Specs'",
+      "Clarification of \"Data Pod\" and pim:Storage Terminology"
     ]
   },
   {
-    "cluster_id": 49,
-    "meta_title": "Noosphere Project Archiving",
-    "meta_summary": "The conversation starts by sharing a link to the Noosphere protocol, followed by a note that its GitHub repository was recently archived.",
+    "cluster_id": 30,
+    "meta_title": "Solid Demonstrations & Use Cases",
+    "meta_summary": "These discussions concern Solid demonstrations and use cases, including scheduling demo presentations at CG meetings and postponing others. Participants also share links to recorded presentations, webinars, and SDKs related to Solid Proof of Concepts (POCs) and tools like Dokieli.",
     "meta_keywords": [
-      "Noosphere",
-      "Protocol",
-      "Repository",
-      "Archiving"
-    ],
-    "group_count": 1,
-    "total_message_count": 3,
-    "timeline": {
-      "2024": 1
-    },
-    "sample_group_titles": [
-      "Discussion on Noosphere Protocol"
-    ]
-  },
-  {
-    "cluster_id": 50,
-    "meta_title": "New CG and Working Group Proposals",
-    "meta_summary": "Contains 3 conversation groups about new cg and working group proposals",
-    "meta_keywords": [
-      "Coordination",
-      "Solid Panels",
-      "VC",
-      "Panel Lifecycle",
-      "Specification Issues",
-      "CCG",
-      "IETF",
-      "BoF",
-      "Working Group",
-      "Solid Catalog"
-    ],
-    "group_count": 3,
-    "total_message_count": 19,
-    "timeline": {
-      "2021": 1,
-      "2024": 1,
-      "2025": 1
-    },
-    "sample_group_titles": [
-      "Dispute over Cataloging CSS Extensions and CG/Practitioners Scope",
-      "Strategic approach to Solid Panel creation and lifecycle",
-      "Discussing a Solid BoF at IETF"
-    ]
-  },
-  {
-    "cluster_id": 51,
-    "meta_title": "SoSy 2024 CFP Call",
-    "meta_summary": "An announcement was made regarding the immediate deadline for the Call for Session Proposals for the SoSy 2024 conference, prompting a query about the event's hybrid format.",
-    "meta_keywords": [
-      "SoSy 2024",
-      "CFP",
-      "Conference",
-      "Hybrid event"
-    ],
-    "group_count": 1,
-    "total_message_count": 2,
-    "timeline": {
-      "2023": 1
-    },
-    "sample_group_titles": [
-      "SoSy 2024 Call for Proposals"
-    ]
-  },
-  {
-    "cluster_id": 52,
-    "meta_title": "Mallory project security testing",
-    "meta_summary": "A detailed discussion concerning the abstraction of Solid APIs away from mandatory client-server/HTTP requirements to enable local-first architectures (like NextGraph's CRDT sync via pub/sub), contrasted with arguments for retaining HTTP for scalability and alignment with existing 'offline first' movements.",
-    "meta_keywords": [
-      "Protocol Abstraction",
-      "Local-First",
-      "CRDT",
-      "LWS",
-      "HTTP Scalability"
-    ],
-    "group_count": 1,
-    "total_message_count": 20,
-    "timeline": {
-      "2024": 1
-    },
-    "sample_group_titles": [
-      "Decoupling Solid Specs, Local-First, and Scalability"
-    ]
-  },
-  {
-    "cluster_id": 53,
-    "meta_title": "Legal Compliance & Data Sovereignty",
-    "meta_summary": "A discussion was initiated regarding the legal implications of the UK Online Safety Act (OSA) and GDPR on Solid Pod providers, with legal input suggesting that Pod hosts are likely classified as unregulated infrastructure providers rather than regulated service providers.",
-    "meta_keywords": [
-      "Online Safety Act",
-      "GDPR",
-      "Legal Compliance",
-      "Infrastructure Provider",
-      "Service Provider"
-    ],
-    "group_count": 1,
-    "total_message_count": 15,
-    "timeline": {
-      "2025": 1
-    },
-    "sample_group_titles": [
-      "Legal Analysis of UK Online Safety Act (OSA) and Solid Pods"
-    ]
-  },
-  {
-    "cluster_id": 54,
-    "meta_title": "LWS Protocol Discussion",
-    "meta_summary": "Contains 2 conversation groups about lws protocol discussion",
-    "meta_keywords": [
-      "Security",
-      "WebSocket",
-      "Solid Spec",
-      "Authorization",
-      "Re-design",
-      "Websocket",
-      "ACL",
-      "Pub/Sub"
-    ],
-    "group_count": 2,
-    "total_message_count": 4,
-    "timeline": {
-      "2021": 2
-    },
-    "sample_group_titles": [
-      "Status of Solid WebSocket Security Specification",
-      "Proposed Websocket Security Mechanism"
-    ]
-  },
-  {
-    "cluster_id": 55,
-    "meta_title": "Collaboration with External Projects",
-    "meta_summary": "Contains 12 conversation groups about collaboration with external projects",
-    "meta_keywords": [
-      "Collaboration",
-      "NLnet",
-      "Dokieli",
+      "Solid Demos",
+      "Meeting Scheduling",
+      "Postponement",
+      "Special Topic Meeting",
+      "Demo Recording",
       "Community Group",
-      "Reusable Tooling",
-      "Issue 615",
-      "Medront",
-      "Data Ownership",
-      "CG Participation",
-      "Decentralization"
+      "Demo",
+      "Meeting Agenda",
+      "TrinPod",
+      "Solid POC"
     ],
-    "group_count": 12,
-    "total_message_count": 51,
+    "group_count": 4,
+    "total_message_count": 42,
     "timeline": {
-      "2024": 8,
-      "2025": 4
+      "2023": 2,
+      "2024": 1,
+      "2025": 1
     },
     "sample_group_titles": [
-      "Miscellaneous Links and Updates",
-      "Medront Introduction and Collaboration Interest",
-      "Proposal to Integrate NLnet-funded Projects into CG Work (Issue 615)",
-      "NLnet Grant Announcements",
-      "Engaging with Solid Community Australia",
-      "ODI and Solid Collaboration Announcement",
-      "Informational Resource Sharing",
-      "External Event Link Sharing",
-      "Reflection on the Empodera Talk and Dokieli's Spirit",
-      "Video and Book Recommendation"
+      "Postponement and Scheduling of Solid Demos Meeting",
+      "Distribution of Dokieli Presentation Recording",
+      "Scheduling CG Meeting Demo",
+      "Sharing Links for Solid POC Final Webinar and SDK"
     ]
   },
   {
-    "cluster_id": 56,
-    "meta_title": "Naming Semantics Debate",
-    "meta_summary": "A discussion explored whether Solid should also be dubbed 'Sovereign Linked Data' to complement 'Social Linked Data,' alongside a tangential critique of the Solid Wikipedia article.",
+    "cluster_id": 31,
+    "meta_title": "Miscellaneous and Unclassified Topics",
+    "meta_summary": "This cluster encompasses a wide array of unrelated topics, acting as a catch-all for messages that don't fit into specific categories. Discussions range from technical inquiries about OS support and documentation to casual check-ins, humor, link sharing, and administrative announcements. The prevalence of \"orphaned messages\" suggests the AI had difficulty classifying these particular chat interactions.",
     "meta_keywords": [
-      "Solid Naming",
-      "Social Linked Data",
-      "Sovereign Linked Data",
-      "Acronyms",
-      "Wikipedia"
-    ],
-    "group_count": 1,
-    "total_message_count": 9,
-    "timeline": {
-      "2024": 1
-    },
-    "sample_group_titles": [
-      "Debating 'Sovereign Linked Data' vs 'Social Linked Data'"
-    ]
-  },
-  {
-    "cluster_id": 57,
-    "meta_title": "External Commentary and Analysis",
-    "meta_summary": "Contains 2 conversation groups about external commentary and analysis",
-    "meta_keywords": [
-      "Image Share",
-      "Link Metadata",
-      "Ontology",
-      "Timeout",
-      "Link Share",
-      "Code Snippet",
-      "Solid Spec",
-      "Metaphor"
-    ],
-    "group_count": 2,
-    "total_message_count": 8,
-    "timeline": {
-      "2021": 2
-    },
-    "sample_group_titles": [
-      "Miscellaneous Observations and External Links",
-      "Miscellaneous Links and Commentary"
-    ]
-  },
-  {
-    "cluster_id": 58,
-    "meta_title": "Joint Meetings and Coordination",
-    "meta_summary": "Contains 12 conversation groups about joint meetings and coordination",
-    "meta_keywords": [
-      "Scheduling",
-      "CCG",
-      "Coordination",
-      "orphaned",
       "miscellaneous",
-      "Credentials CG",
-      "Authorization Panel",
-      "Meeting",
-      "Integration",
-      "Post-Meeting"
+      "orphaned",
+      "Matrix",
+      "GitHub",
+      "IETF",
+      "W3C",
+      "Miscellaneous",
+      "Gitter",
+      "Humor",
+      "ActivityPub"
     ],
-    "group_count": 12,
-    "total_message_count": 119,
+    "group_count": 112,
+    "total_message_count": 512,
     "timeline": {
-      "2021": 4,
-      "2023": 1,
-      "2025": 7
+      "2020": 1,
+      "2021": 25,
+      "2022": 10,
+      "2023": 25,
+      "2024": 33,
+      "2025": 18
     },
     "sample_group_titles": [
-      "Post-CCG Meeting Success and Next Steps",
-      "W3C CCG Call Recap and Coordination Plans",
+      "Miscellaneous Logistical and Technical Updates",
+      "Coordination, Announcements, and Chat Tool Feedback",
+      "Administrative and Unrelated Topics",
+      "Administrative and Standalone Topics",
+      "Miscellaneous Technical References and Social Exchanges",
+      "General Announcements and Social Messages",
+      "Uncategorized Solid Updates and Technical Queries",
       "Administrative Announcements and Quick Links",
-      "General Announcements and Coordination",
-      "Inquiry and Sharing of CCG Meeting Minutes",
-      "Logistics for Joint Solid/WebAgents Meeting",
-      "Free-format Watercooler Chat Links",
-      "Orphaned Messages (Catch-all)",
-      "Scheduling Joint Meeting with Credentials CG",
-      "Coordination of Catalog Discussion Meetings"
+      "Humor and the P vs NP Problem",
+      "General Announcements and Coordination"
     ]
   },
   {
-    "cluster_id": 59,
-    "meta_title": "Solid Chat Protocol",
-    "meta_summary": "Contains 3 conversation groups about solid chat protocol",
+    "cluster_id": 32,
+    "meta_title": "WebID Definition, Usage and Portability",
+    "meta_summary": "These groups focus on the definition, usage, and portability of WebIDs within the Solid ecosystem. Conversations cover WebID profile structure, discovery mechanisms (including HTTP 303 redirects), the relationship between WebIDs and Identity Providers (IdPs), and the separation of social vs. technical data within profiles. There is also significant discussion on the trade-offs between different approaches to profile retrieval and the privacy implications of indexing WebIDs.",
     "meta_keywords": [
-      "Solid Chat",
-      "Deletion Semantics",
-      "ActivityPub",
-      "Ethics",
-      "Decentralization",
-      "Live Updates",
-      "Decentralized Storage",
-      "Data Editing",
-      "Scalability",
-      "Data Integrity"
+      "WebID",
+      "WebID Profile",
+      "303 Redirect",
+      "solid:oidcIssuer",
+      "Specification",
+      "Authentication",
+      "Solid Profile",
+      "IdP",
+      "Profile Discovery",
+      "Login UX"
     ],
-    "group_count": 3,
-    "total_message_count": 28,
+    "group_count": 28,
+    "total_message_count": 605,
     "timeline": {
-      "2024": 3
+      "2021": 5,
+      "2022": 18,
+      "2023": 1,
+      "2024": 2,
+      "2025": 2
     },
     "sample_group_titles": [
-      "Deep Dive into Solid Chat Protocol Semantics and Social Implications",
-      "Solid Chat Data Management and Decentralized Storage",
-      "Request for Solid Chat Specification PR Reviews"
+      "Debate over WebID Profile Structure and Profile Discovery Complexity",
+      "Debate on WebID Profile Architecture, Editability, and the 'Second Hop'",
+      "TrinPod WebID Design and RDF/Ontology Compliance Fixes",
+      "Separation of WebID and Solid Profile Documents",
+      "WebID Profile: Scope and Separation of Technical vs. Social Data",
+      "Defining Solid Profile Document Discovery",
+      "Managing Contextual Identities: Single WebID vs. Multiple WebIDs",
+      "WebID, 303 Redirects, and Resource Representation Debate",
+      "Debate: One-Hop vs. Two-Hop Profile Retrieval",
+      "Handling Multiple WebIDs and Identities in Tokens"
+    ]
+  },
+  {
+    "cluster_id": 33,
+    "meta_title": "Solid Notifications Protocol",
+    "meta_summary": "This topic cluster centers on the Solid Notifications Protocol and its implementation. Discussions include the re-establishment of the Notifications Panel, the exploration of different notification mechanisms like WebSockets and Streaming HTTP, and the integration of notifications with access control mechanisms. The groups also cover specific protocol features, meeting schedules, and comparisons with alternative event APIs like TrinPod's.",
+    "meta_keywords": [
+      "Solid Notifications",
+      "Notifications",
+      "STM",
+      "Notifications Protocol",
+      "PREP",
+      "Scheduling",
+      "Notifications Panel",
+      "LDN",
+      "Implementation",
+      "CSS"
+    ],
+    "group_count": 32,
+    "total_message_count": 237,
+    "timeline": {
+      "2021": 3,
+      "2022": 4,
+      "2023": 8,
+      "2024": 16,
+      "2025": 1
+    },
+    "sample_group_titles": [
+      "TrinPod Event API vs Solid Notifications/PREP",
+      "PREP Notifications Implementation and Technical Debugging",
+      "Solid Notifications Protocol Status and Implementation Advice",
+      "Debate on Solid Architectural Representation and LDN Relevance",
+      "Solid Notifications Special Topic Meeting Planning",
+      "Solid Notifications STM Session (Mar 12)",
+      "Practitioners Meeting Scheduling: Solid Notifications",
+      "WebSocket Limits and Notification Scaling Challenges",
+      "Introduction and Incubation Discussion for the Per Resource Events Protocol",
+      "Solid Notifications Protocol: WebSockets vs. Streaming HTTP"
     ]
   }
 ]
