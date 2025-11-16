@@ -1,0 +1,721 @@
+{
+  "room_name": "solid/solidos",
+  "room_creator": "gitter-badger (The Gitter Badger)",
+  "topic": "SolidOS team meetings: https://solidos.solidcommunity.net/Team/team%20meetings/schedule.html\nSolidOS for devs: https://github.com/solidos/solidos \nSolidOS Pod: https://solidos.solidcommunity.net/",
+  "export_date": "2025/11/16",
+  "exported_by": "Klas Kalass",
+  "messages": [
+    {
+      "content": {
+        "body": "I tested by importing the new mashlib into my local repo of the Catalog and it works fine.",
+        "format": "org.matrix.custom.html",
+        "formatted_body": "I tested by importing the new mashlib into my local repo of the Catalog and it works fine.",
+        "m.mentions": {
+          "user_ids": [
+            "@therealimy-60b3548f6da03739847dbe51:gitter.im"
+          ]
+        },
+        "m.relates_to": {
+          "m.in_reply_to": {
+            "event_id": "$u9J-TtWuR1Z65M9YGqnW-ZDK2UySk767D1zQ9Tv0uVI"
+          }
+        },
+        "msgtype": "m.text"
+      },
+      "origin_server_ts": 1761059725921,
+      "room_id": "!wAfwwonbRnRLYejFOR:gitter.im",
+      "sender": "@jeff-zucker:matrix.org",
+      "type": "m.room.message",
+      "unsigned": {
+        "membership": "leave",
+        "age": 2220374120
+      },
+      "event_id": "$HcZ6iazEk7kT0yAyNorXK4IkDOIKuf2koYiCo3Xj91w",
+      "user_id": "@jeff-zucker:matrix.org",
+      "age": 2220374120
+    },
+    {
+      "content": {
+        "body": "I am discussion with Alain about just this. We will let you know. ",
+        "m.mentions": {},
+        "m.relates_to": {
+          "event_id": "$XL5AeRltofOWhaiVt6_4bGzAzwIbXZxpBrYRX1WFqis",
+          "is_falling_back": true,
+          "m.in_reply_to": {
+            "event_id": "$XL5AeRltofOWhaiVt6_4bGzAzwIbXZxpBrYRX1WFqis"
+          },
+          "rel_type": "m.thread"
+        },
+        "msgtype": "m.text"
+      },
+      "origin_server_ts": 1761117509441,
+      "room_id": "!wAfwwonbRnRLYejFOR:gitter.im",
+      "sender": "@therealimy-60b3548f6da03739847dbe51:gitter.im",
+      "type": "m.room.message",
+      "unsigned": {
+        "membership": "leave"
+      },
+      "event_id": "$R6C88-RHEl0sETEIE19tFAuZ33CGEU9136x8Z_qU4Sc",
+      "user_id": "@therealimy-60b3548f6da03739847dbe51:gitter.im"
+    },
+    {
+      "content": {
+        "body": "On this test server only mashlib was updated, not css.",
+        "m.mentions": {},
+        "m.relates_to": {
+          "event_id": "$XL5AeRltofOWhaiVt6_4bGzAzwIbXZxpBrYRX1WFqis",
+          "is_falling_back": true,
+          "m.in_reply_to": {
+            "event_id": "$R6C88-RHEl0sETEIE19tFAuZ33CGEU9136x8Z_qU4Sc"
+          },
+          "rel_type": "m.thread"
+        },
+        "msgtype": "m.text"
+      },
+      "origin_server_ts": 1761117554235,
+      "room_id": "!wAfwwonbRnRLYejFOR:gitter.im",
+      "sender": "@therealimy-60b3548f6da03739847dbe51:gitter.im",
+      "type": "m.room.message",
+      "unsigned": {
+        "membership": "leave"
+      },
+      "event_id": "$JRnFMUjaOaxBf2kDKPZZPZJNobLfI1263mJCFoRzz6s",
+      "user_id": "@therealimy-60b3548f6da03739847dbe51:gitter.im"
+    },
+    {
+      "content": {
+        "body": "Jeff Zucker (he/him): If I remember well you are also using solid-ui directly (I may be wrong). Do you need to update version the version ?",
+        "format": "org.matrix.custom.html",
+        "formatted_body": "<a href=\"https://matrix.to/#/@jeff-zucker:matrix.org\">Jeff Zucker (he/him)</a>: If I remember well you are also using solid-ui directly (I may be wrong). Do you need to update version the version ?",
+        "m.mentions": {
+          "user_ids": [
+            "@jeff-zucker:matrix.org"
+          ]
+        },
+        "msgtype": "m.text"
+      },
+      "origin_server_ts": 1761147952352,
+      "room_id": "!wAfwwonbRnRLYejFOR:gitter.im",
+      "sender": "@bourgeoa-5bdf2c09d73408ce4fadd1b5:gitter.im",
+      "type": "m.room.message",
+      "unsigned": {
+        "membership": "leave"
+      },
+      "event_id": "$8iy5yDVE163Itc7N3o8ZtGqcZDezKSKaKFGXQUlB4CY",
+      "user_id": "@bourgeoa-5bdf2c09d73408ce4fadd1b5:gitter.im"
+    },
+    {
+      "content": {
+        "body": "I gave up using solid-ui directly because it does not export the things I need and mashlib does. Mashlib is complete overkill for what I need but it is the easiest option.",
+        "format": "org.matrix.custom.html",
+        "formatted_body": "I gave up using solid-ui directly because it does not export the things I need and mashlib does. Mashlib is complete overkill for what I need but it is the easiest option.",
+        "m.mentions": {
+          "user_ids": [
+            "@bourgeoa-5bdf2c09d73408ce4fadd1b5:gitter.im"
+          ]
+        },
+        "m.relates_to": {
+          "m.in_reply_to": {
+            "event_id": "$8iy5yDVE163Itc7N3o8ZtGqcZDezKSKaKFGXQUlB4CY"
+          }
+        },
+        "msgtype": "m.text"
+      },
+      "origin_server_ts": 1761148040279,
+      "room_id": "!wAfwwonbRnRLYejFOR:gitter.im",
+      "sender": "@jeff-zucker:matrix.org",
+      "type": "m.room.message",
+      "unsigned": {
+        "membership": "leave",
+        "age": 2132059762,
+        "m.relations": {
+          "m.thread": {
+            "latest_event": {
+              "content": {
+                "body": "ok. no rush. ",
+                "m.mentions": {},
+                "m.relates_to": {
+                  "event_id": "$XLcYgYMZq0i5VpSuA1fFKCQbXsMsWI6VUgjYA9og1eI",
+                  "is_falling_back": true,
+                  "m.in_reply_to": {
+                    "event_id": "$Y10vqkBO1o5otnhyjLugzVn39AnQqmzFJDz8Mjb2BkE"
+                  },
+                  "rel_type": "m.thread"
+                },
+                "msgtype": "m.text"
+              },
+              "origin_server_ts": 1761553272371,
+              "room_id": "!wAfwwonbRnRLYejFOR:gitter.im",
+              "sender": "@therealimy-60b3548f6da03739847dbe51:gitter.im",
+              "type": "m.room.message",
+              "unsigned": {},
+              "event_id": "$ej9PmwcxdqZPQCzNdeUfHR7a4K-1tsvCB6qQUHKORTc",
+              "user_id": "@therealimy-60b3548f6da03739847dbe51:gitter.im"
+            },
+            "count": 3,
+            "current_user_participated": false
+          }
+        }
+      },
+      "event_id": "$XLcYgYMZq0i5VpSuA1fFKCQbXsMsWI6VUgjYA9og1eI",
+      "user_id": "@jeff-zucker:matrix.org",
+      "age": 2132059762
+    },
+    {
+      "content": {
+        "body": "What do you need? Can you remind me again? Because I can export it for you in the next version.",
+        "m.mentions": {},
+        "m.relates_to": {
+          "event_id": "$XLcYgYMZq0i5VpSuA1fFKCQbXsMsWI6VUgjYA9og1eI",
+          "is_falling_back": true,
+          "m.in_reply_to": {
+            "event_id": "$XLcYgYMZq0i5VpSuA1fFKCQbXsMsWI6VUgjYA9og1eI"
+          },
+          "rel_type": "m.thread"
+        },
+        "msgtype": "m.text"
+      },
+      "origin_server_ts": 1761203286923,
+      "room_id": "!wAfwwonbRnRLYejFOR:gitter.im",
+      "sender": "@therealimy-60b3548f6da03739847dbe51:gitter.im",
+      "type": "m.room.message",
+      "unsigned": {
+        "membership": "leave"
+      },
+      "event_id": "$-pKy0yd6BBRK3w3mBDo0MJrlzcD9lVhPgF3i-1ekgdo",
+      "user_id": "@therealimy-60b3548f6da03739847dbe51:gitter.im"
+    },
+    {
+      "content": {
+        "body": "I'll need to go back through the various apps and make a list. Will get it to you when I can.",
+        "format": "org.matrix.custom.html",
+        "formatted_body": "I&#39;ll need to go back through the various apps and make a list. Will get it to you when I can.",
+        "m.mentions": {
+          "user_ids": [
+            "@therealimy-60b3548f6da03739847dbe51:gitter.im"
+          ]
+        },
+        "m.relates_to": {
+          "event_id": "$XLcYgYMZq0i5VpSuA1fFKCQbXsMsWI6VUgjYA9og1eI",
+          "is_falling_back": false,
+          "m.in_reply_to": {
+            "event_id": "$-pKy0yd6BBRK3w3mBDo0MJrlzcD9lVhPgF3i-1ekgdo"
+          },
+          "rel_type": "m.thread"
+        },
+        "msgtype": "m.text"
+      },
+      "origin_server_ts": 1761238991585,
+      "room_id": "!wAfwwonbRnRLYejFOR:gitter.im",
+      "sender": "@jeff-zucker:matrix.org",
+      "type": "m.room.message",
+      "unsigned": {
+        "membership": "leave",
+        "age": 2041108456
+      },
+      "event_id": "$Y10vqkBO1o5otnhyjLugzVn39AnQqmzFJDz8Mjb2BkE",
+      "user_id": "@jeff-zucker:matrix.org",
+      "age": 2041108456
+    },
+    {
+      "content": {
+        "body": "renewed 6 certs for the 3 servers of which devops I feel responsible",
+        "m.mentions": {},
+        "msgtype": "m.text"
+      },
+      "origin_server_ts": 1761475968944,
+      "room_id": "!wAfwwonbRnRLYejFOR:gitter.im",
+      "sender": "@ewingson:matrix.org",
+      "type": "m.room.message",
+      "unsigned": {
+        "membership": "leave",
+        "age": 1804131097
+      },
+      "event_id": "$3eKG9vYTpzPIDNJHIn97rhNlbTHgH6RH1FkcCB8uymQ",
+      "user_id": "@ewingson:matrix.org",
+      "age": 1804131097
+    },
+    {
+      "content": {
+        "body": "ok. no rush. ",
+        "m.mentions": {},
+        "m.relates_to": {
+          "event_id": "$XLcYgYMZq0i5VpSuA1fFKCQbXsMsWI6VUgjYA9og1eI",
+          "is_falling_back": true,
+          "m.in_reply_to": {
+            "event_id": "$Y10vqkBO1o5otnhyjLugzVn39AnQqmzFJDz8Mjb2BkE"
+          },
+          "rel_type": "m.thread"
+        },
+        "msgtype": "m.text"
+      },
+      "origin_server_ts": 1761553272371,
+      "room_id": "!wAfwwonbRnRLYejFOR:gitter.im",
+      "sender": "@therealimy-60b3548f6da03739847dbe51:gitter.im",
+      "type": "m.room.message",
+      "unsigned": {
+        "membership": "leave"
+      },
+      "event_id": "$ej9PmwcxdqZPQCzNdeUfHR7a4K-1tsvCB6qQUHKORTc",
+      "user_id": "@therealimy-60b3548f6da03739847dbe51:gitter.im"
+    },
+    {
+      "content": {
+        "body": "Call today? Anyone joining?",
+        "m.mentions": {},
+        "msgtype": "m.text"
+      },
+      "origin_server_ts": 1761753784608,
+      "room_id": "!wAfwwonbRnRLYejFOR:gitter.im",
+      "sender": "@mwhaddle:matrix.org",
+      "type": "m.room.message",
+      "unsigned": {
+        "age": 1526315433,
+        "m.relations": {
+          "m.thread": {
+            "latest_event": {
+              "content": {
+                "body": " I will be on next Wednesday",
+                "m.mentions": {},
+                "m.relates_to": {
+                  "event_id": "$Qn3TPFPBe7uLzeBy27bT96IMsMr_wXVx84uEmecaNjE",
+                  "is_falling_back": true,
+                  "m.in_reply_to": {
+                    "event_id": "$Qn3TPFPBe7uLzeBy27bT96IMsMr_wXVx84uEmecaNjE"
+                  },
+                  "rel_type": "m.thread"
+                },
+                "msgtype": "m.text"
+              },
+              "origin_server_ts": 1762013627934,
+              "room_id": "!wAfwwonbRnRLYejFOR:gitter.im",
+              "sender": "@chunt007-61f348b46da03739848f44b1:gitter.im",
+              "type": "m.room.message",
+              "unsigned": {},
+              "event_id": "$9TsA9pxtzLxfkXYJ2SBxSXMZHn1Ie7dkTNOsdQWsR98",
+              "user_id": "@chunt007-61f348b46da03739848f44b1:gitter.im"
+            },
+            "count": 1,
+            "current_user_participated": false
+          }
+        },
+        "membership": "leave"
+      },
+      "event_id": "$Qn3TPFPBe7uLzeBy27bT96IMsMr_wXVx84uEmecaNjE",
+      "user_id": "@mwhaddle:matrix.org",
+      "age": 1526310647
+    },
+    {
+      "content": {
+        "body": "Mashlib 1.11.1 was deployed on solidcommunity.net",
+        "msgtype": "m.text"
+      },
+      "origin_server_ts": 1761859376992,
+      "room_id": "!wAfwwonbRnRLYejFOR:gitter.im",
+      "sender": "@therealimy-60b3548f6da03739847dbe51:gitter.im",
+      "type": "m.room.message",
+      "unsigned": {
+        "membership": "leave"
+      },
+      "event_id": "$-tuLAvFh5YvQ8KXfgj5vZNiFplapsZb7HOP42SwdAFQ",
+      "user_id": "@therealimy-60b3548f6da03739847dbe51:gitter.im"
+    },
+    {
+      "content": {
+        "body": "Please mention it, for me, on other channels too",
+        "msgtype": "m.text"
+      },
+      "origin_server_ts": 1761859412573,
+      "room_id": "!wAfwwonbRnRLYejFOR:gitter.im",
+      "sender": "@therealimy-60b3548f6da03739847dbe51:gitter.im",
+      "type": "m.room.message",
+      "unsigned": {
+        "membership": "leave"
+      },
+      "event_id": "$BRNpGV9H_F70PD7lq16Obptz-L9Wg-RHbGo6GIwrjM4",
+      "user_id": "@therealimy-60b3548f6da03739847dbe51:gitter.im"
+    },
+    {
+      "content": {
+        "body": "One can mention also what was done by pointing to https://solidos.solidcommunity.net/public/2025/NLnet%20Grant%20milestone%201a/Milestone1a.html",
+        "msgtype": "m.text"
+      },
+      "origin_server_ts": 1761859443771,
+      "room_id": "!wAfwwonbRnRLYejFOR:gitter.im",
+      "sender": "@therealimy-60b3548f6da03739847dbe51:gitter.im",
+      "type": "m.room.message",
+      "unsigned": {
+        "membership": "leave"
+      },
+      "event_id": "$nuzNSqlTwCHKf7cqLefR-cvB-f2oZ_JuEOrncvYIE7s",
+      "user_id": "@therealimy-60b3548f6da03739847dbe51:gitter.im"
+    },
+    {
+      "content": {
+        "body": "ewingson: feel free to upgrade your servers too.",
+        "format": "org.matrix.custom.html",
+        "formatted_body": "<a href=\"https://matrix.to/#/@ewingson:matrix.org\">ewingson</a>: feel free to upgrade your servers too.",
+        "msgtype": "m.text"
+      },
+      "origin_server_ts": 1761859466718,
+      "room_id": "!wAfwwonbRnRLYejFOR:gitter.im",
+      "sender": "@therealimy-60b3548f6da03739847dbe51:gitter.im",
+      "type": "m.room.message",
+      "unsigned": {
+        "membership": "leave"
+      },
+      "event_id": "$vZ3RoGUs0k1RH80CSeDbHSRvO4BJYozRXY8Stof8Hm8",
+      "user_id": "@therealimy-60b3548f6da03739847dbe51:gitter.im"
+    },
+    {
+      "content": {
+        "body": " I will be on next Wednesday",
+        "m.mentions": {},
+        "m.relates_to": {
+          "event_id": "$Qn3TPFPBe7uLzeBy27bT96IMsMr_wXVx84uEmecaNjE",
+          "is_falling_back": true,
+          "m.in_reply_to": {
+            "event_id": "$Qn3TPFPBe7uLzeBy27bT96IMsMr_wXVx84uEmecaNjE"
+          },
+          "rel_type": "m.thread"
+        },
+        "msgtype": "m.text"
+      },
+      "origin_server_ts": 1762013627934,
+      "room_id": "!wAfwwonbRnRLYejFOR:gitter.im",
+      "sender": "@chunt007-61f348b46da03739848f44b1:gitter.im",
+      "type": "m.room.message",
+      "unsigned": {
+        "membership": "leave"
+      },
+      "event_id": "$9TsA9pxtzLxfkXYJ2SBxSXMZHn1Ie7dkTNOsdQWsR98",
+      "user_id": "@chunt007-61f348b46da03739848f44b1:gitter.im"
+    },
+    {
+      "content": {
+        "body": "Hei everyone, I was wondering about the meetings... I cannot attend them at the time they are set now. I work in the mornings till 14:00 (CET) these days. \nDo you think we could change the meeting time to sometime before noon?",
+        "m.mentions": {},
+        "msgtype": "m.text"
+      },
+      "origin_server_ts": 1762167928426,
+      "room_id": "!wAfwwonbRnRLYejFOR:gitter.im",
+      "sender": "@therealimy-60b3548f6da03739847dbe51:gitter.im",
+      "type": "m.room.message",
+      "unsigned": {
+        "membership": "leave"
+      },
+      "event_id": "$nowmtoTznGzOStA-NmCwB7JerShAevWn_zwZywzmEko",
+      "user_id": "@therealimy-60b3548f6da03739847dbe51:gitter.im"
+    },
+    {
+      "content": {
+        "displayname": "Bee",
+        "membership": "join"
+      },
+      "origin_server_ts": 1762288906707,
+      "room_id": "!wAfwwonbRnRLYejFOR:gitter.im",
+      "sender": "@beebee123:matrix.org",
+      "state_key": "@beebee123:matrix.org",
+      "type": "m.room.member",
+      "unsigned": {
+        "membership": "leave",
+        "age": 991193334
+      },
+      "event_id": "$5RG1QPXce72fHdqwTgfOKlJMLBSpjZoUbqCbncsWQWs",
+      "user_id": "@beebee123:matrix.org",
+      "age": 991193334
+    },
+    {
+      "content": {
+        "body": "I'm normally not free in the mornings, and try to make the regular time, when I can. But it could be possible to change the time if enough people wanted to. I may be able to be free some mornings, but some I would not be able to make. The later in the morning the better, from my POV. But no need to change things on my account.",
+        "m.mentions": {
+          "user_ids": [
+            "@therealimy-60b3548f6da03739847dbe51:gitter.im"
+          ]
+        },
+        "m.relates_to": {
+          "m.in_reply_to": {
+            "event_id": "$nowmtoTznGzOStA-NmCwB7JerShAevWn_zwZywzmEko"
+          }
+        },
+        "msgtype": "m.text"
+      },
+      "origin_server_ts": 1762347735654,
+      "room_id": "!wAfwwonbRnRLYejFOR:gitter.im",
+      "sender": "@melvster:matrix.org",
+      "type": "m.room.message",
+      "unsigned": {
+        "membership": "leave",
+        "age": 932364387,
+        "m.relations": {
+          "m.thread": {
+            "latest_event": {
+              "content": {
+                "body": "I'm down for whatever. I want to make it to this SolidOS meeting this week, can you guys post a time before this upcoming Wednesday? ",
+                "m.mentions": {},
+                "m.relates_to": {
+                  "event_id": "$WYTjYN5W0Fz8juoVk6z6Cny7vyrSmb23onrfq7uMDS4",
+                  "is_falling_back": true,
+                  "m.in_reply_to": {
+                    "event_id": "$WYTjYN5W0Fz8juoVk6z6Cny7vyrSmb23onrfq7uMDS4"
+                  },
+                  "rel_type": "m.thread"
+                },
+                "msgtype": "m.text"
+              },
+              "origin_server_ts": 1762898204031,
+              "room_id": "!wAfwwonbRnRLYejFOR:gitter.im",
+              "sender": "@chunt007-61f348b46da03739848f44b1:gitter.im",
+              "type": "m.room.message",
+              "unsigned": {},
+              "event_id": "$iWZXQZ1SRGW5OZcYLgqcG-4OsjJA8iOJu3wszOTxV6A",
+              "user_id": "@chunt007-61f348b46da03739848f44b1:gitter.im"
+            },
+            "count": 1,
+            "current_user_participated": false
+          }
+        }
+      },
+      "event_id": "$WYTjYN5W0Fz8juoVk6z6Cny7vyrSmb23onrfq7uMDS4",
+      "user_id": "@melvster:matrix.org",
+      "age": 932351544
+    },
+    {
+      "content": {
+        "body": "Normally we have 1-2 folks from USA, so they tend to be 6-9 hours behind europe.",
+        "m.mentions": {},
+        "msgtype": "m.text"
+      },
+      "origin_server_ts": 1762347838899,
+      "room_id": "!wAfwwonbRnRLYejFOR:gitter.im",
+      "sender": "@melvster:matrix.org",
+      "type": "m.room.message",
+      "unsigned": {
+        "membership": "leave",
+        "age": 932261142
+      },
+      "event_id": "$70hYKtcTFbhJBY3gqDbrXMy6D2w_prYJqFA1w217UqU",
+      "user_id": "@melvster:matrix.org",
+      "age": 932248299
+    },
+    {
+      "content": {
+        "body": "Call?",
+        "m.mentions": {},
+        "msgtype": "m.text"
+      },
+      "origin_server_ts": 1762358763478,
+      "room_id": "!wAfwwonbRnRLYejFOR:gitter.im",
+      "sender": "@melvster:matrix.org",
+      "type": "m.room.message",
+      "unsigned": {
+        "membership": "leave",
+        "age": 921336563
+      },
+      "event_id": "$dD-J5E6_Hs8ZA0UgnyqXicAnkep42Q3TWqTprgeAHU8",
+      "user_id": "@melvster:matrix.org",
+      "age": 921323720
+    },
+    {
+      "content": {
+        "body": "Hei everyone, a new mashlib (from branch newFace) is ready to be tested. Please make a user and try some stuff out here: https://pivot-test.solidproject.org:3000/",
+        "m.mentions": {},
+        "msgtype": "m.text"
+      },
+      "origin_server_ts": 1762765717145,
+      "room_id": "!wAfwwonbRnRLYejFOR:gitter.im",
+      "sender": "@therealimy-60b3548f6da03739847dbe51:gitter.im",
+      "type": "m.room.message",
+      "unsigned": {
+        "membership": "leave"
+      },
+      "event_id": "$sPjGRAao8ELmeWBhnrB4aa4V0PGkeBVdD7kmEo6PaTw",
+      "user_id": "@therealimy-60b3548f6da03739847dbe51:gitter.im"
+    },
+    {
+      "content": {
+        "body": "This release is the 2nd milestone of the grant work, focused on modernization and optimization of the codebase. It will end in major releases for all repos. If you want to take a look at the exact code, look at the newFace branches on all repos. Some things to consider:\n\n- solid-logic, solid-ui are bundeled without rdflib. Solid-ui si bundleled without solid-logic even. -> this means - you need to import rdflib and solid-logic if you want to make use of solid-ui. (mashlib, of course contains it all).\nWhy? architecturally this is cleaner and it did reduce the mashlib bundlesize.\n- solid-logic and solid-ui are now available also as ESM not just CommonJS.\nThe solid-logic dependency is: https://www.npmjs.com/package/solid-logic/v/3.1.1-db26ace\nSolid-ui: https://www.npmjs.com/package/solid-ui/v/2.6.1-ad0c401\n\nI will prepare a blogpost with all changes done.\nPlease feedback and comment and see if you find errors.",
+        "format": "org.matrix.custom.html",
+        "formatted_body": "<p>This release is the 2nd milestone of the grant work, focused on modernization and optimization of the codebase. It will end in major releases for all repos. If you want to take a look at the exact code, look at the newFace branches on all repos. Some things to consider:</p>\n<ul>\n<li>solid-logic, solid-ui are bundeled without rdflib. Solid-ui si bundleled without solid-logic even. -&gt; this means - you need to import rdflib and solid-logic if you want to make use of solid-ui. (mashlib, of course contains it all).<br>Why? architecturally this is cleaner and it did reduce the mashlib bundlesize.</li>\n<li>solid-logic and solid-ui are now available also as ESM not just CommonJS.<br>The solid-logic dependency is: https://www.npmjs.com/package/solid-logic/v/3.1.1-db26ace<br>Solid-ui: https://www.npmjs.com/package/solid-ui/v/2.6.1-ad0c401</li>\n</ul>\n<p>I will prepare a blogpost with all changes done.<br>Please feedback and comment and see if you find errors.</p>\n",
+        "m.mentions": {},
+        "msgtype": "m.text"
+      },
+      "origin_server_ts": 1762766130874,
+      "room_id": "!wAfwwonbRnRLYejFOR:gitter.im",
+      "sender": "@therealimy-60b3548f6da03739847dbe51:gitter.im",
+      "type": "m.room.message",
+      "unsigned": {
+        "membership": "leave",
+        "m.relations": {
+          "m.replace": {
+            "content": {
+              "body": "* This release is the 2nd milestone of the grant work, focused on modernization and optimization of the codebase. It will end in major releases for all repos. If you want to take a look at the exact code, look at the newFace branches on all repos. Some things to consider:\n\n- solid-logic, solid-ui are bundeled without rdflib. Solid-ui si bundleled without solid-logic even. -> this means - you need to import rdflib and solid-logic if you want to make use of solid-ui. (mashlib, of course contains it all).\nWhy? architecturally this is cleaner and it did reduce the mashlib bundlesize.\n- solid-logic and solid-ui are now available also as ESM not just CommonJS.\nThe solid-logic dependency is: https://www.npmjs.com/package/solid-logic/v/3.1.1-db26ace\nSolid-ui: https://www.npmjs.com/package/solid-ui/v/2.6.1-ad0c401\n\nI will prepare a blogpost with all changes done.\nPlease feedback and comment and see if you find errors.",
+              "format": "org.matrix.custom.html",
+              "formatted_body": "* <p>This release is the 2nd milestone of the grant work, focused on modernization and optimization of the codebase. It will end in major releases for all repos. If you want to take a look at the exact code, look at the newFace branches on all repos. Some things to consider:</p>\n<ul>\n<li>solid-logic, solid-ui are bundeled without rdflib. Solid-ui si bundleled without solid-logic even. -&gt; this means - you need to import rdflib and solid-logic if you want to make use of solid-ui. (mashlib, of course contains it all).<br>Why? architecturally this is cleaner and it did reduce the mashlib bundlesize.</li>\n<li>solid-logic and solid-ui are now available also as ESM not just CommonJS.<br>The solid-logic dependency is: https://www.npmjs.com/package/solid-logic/v/3.1.1-db26ace<br>Solid-ui: https://www.npmjs.com/package/solid-ui/v/2.6.1-ad0c401</li>\n</ul>\n<p>I will prepare a blogpost with all changes done.<br>Please feedback and comment and see if you find errors.</p>\n",
+              "m.mentions": {},
+              "m.new_content": {
+                "body": "This release is the 2nd milestone of the grant work, focused on modernization and optimization of the codebase. It will end in major releases for all repos. If you want to take a look at the exact code, look at the newFace branches on all repos. Some things to consider:\n\n- solid-logic, solid-ui are bundeled without rdflib. Solid-ui si bundleled without solid-logic even. -> this means - you need to import rdflib and solid-logic if you want to make use of solid-ui. (mashlib, of course contains it all).\nWhy? architecturally this is cleaner and it did reduce the mashlib bundlesize.\n- solid-logic and solid-ui are now available also as ESM not just CommonJS.\nThe solid-logic dependency is: https://www.npmjs.com/package/solid-logic/v/3.1.1-db26ace\nSolid-ui: https://www.npmjs.com/package/solid-ui/v/2.6.1-ad0c401\n\nI will prepare a blogpost with all changes done.\nPlease feedback and comment and see if you find errors.",
+                "format": "org.matrix.custom.html",
+                "formatted_body": "<p>This release is the 2nd milestone of the grant work, focused on modernization and optimization of the codebase. It will end in major releases for all repos. If you want to take a look at the exact code, look at the newFace branches on all repos. Some things to consider:</p>\n<ul>\n<li>solid-logic, solid-ui are bundeled without rdflib. Solid-ui si bundleled without solid-logic even. -&gt; this means - you need to import rdflib and solid-logic if you want to make use of solid-ui. (mashlib, of course contains it all).<br>Why? architecturally this is cleaner and it did reduce the mashlib bundlesize.</li>\n<li>solid-logic and solid-ui are now available also as ESM not just CommonJS.<br>The solid-logic dependency is: https://www.npmjs.com/package/solid-logic/v/3.1.1-db26ace<br>Solid-ui: https://www.npmjs.com/package/solid-ui/v/2.6.1-ad0c401</li>\n</ul>\n<p>I will prepare a blogpost with all changes done.<br>Please feedback and comment and see if you find errors.</p>\n",
+                "m.mentions": {},
+                "msgtype": "m.text"
+              },
+              "m.relates_to": {
+                "event_id": "$9HetBvViPQ3wYVwwlQK3jIT_VA85gqPA674pZBz1ExQ",
+                "rel_type": "m.replace"
+              },
+              "msgtype": "m.text"
+            },
+            "origin_server_ts": 1762766196918,
+            "room_id": "!wAfwwonbRnRLYejFOR:gitter.im",
+            "sender": "@therealimy-60b3548f6da03739847dbe51:gitter.im",
+            "type": "m.room.message",
+            "unsigned": {},
+            "event_id": "$zfzOrzIIanFMJmCFg711bMAhDmJ2p10l6LNRI5i2rV0",
+            "user_id": "@therealimy-60b3548f6da03739847dbe51:gitter.im"
+          }
+        }
+      },
+      "event_id": "$9HetBvViPQ3wYVwwlQK3jIT_VA85gqPA674pZBz1ExQ",
+      "user_id": "@therealimy-60b3548f6da03739847dbe51:gitter.im"
+    },
+    {
+      "content": {
+        "body": "Great work, I am a fan of ESM",
+        "m.mentions": {
+          "user_ids": [
+            "@therealimy-60b3548f6da03739847dbe51:gitter.im"
+          ]
+        },
+        "m.relates_to": {
+          "m.in_reply_to": {
+            "event_id": "$9HetBvViPQ3wYVwwlQK3jIT_VA85gqPA674pZBz1ExQ"
+          }
+        },
+        "msgtype": "m.text"
+      },
+      "origin_server_ts": 1762778681970,
+      "room_id": "!wAfwwonbRnRLYejFOR:gitter.im",
+      "sender": "@melvster:matrix.org",
+      "type": "m.room.message",
+      "unsigned": {
+        "membership": "leave",
+        "age": 501418071
+      },
+      "event_id": "$ULlHLD7rAmiEFLn9sUhKqpaYLCc3d7RlLtHLIicI92s",
+      "user_id": "@melvster:matrix.org",
+      "age": 501405228
+    },
+    {
+      "content": {
+        "body": "image.png",
+        "info": {
+          "h": 936,
+          "mimetype": "image/png",
+          "org.matrix.msc4230.is_animated": false,
+          "size": 42593,
+          "w": 714,
+          "xyz.amorgan.blurhash": "TJRWC+4-~E~E%49YM{WBoME0NFxb"
+        },
+        "m.mentions": {},
+        "msgtype": "m.image",
+        "url": "mxc://matrix.org/vvLdjNDckVsttKSbMScdVfaf"
+      },
+      "origin_server_ts": 1762781514066,
+      "room_id": "!wAfwwonbRnRLYejFOR:gitter.im",
+      "sender": "@melvster:matrix.org",
+      "type": "m.room.message",
+      "unsigned": {
+        "membership": "leave",
+        "age": 498585975
+      },
+      "event_id": "$KlMsU_ANpU37pokGfX96jo5kKG0MY3XpjOGVZ4rQuJc",
+      "user_id": "@melvster:matrix.org",
+      "age": 498573132
+    },
+    {
+      "content": {
+        "body": "worked for me, great job timea-solid ",
+        "format": "org.matrix.custom.html",
+        "formatted_body": "worked for me, great job <a href=\"https://matrix.to/#/@therealimy-60b3548f6da03739847dbe51:gitter.im\">timea-solid</a>",
+        "m.mentions": {
+          "user_ids": [
+            "@therealimy-60b3548f6da03739847dbe51:gitter.im"
+          ]
+        },
+        "msgtype": "m.text"
+      },
+      "origin_server_ts": 1762781523507,
+      "room_id": "!wAfwwonbRnRLYejFOR:gitter.im",
+      "sender": "@melvster:matrix.org",
+      "type": "m.room.message",
+      "unsigned": {
+        "membership": "leave",
+        "age": 498576534
+      },
+      "event_id": "$Lzd1Zw1SRn34GP9qIkutP3URDZUs837TxyFNdMGT1V8",
+      "user_id": "@melvster:matrix.org",
+      "age": 498563691
+    },
+    {
+      "content": {
+        "body": "I'm down for whatever. I want to make it to this SolidOS meeting this week, can you guys post a time before this upcoming Wednesday? ",
+        "m.mentions": {},
+        "m.relates_to": {
+          "event_id": "$WYTjYN5W0Fz8juoVk6z6Cny7vyrSmb23onrfq7uMDS4",
+          "is_falling_back": true,
+          "m.in_reply_to": {
+            "event_id": "$WYTjYN5W0Fz8juoVk6z6Cny7vyrSmb23onrfq7uMDS4"
+          },
+          "rel_type": "m.thread"
+        },
+        "msgtype": "m.text"
+      },
+      "origin_server_ts": 1762898204031,
+      "room_id": "!wAfwwonbRnRLYejFOR:gitter.im",
+      "sender": "@chunt007-61f348b46da03739848f44b1:gitter.im",
+      "type": "m.room.message",
+      "unsigned": {
+        "membership": "leave"
+      },
+      "event_id": "$iWZXQZ1SRGW5OZcYLgqcG-4OsjJA8iOJu3wszOTxV6A",
+      "user_id": "@chunt007-61f348b46da03739848f44b1:gitter.im"
+    },
+    {
+      "content": {
+        "body": "call now",
+        "m.mentions": {},
+        "msgtype": "m.text"
+      },
+      "origin_server_ts": 1762963536394,
+      "room_id": "!wAfwwonbRnRLYejFOR:gitter.im",
+      "sender": "@melvster:matrix.org",
+      "type": "m.room.message",
+      "unsigned": {
+        "membership": "leave",
+        "age": 316563647
+      },
+      "event_id": "$qHqSot2iDOcB_3mbsxWMMd4A_7MYo-puJdD2qVJzf10",
+      "user_id": "@melvster:matrix.org",
+      "age": 316550804
+    },
+    {
+      "content": {
+        "displayname": "Klas Kalass",
+        "membership": "join"
+      },
+      "origin_server_ts": 1763280087242,
+      "room_id": "!wAfwwonbRnRLYejFOR:gitter.im",
+      "sender": "@kkalass:matrix.org",
+      "state_key": "@kkalass:matrix.org",
+      "type": "m.room.member",
+      "unsigned": {
+        "membership": "join",
+        "age": 12799
+      },
+      "event_id": "$C9NskEfM3AK_ihPa5Bikh2-VAM52jA_ranyzKm0ajAE",
+      "user_id": "@kkalass:matrix.org",
+      "age": 12799
+    }
+  ]
+}

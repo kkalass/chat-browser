@@ -10,5 +10,11 @@
     "name": "Solid Practitioners",
     "exportDate": "2025-11-14",
     "description": "AI-analyzed snapshot of the Solid Practitioners chat room"
+  },
+  {
+    "id": "solidos",
+    "name": "SolidOS",
+    "exportDate": "2025-11-16",
+    "description": "AI-analyzed snapshot of the SolidOS chat room"
   }
 ]
