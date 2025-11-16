@@ -870,7 +870,7 @@
             <div class="column" style="flex: 0 0 30%;">
                 <div class="column-header">
                     <div class="column-header-top">
-                        <span>Clusters ({{ clusters.length }})</span>
+                        <span>Clusters ({{ sortedClusters.length }})</span>
                         <span style="font-size: 11px; color: #6c757d; font-weight: normal; margin-left: 8px;">✨ AI-generated</span>
                         <button v-if="selectedCluster" class="clear-filter-btn" @click="clearClusterSelection" title="Clear cluster filter">✕ Clear</button>
                     </div>
@@ -1264,6 +1264,30 @@
                 };
             },
             computed: {
+                sortedClusters() {
+                    // Sort clusters by the timestamp of the first message in their groups
+                    return [...this.clusters].sort((a, b) => {
+                        // Find earliest message in cluster a
+                        const groupsA = this.groups.filter(g => g.cluster_id === a.cluster_id);
+                        const earliestA = groupsA.reduce((earliest, group) => {
+                            const groupTime = new Date(group.start_time);
+                            return !earliest || groupTime < earliest ? groupTime : earliest;
+                        }, null);
+                        
+                        // Find earliest message in cluster b
+                        const groupsB = this.groups.filter(g => g.cluster_id === b.cluster_id);
+                        const earliestB = groupsB.reduce((earliest, group) => {
+                            const groupTime = new Date(group.start_time);
+                            return !earliest || groupTime < earliest ? groupTime : earliest;
+                        }, null);
+                        
+                        // Sort by earliest timestamp (oldest first)
+                        if (!earliestA && !earliestB) return 0;
+                        if (!earliestA) return 1;
+                        if (!earliestB) return -1;
+                        return earliestA - earliestB;
+                    });
+                },
                 sortedGroups() {
                     return [...this.groups].sort((a, b) => {
                         return new Date(a.start_time) - new Date(b.start_time);
@@ -1891,7 +1915,7 @@
                     
                     // Expand this cluster and collapse others
                     this.expandedClusterIndices.clear();
-                    const clusterIndex = this.clusters.findIndex(c => c.cluster_id === cluster.cluster_id);
+                    const clusterIndex = this.sortedClusters.findIndex(c => c.cluster_id === cluster.cluster_id);
                     this.expandedClusterIndices.add(clusterIndex);
                     
                     // Expand groups belonging to this cluster (these are "relevant")
@@ -1942,7 +1966,7 @@
                     if (!this.selectedCluster) {
                         return false;
                     }
-                    const index = this.clusters.findIndex(c => c.cluster_id === clusterId);
+                    const index = this.sortedClusters.findIndex(c => c.cluster_id === clusterId);
                     return !this.expandedClusterIndices.has(index);
                 },
                 isGroupCollapsed(groupKey) {
@@ -1958,7 +1982,7 @@
                 },
                 expandClustersBefore(count) {
                     const selectedIndex = this.selectedCluster 
-                        ? this.clusters.findIndex(c => c.cluster_id === this.selectedCluster.cluster_id)
+                        ? this.sortedClusters.findIndex(c => c.cluster_id === this.selectedCluster.cluster_id)
                         : 0;
                     
                     for (let i = Math.max(0, selectedIndex - count); i < selectedIndex; i++) {
@@ -1967,15 +1991,15 @@
                 },
                 expandClustersAfter(count) {
                     const selectedIndex = this.selectedCluster 
-                        ? this.clusters.findIndex(c => c.cluster_id === this.selectedCluster.cluster_id)
-                        : this.clusters.length - 1;
+                        ? this.sortedClusters.findIndex(c => c.cluster_id === this.selectedCluster.cluster_id)
+                        : this.sortedClusters.length - 1;
                     
-                    for (let i = selectedIndex + 1; i <= Math.min(this.clusters.length - 1, selectedIndex + count); i++) {
+                    for (let i = selectedIndex + 1; i <= Math.min(this.sortedClusters.length - 1, selectedIndex + count); i++) {
                         this.expandedClusterIndices.add(i);
                     }
                 },
                 expandAllClusters() {
-                    this.clusters.forEach((_, idx) => this.expandedClusterIndices.add(idx));
+                    this.sortedClusters.forEach((_, idx) => this.expandedClusterIndices.add(idx));
                 },
                 expandGroupsBefore(count) {
                     const selectedIndex = this.selectedGroup 
@@ -2178,7 +2202,7 @@
                 },
                 highlightGroup(group) {
                     this.highlightedGroup = group;
-                    this.highlightedCluster = this.clusters.find(c => c.cluster_id === group.cluster_id);
+                    this.highlightedCluster = this.sortedClusters.find(c => c.cluster_id === group.cluster_id);
                     
                     // Scroll cluster and group into view, and last highlighted message
                     this.$nextTick(() => {
@@ -2328,7 +2352,7 @@
                     const group = this.groups.find(g => g.groupKey === message.groupKey);
                     if (group) {
                         this.highlightedGroup = group;
-                        this.highlightedCluster = this.clusters.find(c => c.cluster_id === group.cluster_id);
+                        this.highlightedCluster = this.sortedClusters.find(c => c.cluster_id === group.cluster_id);
                         
                         // Scroll highlighted items into view
                         this.$nextTick(() => {
