@@ -1413,18 +1413,48 @@
                 groupBlocks() {
                     const groupsToUse = this.sortedGroups;
                     
-                    // If groupFilter is set, use text filtering with collapse/expand
-                    if (this.groupFilter.trim() && !this.selectedCluster && !this.selectedGroup && !this.activeKeyword) {
-                        const filter = this.groupFilter.toLowerCase();
+                    // Determine which filters are active
+                    const hasTextFilter = this.groupFilter.trim() && !this.selectedGroup;
+                    const hasKeywordFilter = this.activeKeyword && !this.selectedGroup;
+                    const hasClusterFilter = this.selectedCluster && !this.selectedGroup;
+                    
+                    // Build a combined filter function using AND logic
+                    const matchesFilters = (group) => {
+                        // Text filter check
+                        if (hasTextFilter) {
+                            const filter = this.groupFilter.toLowerCase();
+                            const matchesText = group.title?.toLowerCase().includes(filter) ||
+                                              group.summary?.toLowerCase().includes(filter) ||
+                                              group.keywords?.some(kw => kw.toLowerCase().includes(filter));
+                            if (!matchesText) return false;
+                        }
+                        
+                        // Keyword filter check
+                        if (hasKeywordFilter) {
+                            const hasKeyword = group.keywords && group.keywords.some(kw => 
+                                kw.toLowerCase() === this.activeKeyword.toLowerCase()
+                            );
+                            if (!hasKeyword) return false;
+                        }
+                        
+                        // Cluster filter check
+                        if (hasClusterFilter) {
+                            const inCluster = String(group.cluster_id) === String(this.selectedCluster.cluster_id);
+                            if (!inCluster) return false;
+                        }
+                        
+                        return true;
+                    };
+                    
+                    // If any filter is active, apply filtering with collapse/expand
+                    if (hasTextFilter || hasKeywordFilter || hasClusterFilter) {
                         const blocks = [];
                         let currentBlock = { groups: [], collapsedCount: 0, collapsedStartIdx: -1 };
                         let inRelevantSection = false;
                         let collapsedStartIdx = -1;
                         
                         groupsToUse.forEach((group, idx) => {
-                            const matches = group.title?.toLowerCase().includes(filter) ||
-                                          group.summary?.toLowerCase().includes(filter) ||
-                                          group.keywords?.some(kw => kw.toLowerCase().includes(filter));
+                            const matches = matchesFilters(group);
                             
                             if (matches) {
                                 if (!inRelevantSection && currentBlock.collapsedCount > 0) {
@@ -1487,19 +1517,17 @@
                         });
                     }
                     
-                    // If activeKeyword is set, use keyword filtering with collapse/expand
-                    if (this.activeKeyword && !this.selectedCluster && !this.selectedGroup) {
+                    // If any filter is active, apply filtering with collapse/expand
+                    if (hasTextFilter || hasKeywordFilter || hasClusterFilter) {
                         const blocks = [];
                         let currentBlock = { groups: [], collapsedCount: 0, collapsedStartIdx: -1 };
                         let inRelevantSection = false;
                         let collapsedStartIdx = -1;
                         
                         groupsToUse.forEach((group, idx) => {
-                            const hasKeyword = group.keywords && group.keywords.some(kw => 
-                                kw.toLowerCase() === this.activeKeyword.toLowerCase()
-                            );
+                            const matches = matchesFilters(group);
                             
-                            if (hasKeyword) {
+                            if (matches) {
                                 if (!inRelevantSection && currentBlock.collapsedCount > 0) {
                                     blocks.push(currentBlock);
                                     currentBlock = { groups: [], collapsedCount: 0, collapsedStartIdx: -1 };
@@ -1560,101 +1588,65 @@
                         });
                     }
                     
-                    if (!this.selectedCluster) {
-                        // If no cluster selected, show all filtered groups
-                        return [{
-                            groups: groupsToUse,
-                            collapsedCount: 0,
-                            collapsedStartIdx: -1
-                        }];
-                    }
-                    
-                    const blocks = [];
-                    let currentBlock = { groups: [], collapsedCount: 0, collapsedStartIdx: -1 };
-                    let inRelevantSection = false;
-                    let collapsedStartIdx = -1;
-                    
-                    groupsToUse.forEach((group, idx) => {
-                        const isRelevant = group.cluster_id === this.selectedCluster.cluster_id;
-                        
-                        if (isRelevant) {
-                            if (!inRelevantSection && currentBlock.collapsedCount > 0) {
-                                // End previous collapsed section
-                                blocks.push(currentBlock);
-                                currentBlock = { groups: [], collapsedCount: 0, collapsedStartIdx: -1 };
-                            }
-                            currentBlock.groups.push(group);
-                            inRelevantSection = true;
-                        } else {
-                            if (inRelevantSection) {
-                                // Start new collapsed section
-                                if (currentBlock.groups.length > 0) {
-                                    blocks.push(currentBlock);
-                                }
-                                collapsedStartIdx = idx;
-                                currentBlock = { groups: [], collapsedCount: 1, collapsedStartIdx: collapsedStartIdx };
-                                inRelevantSection = false;
-                            } else {
-                                if (collapsedStartIdx === -1) {
-                                    collapsedStartIdx = idx;
-                                    currentBlock.collapsedStartIdx = collapsedStartIdx;
-                                }
-                                currentBlock.collapsedCount++;
-                            }
-                        }
-                    });
-                    
-                    // Add last block
-                    if (currentBlock.groups.length > 0 || currentBlock.collapsedCount > 0) {
-                        blocks.push(currentBlock);
-                    }
-                    
-                    // Apply expanded context
-                    return blocks.map((block, blockIdx) => {
-                        if (block.collapsedCount > 0) {
-                            const expanded = this.expandedGroupBlocks.get(blockIdx) || { beforeCount: 0, afterCount: 0 };
-                            const startIdx = block.collapsedStartIdx;
-                            const endIdx = startIdx + block.collapsedCount;
-                            
-                            const beforeGroups = this.sortedGroups.slice(
-                                Math.max(0, startIdx),
-                                Math.min(startIdx + expanded.beforeCount, endIdx)
-                            );
-                            
-                            const afterGroups = this.sortedGroups.slice(
-                                Math.max(startIdx, endIdx - expanded.afterCount),
-                                endIdx
-                            );
-                            
-                            const totalShown = beforeGroups.length + afterGroups.length;
-                            const remaining = block.collapsedCount - totalShown;
-                            
-                            return {
-                                ...block,
-                                beforeGroups,
-                                afterGroups,
-                                remainingCollapsed: remaining,
-                                canExpandBefore: expanded.beforeCount < block.collapsedCount,
-                                canExpandAfter: expanded.afterCount < block.collapsedCount
-                            };
-                        }
-                        return block;
-                    });
+                    // No filters active, show all groups
+                    return [{
+                        groups: groupsToUse,
+                        collapsedCount: 0,
+                        collapsedStartIdx: -1
+                    }];
                 },
                 messageBlocks() {
                     const messagesToUse = this.allMessages;
                     
-                    // If messageFilter is set, use text filtering with collapse/expand
-                    if (this.messageFilter.trim() && !this.selectedCluster && !this.selectedGroup) {
-                        const filter = this.messageFilter.toLowerCase();
+                    // Determine which filters are active
+                    const hasTextFilter = this.messageFilter.trim() && !this.selectedGroup;
+                    const hasGroupSelection = this.selectedGroup;
+                    const hasClusterSelection = this.selectedCluster && !this.selectedGroup;
+                    const hasKeywordFilter = this.activeKeyword;
+                    
+                    // Build a combined filter function using AND logic
+                    const matchesFilters = (message) => {
+                        // Text filter check
+                        if (hasTextFilter) {
+                            const filter = this.messageFilter.toLowerCase();
+                            const matchesText = message.body?.toLowerCase().includes(filter) ||
+                                              this.getSenderName(message.sender).toLowerCase().includes(filter);
+                            if (!matchesText) return false;
+                        }
+                        
+                        // Group/Cluster filter check
+                        if (hasGroupSelection) {
+                            if (message.groupKey !== this.selectedGroup.groupKey) return false;
+                        } else if (hasClusterSelection || hasKeywordFilter) {
+                            // Get relevant group keys based on cluster and/or keyword
+                            const relevantGroups = this.groups.filter(g => {
+                                let matches = true;
+                                if (hasClusterSelection) {
+                                    matches = matches && String(g.cluster_id) === String(this.selectedCluster.cluster_id);
+                                }
+                                if (hasKeywordFilter) {
+                                    matches = matches && g.keywords && g.keywords.some(kw => 
+                                        kw.toLowerCase() === this.activeKeyword.toLowerCase()
+                                    );
+                                }
+                                return matches;
+                            });
+                            const relevantGroupKeys = new Set(relevantGroups.map(g => g.groupKey));
+                            if (!message.groupKey || !relevantGroupKeys.has(message.groupKey)) return false;
+                        }
+                        
+                        return true;
+                    };
+                    
+                    // If any filter is active, apply filtering with collapse/expand
+                    if (hasTextFilter || hasGroupSelection || hasClusterSelection || hasKeywordFilter) {
                         const blocks = [];
                         let currentBlock = { messages: [], collapsedCount: 0, collapsedStartIdx: -1 };
                         let inRelevantSection = false;
                         let collapsedStartIdx = -1;
                         
                         messagesToUse.forEach((message, idx) => {
-                            const matches = message.body?.toLowerCase().includes(filter) ||
-                                          this.getSenderName(message.sender).toLowerCase().includes(filter);
+                            const matches = matchesFilters(message);
                             
                             if (matches) {
                                 if (!inRelevantSection && currentBlock.collapsedCount > 0) {
@@ -1717,105 +1709,12 @@
                         });
                     }
                     
-                    // Determine which messages are relevant based on selection
-                    const getRelevantGroupKeys = () => {
-                        if (this.selectedGroup) {
-                            // Only messages from the selected group
-                            return new Set([this.selectedGroup.groupKey]);
-                        } else if (this.selectedCluster) {
-                            // Messages from all groups in the selected cluster
-                            return new Set(
-                                this.groups
-                                    .filter(g => g.cluster_id === this.selectedCluster.cluster_id)
-                                    .map(g => g.groupKey)
-                            );
-                        }
-                        return new Set();
-                    };
-                    
-                    const relevantGroupKeys = getRelevantGroupKeys();
-                    if (relevantGroupKeys.size === 0) {
-                        // No selection, show all filtered messages
-                        return [{
-                            messages: messagesToUse,
-                            collapsedCount: 0,
-                            collapsedStartIdx: -1
-                        }];
-                    }
-                    
-                    const blocks = [];
-                    let currentBlock = { messages: [], collapsedCount: 0, collapsedStartIdx: -1 };
-                    let inRelevantSection = false;
-                    let collapsedStartIdx = -1;
-                    
-                    messagesToUse.forEach((message, idx) => {
-                        const isRelevant = message.groupKey && relevantGroupKeys.has(message.groupKey);
-                        
-                        if (isRelevant) {
-                            if (!inRelevantSection && currentBlock.collapsedCount > 0) {
-                                // End previous collapsed section
-                                blocks.push(currentBlock);
-                                currentBlock = { messages: [], collapsedCount: 0, collapsedStartIdx: -1 };
-                            }
-                            currentBlock.messages.push(message);
-                            inRelevantSection = true;
-                        } else {
-                            if (inRelevantSection) {
-                                // Start new collapsed section
-                                if (currentBlock.messages.length > 0) {
-                                    blocks.push(currentBlock);
-                                }
-                                collapsedStartIdx = idx;
-                                currentBlock = { messages: [], collapsedCount: 1, collapsedStartIdx: collapsedStartIdx };
-                                inRelevantSection = false;
-                            } else {
-                                if (collapsedStartIdx === -1) {
-                                    collapsedStartIdx = idx;
-                                    currentBlock.collapsedStartIdx = collapsedStartIdx;
-                                }
-                                currentBlock.collapsedCount++;
-                            }
-                        }
-                    });
-                    
-                    // Add last block
-                    if (currentBlock.messages.length > 0 || currentBlock.collapsedCount > 0) {
-                        blocks.push(currentBlock);
-                    }
-                    
-                    // Apply expanded context
-                    return blocks.map((block, blockIdx) => {
-                        if (block.collapsedCount > 0) {
-                            const expanded = this.expandedMessageBlocks.get(blockIdx) || { beforeCount: 0, afterCount: 0 };
-                            const startIdx = block.collapsedStartIdx;
-                            const endIdx = startIdx + block.collapsedCount;
-                            
-                            const beforeMessages = this.allMessages.slice(
-                                Math.max(0, startIdx),
-                                Math.min(startIdx + expanded.beforeCount, endIdx)
-                            );
-                            
-                            const afterMessages = this.allMessages.slice(
-                                Math.max(startIdx, endIdx - expanded.afterCount),
-                                endIdx
-                            );
-                            
-                            const remainingBefore = Math.max(0, startIdx + expanded.beforeCount - startIdx);
-                            const remainingAfter = Math.max(0, expanded.afterCount);
-                            const totalShown = beforeMessages.length + afterMessages.length;
-                            const remaining = block.collapsedCount - totalShown;
-                            
-                            return {
-                                ...block,
-                                beforeMessages,
-                                afterMessages,
-                                remainingCollapsed: remaining,
-                                canExpandBefore: remainingBefore < block.collapsedCount,
-                                canExpandAfter: remainingAfter < block.collapsedCount
-                            };
-                        }
-                        return block;
-                    });
+                    // No filters active, show all messages
+                    return [{
+                        messages: messagesToUse,
+                        collapsedCount: 0,
+                        collapsedStartIdx: -1
+                    }];
                 }
             },
             methods: {
@@ -2571,6 +2470,8 @@
                         const keyword = params.get('kw');
                         if (keyword) {
                             this.activeKeyword = keyword;
+                            // Open keyword panel when keyword filter is present
+                            this.showKeywordPanel = true;
                         }
                         
                         // Restore selections (with preserveHighlights=true to not overwrite highlights)
