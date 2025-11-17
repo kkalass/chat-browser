@@ -864,6 +864,212 @@
             font-weight: 600;
             color: #495057;
         }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            body {
+                overflow: hidden;
+            }
+
+            #app {
+                overflow: hidden;
+            }
+
+            /* Hide info banner on mobile */
+            .info-banner {
+                display: none;
+            }
+
+            /* Mobile navigation tabs */
+            .mobile-nav {
+                display: flex;
+                flex-direction: column;
+                background: #fff;
+                border-bottom: 1px solid #dee2e6;
+                flex-shrink: 0;
+            }
+
+            .mobile-nav-header {
+                display: flex;
+                align-items: center;
+                padding: 8px;
+                gap: 8px;
+            }
+
+            .burger-btn {
+                font-size: 24px;
+                padding: 8px 12px;
+                background: none;
+                border: none;
+                cursor: pointer;
+                color: #495057;
+                line-height: 1;
+            }
+
+            .mobile-tabs {
+                display: flex;
+                flex: 1;
+                border-radius: 8px;
+                overflow: hidden;
+            }
+
+            .mobile-tab {
+                flex: 1;
+                padding: 10px;
+                background: #f8f9fa;
+                border: none;
+                font-size: 13px;
+                font-weight: 500;
+                color: #6c757d;
+                cursor: pointer;
+                transition: all 0.2s;
+                border-right: 1px solid #dee2e6;
+            }
+
+            .mobile-tab:last-child {
+                border-right: none;
+            }
+
+            .mobile-tab.active {
+                background: #0066cc;
+                color: white;
+            }
+
+            /* Burger menu */
+            .mobile-menu-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.3s;
+            }
+
+            .mobile-menu-overlay.visible {
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            .mobile-menu {
+                position: fixed;
+                top: 0;
+                left: -280px;
+                width: 280px;
+                height: 100%;
+                background: white;
+                z-index: 1000;
+                transition: left 0.3s;
+                box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+                display: flex;
+                flex-direction: column;
+            }
+
+            .mobile-menu.visible {
+                left: 0;
+            }
+
+            .mobile-menu-header {
+                padding: 16px;
+                border-bottom: 1px solid #dee2e6;
+                font-weight: 600;
+                color: #212529;
+            }
+
+            .mobile-menu-content {
+                flex: 1;
+                overflow-y: auto;
+                padding: 16px;
+            }
+
+            .mobile-menu-item {
+                padding: 12px 0;
+                border-bottom: 1px solid #f1f3f5;
+                font-size: 14px;
+                color: #495057;
+            }
+
+            .mobile-menu-item:last-child {
+                border-bottom: none;
+            }
+
+            /* Mobile columns container - horizontal scroll */
+            .columns-container {
+                display: flex;
+                overflow-x: auto;
+                overflow-y: hidden;
+                scroll-snap-type: x mandatory;
+                scroll-behavior: smooth;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none; /* Firefox */
+                -ms-overflow-style: none; /* IE/Edge */
+            }
+
+            .columns-container::-webkit-scrollbar {
+                display: none; /* Chrome/Safari */
+            }
+
+            .column {
+                flex: 0 0 100% !important;
+                width: 100% !important;
+                min-width: 100% !important;
+                max-width: 100% !important;
+                scroll-snap-align: start;
+                border-right: none;
+                overflow-x: hidden !important;
+            }
+
+            /* Prevent content overflow in mobile columns */
+            .column .column-header,
+            .column .column-content {
+                width: 100%;
+                max-width: 100%;
+                overflow-x: hidden;
+            }
+
+            .column .filter-input-wrapper,
+            .column .column-header-top {
+                width: 100%;
+                max-width: 100%;
+            }
+
+            /* Adjust filter inputs for mobile */
+            .filter-input {
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+
+            /* Hide keyword panel by default on mobile */
+            .keyword-panel {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                z-index: 100;
+                background: white;
+                transform: translateY(100%);
+                transition: transform 0.3s;
+            }
+
+            .keyword-panel.visible {
+                transform: translateY(0);
+            }
+        }
+
+        /* Desktop - hide mobile elements */
+        @media (min-width: 769px) {
+            .mobile-nav {
+                display: none;
+            }
+
+            .mobile-menu,
+            .mobile-menu-overlay {
+                display: none !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -871,6 +1077,68 @@
         <div v-if="loading" class="loading">Loading data...</div>
         <div v-else-if="error" class="error">{{ error }}</div>
         <template v-else>
+            <!-- Mobile Navigation -->
+            <div class="mobile-nav">
+                <div class="mobile-nav-header">
+                    <button @click="showMobileMenu = !showMobileMenu" class="burger-btn">☰</button>
+                    <div class="mobile-tabs">
+                        <button 
+                            :class="['mobile-tab', { active: currentTab === 0 }]"
+                            @click="switchToTab(0)"
+                        >
+                            Topics
+                        </button>
+                        <button 
+                            :class="['mobile-tab', { active: currentTab === 1 }]"
+                            @click="switchToTab(1)"
+                        >
+                            Groups
+                        </button>
+                        <button 
+                            :class="['mobile-tab', { active: currentTab === 2 }]"
+                            @click="switchToTab(2)"
+                        >
+                            Messages
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Overlay -->
+            <div 
+                :class="['mobile-menu-overlay', { visible: showMobileMenu }]"
+                @click="showMobileMenu = false"
+            ></div>
+
+            <!-- Mobile Menu -->
+            <div :class="['mobile-menu', { visible: showMobileMenu }]">
+                <div class="mobile-menu-header">
+                    Menu
+                </div>
+                <div class="mobile-menu-content">
+                    <div class="mobile-menu-item" v-if="chatName">
+                        <strong>Chat:</strong> {{ chatName }}
+                    </div>
+                    <div class="mobile-menu-item" v-if="exportDate">
+                        <strong>Exported:</strong> {{ exportDate }}
+                    </div>
+                    <div class="mobile-menu-item">
+                        <button 
+                            @click="showKeywordPanel = !showKeywordPanel; showMobileMenu = false" 
+                            :class="['keywords-btn', { active: showKeywordPanel }]"
+                            style="width: 100%; justify-content: center;"
+                        >
+                            🏷️ Keywords ({{ aggregatedKeywords.length }})
+                        </button>
+                    </div>
+                    <div class="mobile-menu-item">
+                        <a href="index.html" class="back-btn" style="width: 100%; justify-content: center; text-decoration: none; display: inline-block;">
+                            ← Back to Chats
+                        </a>
+                    </div>
+                </div>
+            </div>
+
             <div class="info-banner">
                 <div class="info-banner-content">
                     ℹ️ <strong>Static Snapshot:</strong> This is an AI-analyzed snapshot of chat data, not a live view. 
@@ -1339,10 +1607,16 @@
                     expandedGroupIndices: new Set(),
                     expandedMessageIndices: new Set(),
                     expandedMessageBlocks: new Map(), // blockIdx -> { beforeCount: number, afterCount: number }
-                    expandedGroupBlocks: new Map(), // blockIdx -> { beforeCount: number, afterCount: number }
+                    expandedGroupBlocks: new Map(), // blockIdx -> { blockIdx -> { beforeCount: number, afterCount: number }
                     showKeywordPanel: false,
                     keywordFilter: '',
-                    restoringState: false // Flag to prevent watchers from triggering during state restoration
+                    restoringState: false, // Flag to prevent watchers from triggering during state restoration
+                    // Mobile
+                    currentTab: 0, // 0=topics, 1=groups, 2=messages
+                    showMobileMenu: false,
+                    scrollPositions: [0, 0, 0],
+                    touchStartX: 0,
+                    touchStartY: 0
                 };
             },
             computed: {
@@ -1718,6 +1992,99 @@
                 }
             },
             methods: {
+                // Mobile methods
+                switchToTab(tabIndex) {
+                    if (this.currentTab === tabIndex) return;
+                    
+                    const container = document.querySelector('.columns-container');
+                    if (!container) return;
+                    
+                    // Save current scroll position
+                    const currentColumn = container.children[this.currentTab];
+                    if (currentColumn) {
+                        this.scrollPositions[this.currentTab] = currentColumn.scrollTop;
+                    }
+                    
+                    // Switch tab
+                    this.currentTab = tabIndex;
+                    
+                    // Scroll container to show the right column
+                    this.$nextTick(() => {
+                        container.scrollLeft = tabIndex * container.offsetWidth;
+                        
+                        // Restore scroll position for the new tab
+                        const newColumn = container.children[tabIndex];
+                        if (newColumn) {
+                            newColumn.scrollTop = this.scrollPositions[tabIndex] || 0;
+                        }
+                    });
+                },
+                setupMobileHandlers() {
+                    if (window.innerWidth > 768) return;
+                    
+                    this.$nextTick(() => {
+                        const container = document.querySelector('.columns-container');
+                        if (!container) return;
+                        
+                        container.addEventListener('touchstart', this.handleTouchStart.bind(this));
+                        container.addEventListener('touchmove', this.handleTouchMove.bind(this));
+                        container.addEventListener('touchend', this.handleTouchEnd.bind(this));
+                        container.addEventListener('scroll', this.handleContainerScroll.bind(this), { passive: true });
+                    });
+                },
+                cleanupMobileHandlers() {
+                    const container = document.querySelector('.columns-container');
+                    if (!container) return;
+                    
+                    container.removeEventListener('touchstart', this.handleTouchStart);
+                    container.removeEventListener('touchmove', this.handleTouchMove);
+                    container.removeEventListener('touchend', this.handleTouchEnd);
+                    container.removeEventListener('scroll', this.handleContainerScroll);
+                },
+                handleTouchStart(e) {
+                    this.touchStartX = e.touches[0].clientX;
+                    this.touchStartY = e.touches[0].clientY;
+                },
+                handleTouchMove(e) {
+                    // Prevent vertical scrolling when swiping horizontally
+                    const deltaX = Math.abs(e.touches[0].clientX - this.touchStartX);
+                    const deltaY = Math.abs(e.touches[0].clientY - this.touchStartY);
+                    
+                    if (deltaX > deltaY && deltaX > 10) {
+                        // Horizontal swipe detected, prevent default
+                        e.preventDefault();
+                    }
+                },
+                handleTouchEnd(e) {
+                    this.touchStartX = 0;
+                    this.touchStartY = 0;
+                },
+                handleContainerScroll(e) {
+                    if (window.innerWidth > 768) return;
+                    
+                    const scrollLeft = e.target.scrollLeft;
+                    const width = e.target.offsetWidth;
+                    const newTab = Math.round(scrollLeft / width);
+                    
+                    if (newTab >= 0 && newTab <= 2 && newTab !== this.currentTab) {
+                        this.currentTab = newTab;
+                    }
+                },
+                syncTabWithScroll() {
+                    if (window.innerWidth > 768) return;
+                    
+                    const container = document.querySelector('.columns-container');
+                    if (!container) return;
+                    
+                    const scrollLeft = container.scrollLeft;
+                    const columnWidth = container.offsetWidth;
+                    const newTab = Math.round(scrollLeft / columnWidth);
+                    
+                    if (newTab >= 0 && newTab <= 2) {
+                        this.currentTab = newTab;
+                    }
+                },
+                // Existing methods
                 async loadData() {
                     try {
                         // Get chat ID from URL parameter
@@ -1851,6 +2218,9 @@
                         
                         this.loading = false;
                         
+                        // Setup mobile handlers now that DOM is ready
+                        this.setupMobileHandlers();
+                        
                         // Update fragment after restoration to ensure it's in sync
                         this.$nextTick(() => {
                             this.serializeStateToFragment();
@@ -1942,6 +2312,11 @@
                             this.expandedMessageIndices.add(idx);
                         }
                     });
+                    
+                    // Switch to groups tab on mobile
+                    if (window.innerWidth <= 768) {
+                        this.switchToTab(1);
+                    }
                 },
                 selectGroup(group, preserveHighlights = false) {
                     this.selectedGroup = group;
@@ -1971,6 +2346,11 @@
                             this.expandedMessageIndices.add(idx);
                         }
                     });
+                    
+                    // Switch to messages tab on mobile
+                    if (window.innerWidth <= 768) {
+                        this.switchToTab(2);
+                    }
                 },
                 isClusterCollapsed(clusterId) {
                     // If no cluster selected, show all normally
@@ -2530,6 +2910,9 @@
             },
             mounted() {
                 this.loadData();
+            },
+            beforeUnmount() {
+                this.cleanupMobileHandlers();
             }
         }).mount('#app');
     </script>
