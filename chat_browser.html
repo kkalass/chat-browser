@@ -975,14 +975,14 @@
                         v-for="cluster in clusters"
                         :key="cluster.cluster_id"
                         :class="['cluster-item', { 
-                            selected: selectedCluster?.cluster_id === cluster.cluster_id,
-                            highlighted: highlightedCluster?.cluster_id === cluster.cluster_id && !highlightedGroup,
-                            outlined: highlightedCluster?.cluster_id === cluster.cluster_id && highlightedGroup,
+                            selected: selectedCluster && String(selectedCluster.cluster_id) === String(cluster.cluster_id),
+                            highlighted: highlightedCluster && String(highlightedCluster.cluster_id) === String(cluster.cluster_id) && !highlightedGroup,
+                            outlined: highlightedCluster && String(highlightedCluster.cluster_id) === String(cluster.cluster_id) && highlightedGroup,
                             collapsed: isClusterCollapsed(cluster.cluster_id)
                         }]"
                         @click="highlightCluster(cluster)"
                     >
-                        <div class="select-icon" @click.stop="toggleSelectCluster(cluster)" :title="selectedCluster?.cluster_id === cluster.cluster_id ? 'Deselect to clear filter' : 'Select to filter this topic'">
+                        <div class="select-icon" @click.stop="toggleSelectCluster(cluster)" :title="selectedCluster && String(selectedCluster.cluster_id) === String(cluster.cluster_id) ? 'Deselect to clear filter' : 'Select to filter this topic'">
                         </div>
                         <div class="item-title">{{ cluster.meta_title }}</div>
                         <div class="item-meta">
@@ -1341,7 +1341,8 @@
                     expandedMessageBlocks: new Map(), // blockIdx -> { beforeCount: number, afterCount: number }
                     expandedGroupBlocks: new Map(), // blockIdx -> { beforeCount: number, afterCount: number }
                     showKeywordPanel: false,
-                    keywordFilter: ''
+                    keywordFilter: '',
+                    restoringState: false // Flag to prevent watchers from triggering during state restoration
                 };
             },
             computed: {
@@ -1946,52 +1947,81 @@
                             return new Date(a.timestamp) - new Date(b.timestamp);
                         });
                         
-                        // Initially highlight the last message's context instead of selecting
-                        if (this.allMessages.length > 0) {
+                        // Restore state from URL fragment BEFORE setting loading to false
+                        this.restoreStateFromFragment();
+                        
+                        this.loading = false;
+                        
+                        // Update fragment after restoration to ensure it's in sync
+                        this.$nextTick(() => {
+                            this.serializeStateToFragment();
+                        });
+                        
+                        // Only highlight the last message if no state was restored from fragment
+                        if (!this.highlightedCluster && !this.highlightedGroup && 
+                            !this.selectedCluster && !this.selectedGroup && this.allMessages.length > 0) {
                             const lastMessage = this.allMessages[this.allMessages.length - 1];
                             this.highlightMessageContext(lastMessage);
                         }
                         
-                        this.loading = false;
-                        
                         // Scroll columns appropriately after data loads
                         this.$nextTick(() => {
-                            // Scroll all columns to bottom to show most recent content
-                            const columns = document.querySelectorAll('.column-content');
-                            columns.forEach(column => {
-                                column.scrollTop = column.scrollHeight;
-                            });
-                            
-                            // Then scroll highlighted items into view (if any)
-                            setTimeout(() => {
-                                const highlightedClusterEl = document.querySelector('.cluster-item.highlighted');
-                                const outlinedClusterEl = document.querySelector('.cluster-item.outlined');
-                                const highlightedGroupEl = document.querySelector('.group-item.highlighted');
-                                
-                                if (highlightedClusterEl) {
-                                    highlightedClusterEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                                }
-                                if (outlinedClusterEl) {
-                                    outlinedClusterEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                                }
-                                if (highlightedGroupEl) {
-                                    highlightedGroupEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                                }
-                            }, 100);
+                            // If state was restored, scroll to highlighted items
+                            if (this.highlightedCluster || this.highlightedGroup || this.selectedCluster || this.selectedGroup) {
+                                // Wait for DOM to update with highlighted/selected classes
+                                setTimeout(() => {
+                                    const highlightedClusterEl = document.querySelector('.cluster-item.highlighted');
+                                    const outlinedClusterEl = document.querySelector('.cluster-item.outlined');
+                                    const selectedClusterEl = document.querySelector('.cluster-item.selected');
+                                    const highlightedGroupEl = document.querySelector('.group-item.highlighted');
+                                    const selectedGroupEl = document.querySelector('.group-item.selected');
+                                    
+                                    // Scroll cluster into view
+                                    const clusterEl = highlightedClusterEl || outlinedClusterEl || selectedClusterEl;
+                                    if (clusterEl) {
+                                        clusterEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                    }
+                                    
+                                    // Scroll group into view after cluster
+                                    setTimeout(() => {
+                                        const groupEl = highlightedGroupEl || selectedGroupEl;
+                                        if (groupEl) {
+                                            groupEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                        }
+                                        
+                                        // Scroll to last highlighted message
+                                        setTimeout(() => {
+                                            const highlightedMessages = document.querySelectorAll('.message-item.highlighted');
+                                            if (highlightedMessages.length > 0) {
+                                                const lastHighlightedMessage = highlightedMessages[highlightedMessages.length - 1];
+                                                lastHighlightedMessage.scrollIntoView({ behavior: 'smooth', block: 'end' });
+                                            }
+                                        }, 300);
+                                    }, 300);
+                                }, 100);
+                            } else {
+                                // No state restored, scroll all columns to bottom to show most recent content
+                                const columns = document.querySelectorAll('.column-content');
+                                columns.forEach(column => {
+                                    column.scrollTop = column.scrollHeight;
+                                });
+                            }
                         });
                     } catch (err) {
                         this.error = `Failed to load data: ${err.message}`;
                         this.loading = false;
                     }
                 },
-                selectCluster(cluster) {
+                selectCluster(cluster, preserveHighlights = false) {
                     this.selectedCluster = cluster;
                     this.selectedGroup = null;
                     this.expandedMessageBlocks.clear(); // Reset expanded context
                     this.expandedGroupBlocks.clear(); // Reset expanded context
                     
-                    // Highlight the cluster
-                    this.highlightCluster(cluster);
+                    // Only highlight the cluster if not preserving existing highlights
+                    if (!preserveHighlights) {
+                        this.highlightCluster(cluster);
+                    }
                     
                     // Expand this cluster and collapse others
                     this.expandedClusterIndices.clear();
@@ -2014,12 +2044,14 @@
                         }
                     });
                 },
-                selectGroup(group) {
+                selectGroup(group, preserveHighlights = false) {
                     this.selectedGroup = group;
                     this.expandedMessageBlocks.clear(); // Reset expanded context
                     
-                    // Highlight the group
-                    this.highlightGroup(group);
+                    // Only highlight the group if not preserving existing highlights
+                    if (!preserveHighlights) {
+                        this.highlightGroup(group);
+                    }
                     
                     // Expand this group and collapse others not in the same cluster
                     this.expandedGroupIndices.clear();
@@ -2266,7 +2298,7 @@
                     });
                 },
                 toggleSelectCluster(cluster) {
-                    if (this.selectedCluster?.cluster_id === cluster.cluster_id) {
+                    if (this.selectedCluster && String(this.selectedCluster.cluster_id) === String(cluster.cluster_id)) {
                         // Deselect - clear filter
                         this.selectedCluster = null;
                         this.selectedGroup = null;
@@ -2438,7 +2470,7 @@
                     const group = this.groups.find(g => g.groupKey === message.groupKey);
                     if (group) {
                         this.highlightedGroup = group;
-                        this.highlightedCluster = this.clusters.find(c => c.cluster_id === group.cluster_id);
+                        this.highlightedCluster = this.clusters.find(c => String(c.cluster_id) === String(group.cluster_id));
                         
                         // Scroll highlighted items into view
                         this.$nextTick(() => {
@@ -2457,6 +2489,142 @@
                             }, 300);
                         });
                     }
+                },
+                serializeStateToFragment() {
+                    const params = new URLSearchParams();
+                    
+                    if (this.selectedCluster) {
+                        params.set('sc', this.selectedCluster.cluster_id);
+                    }
+                    if (this.selectedGroup) {
+                        params.set('sg', this.selectedGroup.groupKey);
+                    }
+                    if (this.highlightedCluster) {
+                        params.set('hc', this.highlightedCluster.cluster_id);
+                    }
+                    if (this.highlightedGroup) {
+                        params.set('hg', this.highlightedGroup.groupKey);
+                    }
+                    if (this.activeKeyword) {
+                        params.set('kw', this.activeKeyword);
+                    }
+                    if (this.clusterFilter) {
+                        params.set('cf', this.clusterFilter);
+                    }
+                    if (this.groupFilter) {
+                        params.set('gf', this.groupFilter);
+                    }
+                    if (this.messageFilter) {
+                        params.set('mf', this.messageFilter);
+                    }
+                    
+                    const fragment = params.toString();
+                    const newHash = fragment ? `#${fragment}` : '';
+                    
+                    if (window.location.hash !== newHash) {
+                        window.history.replaceState(null, '', window.location.pathname + window.location.search + newHash);
+                    }
+                },
+                restoreStateFromFragment() {
+                    const hash = window.location.hash.slice(1);
+                    if (!hash) return;
+                    
+                    const params = new URLSearchParams(hash);
+                    
+                    // Set flag to prevent watchers from triggering
+                    this.restoringState = true;
+                    
+                    try {
+                        // Restore highlights first (these should be set directly without side effects)
+                        const highlightedClusterId = params.get('hc');
+                        if (highlightedClusterId) {
+                            const cluster = this.clusters.find(c => String(c.cluster_id) === String(highlightedClusterId));
+                            if (cluster) {
+                                this.highlightedCluster = cluster;
+                            }
+                        }
+                        
+                        const highlightedGroupKey = params.get('hg');
+                        if (highlightedGroupKey) {
+                            const group = this.groups.find(g => g.groupKey === highlightedGroupKey);
+                            if (group) {
+                                this.highlightedGroup = group;
+                            }
+                        }
+                        
+                        // Restore filters
+                        const clusterFilter = params.get('cf');
+                        if (clusterFilter) {
+                            this.clusterFilter = clusterFilter;
+                        }
+                        
+                        const groupFilter = params.get('gf');
+                        if (groupFilter) {
+                            this.groupFilter = groupFilter;
+                        }
+                        
+                        const messageFilter = params.get('mf');
+                        if (messageFilter) {
+                            this.messageFilter = messageFilter;
+                        }
+                        
+                        const keyword = params.get('kw');
+                        if (keyword) {
+                            this.activeKeyword = keyword;
+                        }
+                        
+                        // Restore selections (with preserveHighlights=true to not overwrite highlights)
+                        const selectedClusterId = params.get('sc');
+                        if (selectedClusterId) {
+                            const cluster = this.clusters.find(c => String(c.cluster_id) === String(selectedClusterId));
+                            if (cluster) {
+                                this.selectCluster(cluster, true);
+                            }
+                        }
+                        
+                        const selectedGroupKey = params.get('sg');
+                        if (selectedGroupKey) {
+                            const group = this.groups.find(g => g.groupKey === selectedGroupKey);
+                            if (group) {
+                                this.selectGroup(group, true);
+                            }
+                        }
+                    } finally {
+                        // Re-enable watchers after restoration is complete
+                        this.restoringState = false;
+                    }
+                },
+                updateFragment() {
+                    // Don't update fragment if we're in the middle of restoring state
+                    if (!this.restoringState) {
+                        this.serializeStateToFragment();
+                    }
+                }
+            },
+            watch: {
+                selectedCluster() {
+                    this.updateFragment();
+                },
+                selectedGroup() {
+                    this.updateFragment();
+                },
+                highlightedCluster() {
+                    this.updateFragment();
+                },
+                highlightedGroup() {
+                    this.updateFragment();
+                },
+                activeKeyword() {
+                    this.updateFragment();
+                },
+                clusterFilter() {
+                    this.updateFragment();
+                },
+                groupFilter() {
+                    this.updateFragment();
+                },
+                messageFilter() {
+                    this.updateFragment();
                 }
             },
             mounted() {
